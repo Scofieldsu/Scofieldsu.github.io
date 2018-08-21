@@ -3,10 +3,72 @@
 
 
     
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/08/28/%E8%8E%B7%E5%8F%96mac%E5%9C%B0%E5%9D%80/</loc>
+    <lastmod>2018-08-21T18:57:58.795Z</lastmod>
+    <data>
+        <display>
+        <title>获取mac地址</title>
+        <pubTime>2015-08-28T08:18:20.000Z</pubTime>
+        
+        <tag>mac</tag>
+         
+        <tag>socket</tag>
+         
+         
+           
+             
+              <breadCrumb title="意思意思" url="http://Scofieldsu.github.io/categories/%E6%84%8F%E6%80%9D%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/08/20/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E6%9C%8B%E5%8F%8B%E5%B7%B2%E7%BB%8F%E6%AD%BB%E4%BA%86/</loc>
+    <lastmod>2018-08-21T18:57:36.131Z</lastmod>
+    <data>
+        <display>
+        <title>初相遇</title>
+        <pubTime>2017-08-20T05:14:40.000Z</pubTime>
+        
+        <tag>丧</tag>
+         
+         
+           
+             
+              <breadCrumb title="几个意思" url="http://Scofieldsu.github.io/categories/%E5%87%A0%E4%B8%AA%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/04/28/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2018-08-21T18:31:36.758Z</lastmod>
+    <data>
+        <display>
+        <title>鸭子类型</title>
+        <pubTime>2015-04-28T12:19:42.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://Scofieldsu.github.io/2015/08/15/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
-    <lastmod>2018-01-14T18:10:04.134Z</lastmod>
+    <lastmod>2018-08-21T18:31:23.726Z</lastmod>
     <data>
         <display>
         <title>网络协议</title>
@@ -17,7 +79,7 @@
          
            
              
-              <breadCrumb title="网络相关" url="http://Scofieldsu.github.io/categories/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/"/>
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
           
         </display>
     </data>
@@ -25,19 +87,69 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2017/05/14/npm%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2018-01-14T18:09:13.691Z</lastmod>
+    <loc>http://Scofieldsu.github.io/2015/07/15/%E5%AE%89%E8%A3%85node-js%E5%92%8Chexo/</loc>
+    <lastmod>2018-08-21T18:31:15.486Z</lastmod>
     <data>
         <display>
-        <title>npm 详解</title>
-        <pubTime>2017-05-13T16:02:58.000Z</pubTime>
+        <title>安装node.js和hexo</title>
+        <pubTime>2015-07-14T17:28:42.000Z</pubTime>
+        
+        <tag>node.js</tag>
+         
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/07/15/win7%E5%92%8Cubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8/</loc>
+    <lastmod>2018-08-21T18:31:00.768Z</lastmod>
+    <data>
+        <display>
+        <title>win7和ubuntu双系统默认启动</title>
+        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
+        
+        <tag>双系统启动</tag>
+         
+         
+           
+             
+              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/01/vuejs%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2018-08-21T18:30:24.990Z</lastmod>
+    <data>
+        <display>
+        <title>vue.js入门</title>
+        <pubTime>2017-06-01T14:39:08.000Z</pubTime>
         
         <tag>npm</tag>
          
+        <tag>vue.js</tag>
+         
+        <tag>elementUI</tag>
+         
+        <tag>axios</tag>
+         
+        <tag>vuex</tag>
+         
          
            
              
-              <breadCrumb title="frontend" url="http://Scofieldsu.github.io/categories/frontend/"/>
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
           
         </display>
     </data>
@@ -45,45 +157,83 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2017/05/08/centos7%E5%AE%89%E8%A3%85docker/</loc>
-    <lastmod>2018-01-14T18:07:58.063Z</lastmod>
+    <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2018-08-21T18:30:16.693Z</lastmod>
     <data>
         <display>
-        <title>centos7 安装docker1.26</title>
-        <pubTime>2017-05-08T12:47:23.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>centos7</tag>
-         
-         
-           
-             
-              <breadCrumb title="devops" url="http://Scofieldsu.github.io/categories/devops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/08/10/python(2)-%E7%BA%BF%E7%A8%8Bvs%E8%BF%9B%E7%A8%8B/</loc>
-    <lastmod>2018-01-14T18:06:40.667Z</lastmod>
-    <data>
-        <display>
-        <title>python(2):进程vs线程</title>
-        <pubTime>2015-08-10T14:01:27.000Z</pubTime>
+        <title>ubuntu安装odoo环境</title>
+        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
         
         <tag>python</tag>
          
-        <tag>进程</tag>
+        <tag>ubuntu</tag>
          
-        <tag>线程</tag>
+        <tag>odoo</tag>
+         
+        <tag>postgresql</tag>
          
          
            
              
-              <breadCrumb title="python" url="http://Scofieldsu.github.io/categories/python/"/>
+              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/07/15/ubuntu%E5%AE%89%E8%A3%85deb%E5%8C%85/</loc>
+    <lastmod>2018-08-21T18:30:09.699Z</lastmod>
+    <data>
+        <display>
+        <title>ubuntu安装deb包</title>
+        <pubTime>2015-07-14T17:23:13.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/07/15/ubuntu%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8Fdesktop/</loc>
+    <lastmod>2018-08-21T18:30:03.559Z</lastmod>
+    <data>
+        <display>
+        <title>ubuntu创建快捷方式desktop</title>
+        <pubTime>2015-07-14T17:13:57.000Z</pubTime>
+        
+        <tag>ubuntu</tag>
+         
+         
+           
+             
+              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/04/28/socket(1)/</loc>
+    <lastmod>2018-08-21T18:29:53.726Z</lastmod>
+    <data>
+        <display>
+        <title>socket(1)</title>
+        <pubTime>2016-04-28T12:49:56.000Z</pubTime>
+        
+        <tag>socket，tcp，udp</tag>
+         
+         
+           
+             
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
           
         </display>
     </data>
@@ -92,7 +242,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2016/08/01/python(3)-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2018-01-14T18:06:08.402Z</lastmod>
+    <lastmod>2018-08-21T18:29:04.325Z</lastmod>
     <data>
         <display>
         <title>python(3):内存管理机制</title>
@@ -107,7 +257,95 @@
          
            
              
-              <breadCrumb title="python" url="http://Scofieldsu.github.io/categories/python/"/>
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/08/10/python(2)-%E7%BA%BF%E7%A8%8Bvs%E8%BF%9B%E7%A8%8B/</loc>
+    <lastmod>2018-08-21T18:28:57.587Z</lastmod>
+    <data>
+        <display>
+        <title>python(2):进程vs线程</title>
+        <pubTime>2015-08-10T14:01:27.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>进程</tag>
+         
+        <tag>线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/08/08/python(1):%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
+    <lastmod>2018-08-21T18:28:48.336Z</lastmod>
+    <data>
+        <display>
+        <title>python(1):正则表达式</title>
+        <pubTime>2015-08-08T13:13:45.000Z</pubTime>
+        
+        <tag>正则表达式</tag>
+         
+         
+           
+             
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/05/14/npm%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2018-08-21T18:28:41.384Z</lastmod>
+    <data>
+        <display>
+        <title>npm 详解</title>
+        <pubTime>2017-05-13T16:02:58.000Z</pubTime>
+        
+        <tag>npm</tag>
+         
+         
+           
+             
+              <breadCrumb title="什么意思" url="http://Scofieldsu.github.io/categories/%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/05/08/centos7%E5%AE%89%E8%A3%85docker/</loc>
+    <lastmod>2018-08-21T18:27:12.739Z</lastmod>
+    <data>
+        <display>
+        <title>centos7 安装docker1.26</title>
+        <pubTime>2017-05-08T12:47:23.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>centos7</tag>
+         
+        <tag>2048</tag>
+         
+         
+           
+             
+              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
           
         </display>
     </data>
@@ -255,215 +493,6 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/%E5%AE%89%E8%A3%85node-js%E5%92%8Chexo/</loc>
-    <lastmod>2018-01-14T17:57:37.881Z</lastmod>
-    <data>
-        <display>
-        <title>安装node.js和hexo</title>
-        <pubTime>2015-07-14T17:28:42.000Z</pubTime>
-        
-        <tag>node.js</tag>
-         
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo" url="http://Scofieldsu.github.io/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/win7%E5%92%8Cubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8/</loc>
-    <lastmod>2018-01-14T09:53:31.443Z</lastmod>
-    <data>
-        <display>
-        <title>win7和ubuntu双系统默认启动</title>
-        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
-        
-        <tag>双系统启动</tag>
-         
-         
-           
-             
-              <breadCrumb title="ubuntu" url="http://Scofieldsu.github.io/categories/ubuntu/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/01/vuejs%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2018-01-14T09:53:31.441Z</lastmod>
-    <data>
-        <display>
-        <title>vue.js入门</title>
-        <pubTime>2017-06-01T14:39:08.000Z</pubTime>
-        
-        <tag>npm</tag>
-         
-        <tag>vue.js</tag>
-         
-        <tag>elementUI</tag>
-         
-        <tag>axios</tag>
-         
-        <tag>vuex</tag>
-         
-         
-           
-             
-              <breadCrumb title="frontend" url="http://Scofieldsu.github.io/categories/frontend/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/ubuntu%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8Fdesktop/</loc>
-    <lastmod>2018-01-14T09:53:31.440Z</lastmod>
-    <data>
-        <display>
-        <title>ubuntu创建快捷方式desktop</title>
-        <pubTime>2015-07-14T17:13:57.000Z</pubTime>
-        
-        <tag>ubuntu</tag>
-         
-         
-           
-             
-              <breadCrumb title="ubuntu" url="http://Scofieldsu.github.io/categories/ubuntu/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2018-01-14T09:53:31.438Z</lastmod>
-    <data>
-        <display>
-        <title>ubuntu安装odoo环境</title>
-        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>ubuntu</tag>
-         
-        <tag>odoo</tag>
-         
-        <tag>postgresql</tag>
-         
-         
-           
-             
-              <breadCrumb title="ubuntu" url="http://Scofieldsu.github.io/categories/ubuntu/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/ubuntu%E5%AE%89%E8%A3%85deb%E5%8C%85/</loc>
-    <lastmod>2018-01-14T09:53:31.437Z</lastmod>
-    <data>
-        <display>
-        <title>ubuntu安装deb包</title>
-        <pubTime>2015-07-14T17:23:13.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="ubuntu" url="http://Scofieldsu.github.io/categories/ubuntu/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/04/28/socket(1)/</loc>
-    <lastmod>2018-01-14T09:53:31.433Z</lastmod>
-    <data>
-        <display>
-        <title>socket(1)</title>
-        <pubTime>2016-04-28T12:49:56.000Z</pubTime>
-        
-        <tag>socket，tcp，udp</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="http://Scofieldsu.github.io/categories/python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/07/07/Scofield-yu/</loc>
-    <lastmod>2018-01-14T09:53:31.430Z</lastmod>
-    <data>
-        <display>
-        <title>Scofield.yu</title>
-        <pubTime>2016-07-06T18:43:51.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/08/08/python(1):%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
-    <lastmod>2018-01-14T09:53:31.421Z</lastmod>
-    <data>
-        <display>
-        <title>python(1):正则表达式</title>
-        <pubTime>2015-08-08T13:13:45.000Z</pubTime>
-        
-        <tag>正则表达式</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="http://Scofieldsu.github.io/categories/python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/04/28/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
-    <lastmod>2018-01-14T09:53:31.417Z</lastmod>
-    <data>
-        <display>
-        <title>鸭子类型</title>
-        <pubTime>2015-04-28T12:19:42.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="http://Scofieldsu.github.io/categories/python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://Scofieldsu.github.io/2016/06/03/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/</loc>
     <lastmod>2018-01-14T09:53:31.416Z</lastmod>
     <data>
@@ -477,28 +506,6 @@
            
              
               <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/08/28/%E8%8E%B7%E5%8F%96mac%E5%9C%B0%E5%9D%80/</loc>
-    <lastmod>2018-01-14T09:53:31.415Z</lastmod>
-    <data>
-        <display>
-        <title>获取mac地址</title>
-        <pubTime>2015-08-28T08:18:20.000Z</pubTime>
-        
-        <tag>mac</tag>
-         
-        <tag>socket</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="http://Scofieldsu.github.io/categories/python/"/>
           
         </display>
     </data>
