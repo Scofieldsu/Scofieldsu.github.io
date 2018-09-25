@@ -4,47 +4,23 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2018/05/08/%E9%86%92%E6%9D%A5%E5%95%8A%EF%BC%8C%E9%BA%A6%E5%85%8B%E7%99%BD/</loc>
-    <lastmod>2018-09-12T04:45:26.250Z</lastmod>
+    <loc>http://Scofieldsu.github.io/2018/04/08/%E7%8E%A9%E4%B8%80%E7%8E%A9locust/</loc>
+    <lastmod>2018-09-25T18:27:14.882Z</lastmod>
     <data>
         <display>
-        <title>醒来啊，麦克白</title>
-        <pubTime>2018-05-08T15:02:10.000Z</pubTime>
+        <title>玩一玩locust</title>
+        <pubTime>2018-04-08T12:47:23.000Z</pubTime>
         
-        <tag>The_Life_You_Want</tag>
+        <tag>locust</tag>
+         
+        <tag>性能，压力测试</tag>
+         
+        <tag>QPS</tag>
          
          
            
              
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/09/08/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-09-11T22:26:24.838Z</lastmod>
-    <data>
-        <display>
-        <title>记一次重装系统之后</title>
-        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>重装系统</tag>
-         
-        <tag>环境搭建</tag>
-         
-        <tag>Java</tag>
-         
-         
-           
-             
-              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
           
         </display>
     </data>
@@ -52,33 +28,56 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2017/06/20/%E7%83%9F%E7%81%AB%E9%87%8C%E7%9A%84%E5%B0%98%E5%9F%83/</loc>
-    <lastmod>2018-09-11T21:49:20.717Z</lastmod>
+    <loc>http://Scofieldsu.github.io/2016/12/08/git%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-09-25T18:21:45.184Z</lastmod>
     <data>
         <display>
-        <title>烟火里的尘埃</title>
-        <pubTime>2017-06-20T13:44:23.000Z</pubTime>
+        <title>git使用</title>
+        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
         
-        <tag>The_Life_You_Want</tag>
+        <tag>git</tag>
+         
+        <tag>workflow</tag>
+         
+        <tag>branch</tag>
          
          
            
              
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
+              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
           
         </display>
     </data>
     </url>
 
     
-    
-    
-    
-    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/12/15/%E5%85%B3%E4%BA%8EMAC%E5%9C%B0%E5%9D%80/</loc>
+    <lastmod>2018-09-25T18:18:04.213Z</lastmod>
+    <data>
+        <display>
+        <title>关于MAC地址</title>
+        <pubTime>2017-12-15T12:47:23.000Z</pubTime>
+        
+        <tag>MAC</tag>
+         
+        <tag>伪MAC</tag>
+         
+        <tag>探针</tag>
+         
+         
+           
+             
+              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://Scofieldsu.github.io/2017/05/08/%E7%8E%A9%E4%B8%80%E7%8E%A9docker/</loc>
-    <lastmod>2018-08-30T20:42:32.580Z</lastmod>
+    <lastmod>2018-09-25T18:15:28.195Z</lastmod>
     <data>
         <display>
         <title>玩一玩docker</title>
@@ -93,27 +92,7 @@
          
            
              
-              <breadCrumb title="皮一下" url="http://Scofieldsu.github.io/categories/%E7%9A%AE%E4%B8%80%E4%B8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/08/%E7%8E%A9%E4%B8%80%E7%8E%A9jenkins/</loc>
-    <lastmod>2018-08-30T20:42:19.380Z</lastmod>
-    <data>
-        <display>
-        <title>玩一玩jenkins</title>
-        <pubTime>2017-06-08T12:47:23.000Z</pubTime>
-        
-        <tag>jenkins</tag>
-         
-         
-           
-             
-              <breadCrumb title="皮一下" url="http://Scofieldsu.github.io/categories/%E7%9A%AE%E4%B8%80%E4%B8%8B/"/>
+              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
           
         </display>
     </data>
@@ -122,7 +101,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2017/06/01/%E7%8E%A9%E4%B8%80%E7%8E%A9vue/</loc>
-    <lastmod>2018-08-30T20:42:13.284Z</lastmod>
+    <lastmod>2018-09-25T18:13:46.119Z</lastmod>
     <data>
         <display>
         <title>玩一玩vue</title>
@@ -141,7 +120,101 @@
          
            
              
-              <breadCrumb title="皮一下" url="http://Scofieldsu.github.io/categories/%E7%9A%AE%E4%B8%80%E4%B8%8B/"/>
+              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/08/%E7%8E%A9%E4%B8%80%E7%8E%A9jenkins/</loc>
+    <lastmod>2018-09-25T18:13:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>玩一玩jenkins</title>
+        <pubTime>2017-06-08T12:47:23.000Z</pubTime>
+        
+        <tag>jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/05/09/%E7%8E%A9%E4%B8%80%E7%8E%A9selenium/</loc>
+    <lastmod>2018-09-25T18:12:03.945Z</lastmod>
+    <data>
+        <display>
+        <title>玩一玩selenium</title>
+        <pubTime>2018-05-09T12:47:23.000Z</pubTime>
+        
+        <tag>selenium</tag>
+         
+        <tag>自动化</tag>
+         
+        <tag>xpath</tag>
+         
+        <tag>webdriver</tag>
+         
+        <tag>headless</tag>
+         
+         
+           
+             
+              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/07/15/win&ubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-09-25T17:33:03.315Z</lastmod>
+    <data>
+        <display>
+        <title>win7和ubuntu双系统</title>
+        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
+        
+        <tag>双系统启动</tag>
+         
+         
+           
+             
+              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/09/08/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-09-25T17:31:38.654Z</lastmod>
+    <data>
+        <display>
+        <title>记一次重装系统之后</title>
+        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>重装系统</tag>
+         
+        <tag>环境搭建</tag>
+         
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
           
         </display>
     </data>
@@ -150,7 +223,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2018-08-30T20:39:14.557Z</lastmod>
+    <lastmod>2018-09-25T17:31:24.045Z</lastmod>
     <data>
         <display>
         <title>ubuntu安装odoo环境</title>
@@ -167,27 +240,7 @@
          
            
              
-              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/win&ubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-08-30T20:21:29.296Z</lastmod>
-    <data>
-        <display>
-        <title>win7和ubuntu双系统</title>
-        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
-        
-        <tag>双系统启动</tag>
-         
-         
-           
-             
-              <breadCrumb title="有点意思" url="http://Scofieldsu.github.io/categories/%E6%9C%89%E7%82%B9%E6%84%8F%E6%80%9D/"/>
+              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
           
         </display>
     </data>
@@ -196,7 +249,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2017/08/20/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E6%9C%8B%E5%8F%8B%E5%B7%B2%E7%BB%8F%E6%AD%BB%E4%BA%86/</loc>
-    <lastmod>2018-08-21T19:02:08.561Z</lastmod>
+    <lastmod>2018-09-25T17:28:56.143Z</lastmod>
     <data>
         <display>
         <title>我最好的朋友已经死了</title>
@@ -207,7 +260,7 @@
          
            
              
-              <breadCrumb title="几个意思" url="http://Scofieldsu.github.io/categories/%E5%87%A0%E4%B8%AA%E6%84%8F%E6%80%9D/"/>
+              <breadCrumb title="随笔" url="http://Scofieldsu.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -215,59 +268,19 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2016/05/16/%E5%91%BD%E8%8B%A5%E7%90%B4%E5%BC%A6/</loc>
-    <lastmod>2018-01-14T18:03:05.229Z</lastmod>
+    <loc>http://Scofieldsu.github.io/2018/05/08/%E9%86%92%E6%9D%A5%E5%95%8A%EF%BC%8C%E9%BA%A6%E5%85%8B%E7%99%BD/</loc>
+    <lastmod>2018-09-25T17:28:11.480Z</lastmod>
     <data>
         <display>
-        <title>命若琴弦</title>
-        <pubTime>2016-05-16T14:31:46.000Z</pubTime>
+        <title>醒来啊，麦克白</title>
+        <pubTime>2018-05-08T15:02:10.000Z</pubTime>
         
         <tag>The_Life_You_Want</tag>
          
          
            
              
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/15/%E5%A6%82%E6%9E%9C/</loc>
-    <lastmod>2018-01-14T18:02:40.531Z</lastmod>
-    <data>
-        <display>
-        <title>如果</title>
-        <pubTime>2017-06-15T15:20:26.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/07/15/When-you-are-old/</loc>
-    <lastmod>2018-01-14T18:01:20.918Z</lastmod>
-    <data>
-        <display>
-        <title>When you are old</title>
-        <pubTime>2016-07-14T17:46:58.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
           
         </display>
     </data>
@@ -276,7 +289,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2016/05/12/%E8%87%B4%E6%A9%A1%E6%A0%91/</loc>
-    <lastmod>2018-01-14T18:00:36.380Z</lastmod>
+    <lastmod>2018-09-25T17:28:04.842Z</lastmod>
     <data>
         <display>
         <title>致橡树</title>
@@ -287,47 +300,7 @@
          
            
              
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/05/08/%E4%B8%80%E9%A2%97%E5%BC%80%E8%8A%B1%E7%9A%84%E6%A0%91/</loc>
-    <lastmod>2018-01-14T17:59:48.040Z</lastmod>
-    <data>
-        <display>
-        <title>一颗开花的树</title>
-        <pubTime>2016-05-08T15:02:10.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/05/18/%E5%88%9D%E7%9B%B8%E9%81%87/</loc>
-    <lastmod>2018-01-14T17:58:29.174Z</lastmod>
-    <data>
-        <display>
-        <title>初相遇</title>
-        <pubTime>2016-05-18T15:44:23.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
           
         </display>
     </data>
@@ -336,7 +309,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2016/07/15/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/</loc>
-    <lastmod>2018-01-14T17:57:54.562Z</lastmod>
+    <lastmod>2018-09-25T17:27:58.217Z</lastmod>
     <data>
         <display>
         <title>百年孤独</title>
@@ -347,7 +320,7 @@
          
            
              
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
           
         </display>
     </data>
@@ -356,7 +329,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2016/06/03/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/</loc>
-    <lastmod>2018-01-14T09:53:31.416Z</lastmod>
+    <lastmod>2018-09-25T17:27:52.193Z</lastmod>
     <data>
         <display>
         <title>热爱生命</title>
@@ -367,10 +340,138 @@
          
            
              
-              <breadCrumb title="诗和小说以及文章" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E5%92%8C%E5%B0%8F%E8%AF%B4%E4%BB%A5%E5%8F%8A%E6%96%87%E7%AB%A0/"/>
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
           
         </display>
     </data>
     </url>
 
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/20/%E7%83%9F%E7%81%AB%E9%87%8C%E7%9A%84%E5%B0%98%E5%9F%83/</loc>
+    <lastmod>2018-09-25T17:27:46.923Z</lastmod>
+    <data>
+        <display>
+        <title>烟火里的尘埃</title>
+        <pubTime>2017-06-20T13:44:23.000Z</pubTime>
+        
+        <tag>The_Life_You_Want</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/15/%E5%A6%82%E6%9E%9C/</loc>
+    <lastmod>2018-09-25T17:27:38.611Z</lastmod>
+    <data>
+        <display>
+        <title>如果</title>
+        <pubTime>2017-06-15T15:20:26.000Z</pubTime>
+        
+        <tag>The_Life_You_Want</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/16/%E5%91%BD%E8%8B%A5%E7%90%B4%E5%BC%A6/</loc>
+    <lastmod>2018-09-25T17:27:32.985Z</lastmod>
+    <data>
+        <display>
+        <title>命若琴弦</title>
+        <pubTime>2016-05-16T14:31:46.000Z</pubTime>
+        
+        <tag>The_Life_You_Want</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/18/%E5%88%9D%E7%9B%B8%E9%81%87/</loc>
+    <lastmod>2018-09-25T17:27:27.499Z</lastmod>
+    <data>
+        <display>
+        <title>初相遇</title>
+        <pubTime>2016-05-18T15:44:23.000Z</pubTime>
+        
+        <tag>The_Life_You_Want</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/08/%E4%B8%80%E9%A2%97%E5%BC%80%E8%8A%B1%E7%9A%84%E6%A0%91/</loc>
+    <lastmod>2018-09-25T17:27:22.214Z</lastmod>
+    <data>
+        <display>
+        <title>一颗开花的树</title>
+        <pubTime>2016-05-08T15:02:10.000Z</pubTime>
+        
+        <tag>The_Life_You_Want</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/07/15/When-you-are-old/</loc>
+    <lastmod>2018-09-25T17:26:58.796Z</lastmod>
+    <data>
+        <display>
+        <title>When you are old</title>
+        <pubTime>2016-07-14T17:46:58.000Z</pubTime>
+        
+        <tag>The_Life_You_Want</tag>
+         
+         
+           
+             
+              <breadCrumb title="诗说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%B4%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+    
+    
+    
+    
 </urlset>
