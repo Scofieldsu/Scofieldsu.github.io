@@ -4,11 +4,65 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2018/10/10/%E6%88%91%E4%BB%AC%E4%BB%8D%E6%9C%AA%E7%9F%A5%E9%81%93%E9%82%A3%E5%A4%A9%E6%89%80%E7%9C%8B%E8%A7%81%E7%9A%84%E8%8A%B1%E7%9A%84%E5%90%8D%E5%AD%97(%E6%9C%AA%E9%97%BB%E8%8A%B1%E5%90%8D)/</loc>
-    <lastmod>2018-10-17T19:44:57.626Z</lastmod>
+    <loc>http://Scofieldsu.github.io/2018/10/20/%E5%AD%97%E8%8A%82%E5%BA%8F%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2018-10-22T16:09:33.088Z</lastmod>
     <data>
         <display>
-        <title>我们仍未知道那天所看见的花的名字</title>
+        <title>字节序大小端模式与基础类型的转换</title>
+        <pubTime>2018-10-19T18:13:45.000Z</pubTime>
+        
+        <tag>字节序</tag>
+         
+        <tag>大小端</tag>
+         
+        <tag>字节对齐</tag>
+         
+        <tag>ByteBuffer</tag>
+         
+        <tag>ctypes</tag>
+         
+         
+           
+             
+              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/09/08/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-10-22T15:38:06.594Z</lastmod>
+    <data>
+        <display>
+        <title>记一次重装系统之后</title>
+        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>重装系统</tag>
+         
+        <tag>环境搭建</tag>
+         
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/10/10/%E6%88%91%E4%BB%AC%E4%BB%8D%E6%9C%AA%E7%9F%A5%E9%81%93%E9%82%A3%E5%A4%A9%E6%89%80%E7%9C%8B%E8%A7%81%E7%9A%84%E8%8A%B1%E7%9A%84%E5%90%8D%E5%AD%97(%E6%9C%AA%E9%97%BB%E8%8A%B1%E5%90%8D)/</loc>
+    <lastmod>2018-10-22T15:35:32.084Z</lastmod>
+    <data>
+        <display>
+        <title>我们仍未知道那天所看见的花的名字(未闻花名)</title>
         <pubTime>2018-10-10T13:44:23.000Z</pubTime>
         
         <tag>The_Life_You_Want</tag>
@@ -204,32 +258,6 @@
         <pubTime>2015-07-14T17:21:09.000Z</pubTime>
         
         <tag>双系统启动</tag>
-         
-         
-           
-             
-              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/09/08/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-09-25T17:31:38.654Z</lastmod>
-    <data>
-        <display>
-        <title>记一次重装系统之后</title>
-        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>重装系统</tag>
-         
-        <tag>环境搭建</tag>
-         
-        <tag>Java</tag>
          
          
            
