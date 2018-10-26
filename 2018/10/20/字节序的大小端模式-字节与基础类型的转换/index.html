@@ -17,18 +17,18 @@
   
   
   <title>字节序的大小端模式-字节与基础类型的转换 | Scofieldyu</title>
-  <meta name="description" content="字节序 与 字节对齐   java基础类型与字节类型转换   2.1 基础类型  ==》 字节类型   2.2 字节类型  ==》 基础类型     python使用ctypes调用c处理字节    1.1  字节序   大端字节序(Big-Endian)：高位字节在内存的低地址，低位字节在内存的高地址，这是人类读写数值的方法。   小端字节序(Little-Endian)：低位字节在内存的低">
+  <meta name="description" content="字节序 与 字节对齐   java基础类型与字节类型转换   2.1 struct ==》 字节类型   2.2 基础类型  ==》 字节类型   2.3 字节类型  ==》 基础类型     python使用ctypes调用c处理字节    1.1  字节序   大端字节序(Big-Endian)：高位字节在内存的低地址，低位字节在内存的高地址，这是人类读写数值的方法。   小端字节序(Li">
 <meta name="keywords" content="字节序,大小端,字节对齐,ByteBuffer,ctypes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字节序的大小端模式-字节与基础类型的转换">
 <meta property="og:url" content="http://Scofieldsu.github.io/2018/10/20/字节序的大小端模式-字节与基础类型的转换/index.html">
 <meta property="og:site_name" content="Scofieldyu">
-<meta property="og:description" content="字节序 与 字节对齐   java基础类型与字节类型转换   2.1 基础类型  ==》 字节类型   2.2 字节类型  ==》 基础类型     python使用ctypes调用c处理字节    1.1  字节序   大端字节序(Big-Endian)：高位字节在内存的低地址，低位字节在内存的高地址，这是人类读写数值的方法。   小端字节序(Little-Endian)：低位字节在内存的低">
+<meta property="og:description" content="字节序 与 字节对齐   java基础类型与字节类型转换   2.1 struct ==》 字节类型   2.2 基础类型  ==》 字节类型   2.3 字节类型  ==》 基础类型     python使用ctypes调用c处理字节    1.1  字节序   大端字节序(Big-Endian)：高位字节在内存的低地址，低位字节在内存的高地址，这是人类读写数值的方法。   小端字节序(Li">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-23T19:48:25.258Z">
+<meta property="og:updated_time" content="2018-10-26T01:28:14.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字节序的大小端模式-字节与基础类型的转换">
-<meta name="twitter:description" content="字节序 与 字节对齐   java基础类型与字节类型转换   2.1 基础类型  ==》 字节类型   2.2 字节类型  ==》 基础类型     python使用ctypes调用c处理字节    1.1  字节序   大端字节序(Big-Endian)：高位字节在内存的低地址，低位字节在内存的高地址，这是人类读写数值的方法。   小端字节序(Little-Endian)：低位字节在内存的低">
+<meta name="twitter:description" content="字节序 与 字节对齐   java基础类型与字节类型转换   2.1 struct ==》 字节类型   2.2 基础类型  ==》 字节类型   2.3 字节类型  ==》 基础类型     python使用ctypes调用c处理字节    1.1  字节序   大端字节序(Big-Endian)：高位字节在内存的低地址，低位字节在内存的高地址，这是人类读写数值的方法。   小端字节序(Li">
   <!-- Canonical links -->
   <link rel="canonical" href="http://Scofieldsu.github.io/2018/10/20/字节序的大小端模式-字节与基础类型的转换/index.html">
   
@@ -363,10 +363,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/20/字节序的大小端模式-字节与基础类型的转换/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1,484(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1,676(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8(分)</span>
 	
 
       </div>
@@ -381,10 +381,13 @@
 <p>java基础类型与字节类型转换</p>
 <ul>
 <li>
-<p>2.1 基础类型  ==》 字节类型</p>
+<p>2.1 struct ==》 字节类型</p>
 </li>
 <li>
-<p>2.2 字节类型  ==》 基础类型</p>
+<p>2.2 基础类型  ==》 字节类型</p>
+</li>
+<li>
+<p>2.3 字节类型  ==》 基础类型</p>
 </li>
 </ul>
 </li>
@@ -408,11 +411,18 @@
 </blockquote>
 <p>1.2 字节对齐</p>
 <blockquote>
+<p>对于char型数据，其自身对齐值为1，对于short型为2，对于int,float类型，其自身对齐值为4，对于double型，其自身对齐值为8，单位字节。</p>
+</blockquote>
+<blockquote>
 <p>需要字节对齐的根本原因在于CPU访问数据的效率问题.</p>
 </blockquote>
 <blockquote>
 <p>gcc中结构体默认是4个字节对齐，即为32的倍数</p>
 </blockquote>
+<p>先看个简单的例子(32位，X86处理器，GCC编译器)：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span>    a;</span><br><span class="line">    <span class="keyword">char</span>   b;</span><br><span class="line">    <span class="keyword">short</span>  c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>   b;</span><br><span class="line">    <span class="keyword">int</span>    a;</span><br><span class="line">    <span class="keyword">short</span>  c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>结果是：sizeof(strcut A)值为8；sizeof(struct B)的值却是12。</p>
+<p>结构体A中包含一个4字节的int数据，一个1字节char数据和一个2字节short数据；B也一样。按理说A和B大小应该都是7字节。之所以出现上述结果，就是因为编译器要对数据成员在空间上进行对齐。</p>
 <p>对于标准数据类型，它的地址只要是它的长度的整数倍就行了，而非标准数据类型按下面的原则对齐：</p>
 <ul>
 <li>
