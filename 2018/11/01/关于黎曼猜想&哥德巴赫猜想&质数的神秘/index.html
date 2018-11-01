@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘 | Scofieldyu</title>
+  <meta name="description" content="Do it anyway.That&apos;s dream actually!">
+<meta name="keywords" content="黎曼猜想,欧拉,哥德巴赫猜想,陈景润,质数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘">
+<meta property="og:url" content="http://Scofieldsu.github.io/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="Do it anyway.That&apos;s dream actually!">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-01T20:36:57.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘">
+<meta name="twitter:description" content="Do it anyway.That&apos;s dream actually!">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://Scofieldsu.github.io/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Scofieldyu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">高筑墙-广积粮-缓称王</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Amoy, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+       <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=29004400&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/Scofieldyu" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.douban.com/people/77200882/" target="_blank" title="Douban" data-toggle=tooltip data-placement=top><i class="icon icon-douban"></i></a></li>
+        
+        <li><a href="http://dianying.fm/profile/270434" target="_blank" title="Dribbble" data-toggle=tooltip data-placement=top><i class="icon icon-dribbble"></i></a></li>
+        
+    </ul>
+
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br>看不清这一路的熙熙攘攘纷纷扰扰。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/2048/" style="font-size: 13px;">2048</a> <a href="/tags/ByteBuffer/" style="font-size: 13px;">ByteBuffer</a> <a href="/tags/Java/" style="font-size: 13px;">Java</a> <a href="/tags/MAC/" style="font-size: 13px;">MAC</a> <a href="/tags/QPS/" style="font-size: 13px;">QPS</a> <a href="/tags/The-Life-You-Want/" style="font-size: 14px;">The_Life_You_Want</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/branch/" style="font-size: 13px;">branch</a> <a href="/tags/centos7/" style="font-size: 13px;">centos7</a> <a href="/tags/ctypes/" style="font-size: 13px;">ctypes</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/elementUI/" style="font-size: 13px;">elementUI</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/headless/" style="font-size: 13px;">headless</a> <a href="/tags/jenkins/" style="font-size: 13px;">jenkins</a> <a href="/tags/locust/" style="font-size: 13px;">locust</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/odoo/" style="font-size: 13px;">odoo</a> <a href="/tags/postgresql/" style="font-size: 13px;">postgresql</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/selenium/" style="font-size: 13px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 13px;">ubuntu</a> <a href="/tags/vue-js/" style="font-size: 13px;">vue.js</a> <a href="/tags/vuex/" style="font-size: 13px;">vuex</a> <a href="/tags/webdriver/" style="font-size: 13px;">webdriver</a> <a href="/tags/workflow/" style="font-size: 13px;">workflow</a> <a href="/tags/xpath/" style="font-size: 13px;">xpath</a> <a href="/tags/丧/" style="font-size: 13px;">丧</a> <a href="/tags/伪MAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/双系统启动/" style="font-size: 13px;">双系统启动</a> <a href="/tags/哥德巴赫猜想/" style="font-size: 13px;">哥德巴赫猜想</a> <a href="/tags/大小端/" style="font-size: 13px;">大小端</a> <a href="/tags/字节对齐/" style="font-size: 13px;">字节对齐</a> <a href="/tags/字节序/" style="font-size: 13px;">字节序</a> <a href="/tags/思维导图/" style="font-size: 13px;">思维导图</a> <a href="/tags/性能，压力测试/" style="font-size: 13px;">性能，压力测试</a> <a href="/tags/感同身受/" style="font-size: 13px;">感同身受</a> <a href="/tags/探针/" style="font-size: 13px;">探针</a> <a href="/tags/架构图/" style="font-size: 13px;">架构图</a> <a href="/tags/欧拉/" style="font-size: 13px;">欧拉</a> <a href="/tags/流程图/" style="font-size: 13px;">流程图</a> <a href="/tags/环境搭建/" style="font-size: 13px;">环境搭建</a> <a href="/tags/自动化/" style="font-size: 13px;">自动化</a> <a href="/tags/质数/" style="font-size: 13px;">质数</a> <a href="/tags/重装系统/" style="font-size: 13px;">重装系统</a> <a href="/tags/陈景润/" style="font-size: 13px;">陈景润</a> <a href="/tags/黎曼猜想/" style="font-size: 13px;">黎曼猜想</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/关于一些事儿/">关于一些事儿</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/11/02/关于画图那些事儿/" class="title">关于画图那些事儿</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-11-01T19:09:23.000Z" itemprop="datePublished">2018-11-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/关于一些事儿/">关于一些事儿</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/" class="title">关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-31T17:00:29.000Z" itemprop="datePublished">2018-11-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/随笔/">随笔</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/23/感同身受的造梦空间/" class="title">感同身受的造梦空间</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-22T16:01:40.000Z" itemprop="datePublished">2018-10-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/fixbug/">fixbug</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/20/字节序的大小端模式-字节与基础类型的转换/" class="title">字节序的大小端模式-字节与基础类型的转换</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-19T18:13:45.000Z" itemprop="datePublished">2018-10-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/诗说文/">诗说文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/10/我们仍未知道那天所看见的花的名字(未闻花名)/" class="title">我们仍未知道那天所看见的花的名字(未闻花名)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-10T13:44:23.000Z" itemprop="datePublished">2018-10-10</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/" class="article-date">
+	  <time datetime="2018-10-31T17:00:29.000Z" itemprop="datePublished">2018-11-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/关于一些事儿/">关于一些事儿</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/哥德巴赫猜想/">哥德巴赫猜想</a>, <a class="article-tag-link" href="/tags/欧拉/">欧拉</a>, <a class="article-tag-link" href="/tags/质数/">质数</a>, <a class="article-tag-link" href="/tags/陈景润/">陈景润</a>, <a class="article-tag-link" href="/tags/黎曼猜想/">黎曼猜想</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 0(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://Scofieldsu.github.io/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/" title="关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘" target="_blank" rel="external">http://Scofieldsu.github.io/2018/11/01/关于黎曼猜想&哥德巴赫猜想&质数的神秘/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">Scofieldyu</span><small class="ml-1x">高筑墙-广积粮-缓称王</small></a></h3>
+        <div>Bug developer</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/11/02/关于画图那些事儿/" title="关于画图那些事儿"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/10/23/感同身受的造梦空间/" title="感同身受的造梦空间">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=29004400&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/Scofieldyu" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.douban.com/people/77200882/" target="_blank" title="Douban" data-toggle=tooltip data-placement=top><i class="icon icon-douban"></i></a></li>
+        
+        <li><a href="http://dianying.fm/profile/270434" target="_blank" title="Dribbble" data-toggle=tooltip data-placement=top><i class="icon icon-dribbble"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2018 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://Scofieldsu.github.io/2018/11/01/关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘/';
+        
+        this.page.identifier = '关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>
