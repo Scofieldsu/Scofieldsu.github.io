@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://Scofieldsu.github.io/2018/11/01/%E5%85%B3%E4%BA%8E%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3&%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3&%E8%B4%A8%E6%95%B0%E7%9A%84%E7%A5%9E%E7%A7%98/</loc>
-    <lastmod>2018-11-01T20:59:25.507Z</lastmod>
+    <lastmod>2018-11-02T22:02:48.085Z</lastmod>
     <data>
         <display>
         <title>关于黎曼猜想&哥德巴赫猜想&质数的神秘</title>
@@ -20,6 +20,130 @@
         <tag>陈景润</tag>
          
         <tag>质数</tag>
+         
+         
+           
+             
+              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/10/20/%E5%85%B3%E4%BA%8E%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F-%E5%AD%97%E8%8A%82%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2018-11-02T21:59:26.979Z</lastmod>
+    <data>
+        <display>
+        <title>字节序的大小端模式-字节与基础类型的转换</title>
+        <pubTime>2018-10-19T18:13:45.000Z</pubTime>
+        
+        <tag>字节序</tag>
+         
+        <tag>大小端</tag>
+         
+        <tag>字节对齐</tag>
+         
+        <tag>ByteBuffer</tag>
+         
+        <tag>ctypes</tag>
+         
+         
+           
+             
+              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/09/08/%E5%85%B3%E4%BA%8E%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%90%8E/</loc>
+    <lastmod>2018-11-02T21:59:11.507Z</lastmod>
+    <data>
+        <display>
+        <title>关于重装系统之后</title>
+        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>重装系统</tag>
+         
+        <tag>环境搭建</tag>
+         
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/07/15/%E5%85%B3%E4%BA%8Ewin&ubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-11-02T21:57:53.416Z</lastmod>
+    <data>
+        <display>
+        <title>关于win7和ubuntu双系统</title>
+        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
+        
+        <tag>双系统启动</tag>
+         
+         
+           
+             
+              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2018-11-02T21:57:19.428Z</lastmod>
+    <data>
+        <display>
+        <title>关于ubuntu安装odoo环境</title>
+        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
+        
+        <tag>odoo</tag>
+         
+        <tag>ubuntu</tag>
+         
+        <tag>postgresql</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/12/08/%E5%85%B3%E4%BA%8Egit%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-11-02T21:56:45.913Z</lastmod>
+    <data>
+        <display>
+        <title>git使用</title>
+        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+        <tag>workflow</tag>
+         
+        <tag>branch</tag>
          
          
            
@@ -56,34 +180,6 @@
 
     
   <url>
-    <loc>http://Scofieldsu.github.io/2018/10/20/%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F-%E5%AD%97%E8%8A%82%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
-    <lastmod>2018-10-26T01:28:14.212Z</lastmod>
-    <data>
-        <display>
-        <title>字节序的大小端模式-字节与基础类型的转换</title>
-        <pubTime>2018-10-19T18:13:45.000Z</pubTime>
-        
-        <tag>字节序</tag>
-         
-        <tag>大小端</tag>
-         
-        <tag>字节对齐</tag>
-         
-        <tag>ByteBuffer</tag>
-         
-        <tag>ctypes</tag>
-         
-         
-           
-             
-              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://Scofieldsu.github.io/2018/10/23/%E6%84%9F%E5%90%8C%E8%BA%AB%E5%8F%97%E7%9A%84%E9%80%A0%E6%A2%A6%E7%A9%BA%E9%97%B4/</loc>
     <lastmod>2018-10-26T01:10:09.901Z</lastmod>
     <data>
@@ -97,32 +193,6 @@
            
              
               <breadCrumb title="随笔" url="http://Scofieldsu.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/09/08/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-10-22T15:38:06.594Z</lastmod>
-    <data>
-        <display>
-        <title>记一次重装系统之后</title>
-        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>重装系统</tag>
-         
-        <tag>环境搭建</tag>
-         
-        <tag>Java</tag>
-         
-         
-           
-             
-              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
           
         </display>
     </data>
@@ -167,30 +237,6 @@
            
              
               <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/12/08/git%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2018-09-25T18:21:45.184Z</lastmod>
-    <data>
-        <display>
-        <title>git使用</title>
-        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
-        
-        <tag>git</tag>
-         
-        <tag>workflow</tag>
-         
-        <tag>branch</tag>
-         
-         
-           
-             
-              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
           
         </display>
     </data>
@@ -315,52 +361,6 @@
            
              
               <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/win&ubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-09-25T17:33:03.315Z</lastmod>
-    <data>
-        <display>
-        <title>win7和ubuntu双系统</title>
-        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
-        
-        <tag>双系统启动</tag>
-         
-         
-           
-             
-              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2018-09-25T17:31:24.045Z</lastmod>
-    <data>
-        <display>
-        <title>ubuntu安装odoo环境</title>
-        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
-        
-        <tag>odoo</tag>
-         
-        <tag>ubuntu</tag>
-         
-        <tag>postgresql</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="fixbug" url="http://Scofieldsu.github.io/categories/fixbug/"/>
           
         </display>
     </data>
