@@ -179,13 +179,13 @@
   </entry>
   
   <entry>
-    <title>关于重装系统之后</title>
-    <link href="http://Scofieldsu.github.io/2018/09/08/%E5%85%B3%E4%BA%8E%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%90%8E/"/>
-    <id>http://Scofieldsu.github.io/2018/09/08/关于重装系统之后/</id>
+    <title>常用与有趣的工具推荐</title>
+    <link href="http://Scofieldsu.github.io/2018/09/08/%E5%B8%B8%E7%94%A8%E4%B8%8E%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/"/>
+    <id>http://Scofieldsu.github.io/2018/09/08/常用与有趣的工具推荐/</id>
     <published>2018-09-08T13:13:45.000Z</published>
-    <updated>2018-11-02T21:59:11.507Z</updated>
+    <updated>2018-11-06T17:29:39.405Z</updated>
     
-    <content type="html"><![CDATA[<p>windows系统重装之后整理需要安装软件和环境：</p><ol><li>环境</li></ol><ul><li><p>python2.7  目前暂不用virtualenv管理多版本python环境，安装python2.7时勾选add to path省去配置环境变量过程。</p></li><li><p>java1.8    下载jdk安装后，配置环境变量</p></li></ul>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME = C:\Program Files\Java\jdk1.8.0_91  #实际路径</span><br><span class="line">PATH = %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</span><br><span class="line">CLASSPATH = .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</span><br></pre></td></tr></table></figure><ul><li><p>nodejs 安装时默认勾选add to path</p></li><li><p>git</p></li></ul><ol start="2"><li><p>代码器</p><ul><li>IDEA，Pycharm，notepad++，Atom</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">atom 插件列表：</span><br><span class="line">主题：atom-monkai</span><br><span class="line">扩展：</span><br><span class="line">active-power-mode</span><br><span class="line">markdown-preview-plus</span><br><span class="line">platformio-ide-terminal</span><br><span class="line">simplified-chinese-menu</span><br><span class="line">file-icons</span><br><span class="line">edit-background</span><br></pre></td></tr></table></figure></li><li><p>其他工具</p></li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- heidiSQL （数据库客户端）</span><br><span class="line"></span><br><span class="line">- mobaXterm （终端工具）</span><br><span class="line"></span><br><span class="line">- PDman （数据库建模工具）</span><br></pre></td></tr></table></figure><ol start="4"><li>mac app推荐</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- Termius  （ssh client）</span><br><span class="line"></span><br><span class="line">- Viper FTP （sftp client）</span><br><span class="line"></span><br><span class="line">- PAW （http client）</span><br><span class="line"></span><br><span class="line">- postico （postgresql client）</span><br><span class="line"></span><br><span class="line">- tickeys （键盘音效）</span><br><span class="line"></span><br><span class="line">- LiceCap （gif tool）</span><br><span class="line"></span><br><span class="line">- snip （截图）</span><br><span class="line"></span><br><span class="line">- pap.er (壁纸)</span><br></pre></td></tr></table></figure><ol start="5"><li>chrome插件推荐</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- Tampermonkey（脚本扩展）</span><br><span class="line"></span><br><span class="line">- fireshot （截图）</span><br><span class="line"></span><br><span class="line">- xPath finder， chropath  （xpath选择器）</span><br><span class="line"></span><br><span class="line">- octotree （github代码在线树状结构）</span><br><span class="line"></span><br><span class="line">- onetab （tab收集器）</span><br></pre></td></tr></table></figure><hr>]]></content>
+    <content type="html"><![CDATA[<p>windows系统重装之后整理需要安装软件和环境：</p><ol><li>环境</li></ol><ul><li><p>python2.7  目前暂不用virtualenv管理多版本python环境，安装python2.7时勾选add to path省去配置环境变量过程。</p></li><li><p>java1.8    下载jdk安装后，配置环境变量</p></li></ul>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME = C:\Program Files\Java\jdk1.8.0_91  #实际路径</span><br><span class="line">PATH = %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</span><br><span class="line">CLASSPATH = .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</span><br></pre></td></tr></table></figure><ul><li><p>nodejs 安装时默认勾选add to path</p></li><li><p>git</p></li></ul><ol start="2"><li><p>代码器</p><ul><li>IDEA，Pycharm，notepad++，Atom</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">atom 插件列表：</span><br><span class="line">主题：atom-monkai</span><br><span class="line">扩展：</span><br><span class="line">active-power-mode</span><br><span class="line">markdown-preview-plus</span><br><span class="line">platformio-ide-terminal</span><br><span class="line">simplified-chinese-menu</span><br><span class="line">file-icons</span><br><span class="line">edit-background</span><br></pre></td></tr></table></figure></li><li><p>其他工具</p></li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- heidiSQL （数据库客户端）</span><br><span class="line"></span><br><span class="line">- mobaXterm （终端工具）</span><br><span class="line"></span><br><span class="line">- PDman （数据库建模工具）</span><br></pre></td></tr></table></figure><hr><ol start="4"><li>mac app推荐</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- Termius  （ssh client）</span><br><span class="line"></span><br><span class="line">- Viper FTP （sftp client）</span><br><span class="line"></span><br><span class="line">- PAW （http client）</span><br><span class="line"></span><br><span class="line">- postico （postgresql client）</span><br><span class="line"></span><br><span class="line">- tickeys （键盘音效）</span><br><span class="line"></span><br><span class="line">- LiceCap （gif tool）</span><br><span class="line"></span><br><span class="line">- snip （截图）</span><br><span class="line"></span><br><span class="line">- pap.er (壁纸)</span><br></pre></td></tr></table></figure><ol start="5"><li>chrome插件推荐</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- Tampermonkey（脚本扩展）</span><br><span class="line"></span><br><span class="line">- fireshot （截图）</span><br><span class="line"></span><br><span class="line">- xPath finder， chropath  （xpath选择器）</span><br><span class="line"></span><br><span class="line">- octotree （github代码在线树状结构）</span><br><span class="line"></span><br><span class="line">- onetab （tab收集器）</span><br></pre></td></tr></table></figure><ol start="6"><li>一些好玩的</li></ol> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 在线协作画板  https://witeboard.com/</span><br></pre></td></tr></table></figure><hr>]]></content>
     
     <summary type="html">
     
@@ -319,6 +319,35 @@
       <category term="性能，压力测试" scheme="http://Scofieldsu.github.io/tags/%E6%80%A7%E8%83%BD%EF%BC%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/"/>
     
       <category term="QPS" scheme="http://Scofieldsu.github.io/tags/QPS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令&amp;shell使用</title>
+    <link href="http://Scofieldsu.github.io/2017/12/18/linux%E5%91%BD%E4%BB%A4&amp;shell%E4%BD%BF%E7%94%A8/"/>
+    <id>http://Scofieldsu.github.io/2017/12/18/linux命令&amp;shell使用/</id>
+    <published>2017-12-18T12:13:45.000Z</published>
+    <updated>2018-11-06T19:12:32.378Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-nohup-no-hang-up"><a class="markdownIt-Anchor" href="#1-nohup-no-hang-up"></a> 1. nohup （no hang up）</h2><ul><li>当你在运行一个进程，想要让其后台运行，不占用当前终端，关闭终端或者合上电脑或者退出账号时程序仍然在运行。nohup 了解一下。</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nohup java -jar -server -Xms512m a.jar abc &gt;&gt; logs/nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---命令详解</span><br><span class="line">(1) 执行jar包，可以带上你需要的启动参数，例如以server模式运行，初始堆大小512m -server -Xms512m</span><br><span class="line">(2) abc 为主程序接收的参数</span><br><span class="line">(3)  &gt;&gt; logs/nohup.log  </span><br><span class="line">      其中&gt;&gt;表示追加，如果改为 &gt; 则每次启动都会覆盖原log文件。</span><br><span class="line">      指定到特定路径下的文件，如果不指定，则默认输出到当前目录的nohup.out</span><br><span class="line">(4) 2&gt;&amp;1 将错误信息重定向到标准输出</span><br><span class="line">(5) &amp; 作业被提交到后台运行，当前控制台没有被占用</span><br><span class="line"></span><br><span class="line">---其他相关</span><br><span class="line">(1) 执行python程序时需要加上-u参数（不使用python print 的缓冲）把print的内容输出到文件。</span><br><span class="line">    例如： nohup python -u run.py &gt;&gt; logs/nohup.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">(2) 可以使用jobs -l  查看当前 shell 终端的后台运行任务进程信息,根据进程pid 进行kill来退出任务。</span><br><span class="line">(3) fg %n ,置为前端运行,然后ctrl + c 退出任务。其中%n 为job id</span><br><span class="line">(4) bg %n 让进程n到后台运行</span><br><span class="line">(5) 文件很大的话，nohup.out就会不停的增大，可以利用Linux下一个特殊的文件/dev/null来解决这个问题，这个文件就相当于一个黑洞,任何输出到这个文件的东西都将消失</span><br><span class="line">      只保留输出错误信息 nohup command &gt;/dev/null 2&gt;log &amp;</span><br><span class="line">      所有信息都不要 nohup command &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><h2 id="2-awk-和xargs"><a class="markdownIt-Anchor" href="#2-awk-和xargs"></a> 2. awk 和xargs</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-nohup-no-hang-up&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1-nohup-no-hang-up&quot;&gt;&lt;/a&gt; 1. nohup （no hang up）&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;当你在运行一个进程，想要让其后
+      
+    
+    </summary>
+    
+      <category term="关于一些事儿" scheme="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+    
+    
+      <category term="linux" scheme="http://Scofieldsu.github.io/tags/linux/"/>
+    
+      <category term="shell" scheme="http://Scofieldsu.github.io/tags/shell/"/>
     
   </entry>
   
@@ -479,6 +508,28 @@
   </entry>
   
   <entry>
+    <title>python源码模块--ast语法分析</title>
+    <link href="http://Scofieldsu.github.io/2017/05/20/python%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97--ast%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
+    <id>http://Scofieldsu.github.io/2017/05/20/python源码模块--ast语法分析/</id>
+    <published>2017-05-20T05:14:21.000Z</published>
+    <updated>2018-11-06T19:18:57.320Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="python源码模块" scheme="http://Scofieldsu.github.io/categories/python%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97/"/>
+    
+    
+      <category term="ast" scheme="http://Scofieldsu.github.io/tags/ast/"/>
+    
+      <category term="语法分析" scheme="http://Scofieldsu.github.io/tags/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
+    
+      <category term="抽象语法树" scheme="http://Scofieldsu.github.io/tags/%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>玩一玩docker</title>
     <link href="http://Scofieldsu.github.io/2017/05/08/%E7%8E%A9%E4%B8%80%E7%8E%A9docker/"/>
     <id>http://Scofieldsu.github.io/2017/05/08/玩一玩docker/</id>
@@ -509,8 +560,8 @@
   
   <entry>
     <title>git使用</title>
-    <link href="http://Scofieldsu.github.io/2016/12/08/%E5%85%B3%E4%BA%8Egit%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://Scofieldsu.github.io/2016/12/08/关于git的使用/</id>
+    <link href="http://Scofieldsu.github.io/2016/12/08/git%E4%BD%BF%E7%94%A8/"/>
+    <id>http://Scofieldsu.github.io/2016/12/08/git使用/</id>
     <published>2016-12-08T13:13:45.000Z</published>
     <updated>2018-11-02T21:56:45.913Z</updated>
     
@@ -526,63 +577,6 @@
       <category term="workflow" scheme="http://Scofieldsu.github.io/tags/workflow/"/>
     
       <category term="branch" scheme="http://Scofieldsu.github.io/tags/branch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于ubuntu安装odoo环境</title>
-    <link href="http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/"/>
-    <id>http://Scofieldsu.github.io/2016/12/08/ubuntu安装odoo环境/</id>
-    <published>2016-12-08T13:13:45.000Z</published>
-    <updated>2018-11-02T21:57:19.428Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ubuntu安装odoo环境"><a class="markdownIt-Anchor" href="#ubuntu安装odoo环境"></a> ubuntu安装odoo环境</h1><p>接触odoo几个月的期间，刚开始装环境也是缺东少西，按照文档一步一步来，后来慢慢理解了需要装什么，哪些是必要的。自己工作中使用了ubuntu系统，后来换成mac也在mac上装了环境，不同人安装可能遇到的问题也不一样，但只要知道我们需要什么，就万变不离其宗，我认为可以分为这几块：odoo源码；postgresql数据库；nodejs和less；运行odoo环境的python依赖包。<br>于是可以围绕这几点开始安装。第一，odoo源码。建议从github上clone下来 odoo9或odoo10源码。两者的目录结构有细微变动，而且在启动服务时运行的文件不一样。<a href="http://xn--odoo9odoo-ur6sg15lxu6bvou.py" target="_blank" rel="noopener">odoo9运行的是odoo.py</a>，其配置文件是odoo-9.0/debian/openerp-server.conf，odoo10运行的是odoo.bin,其配置文件是odoo10/debian/odoo.conf。第二安装postgresql数据库。ubuntu可以命令行安装，mac上可以下载postgresql.app比较方便。第三nodejs和lessc参照其他网上教程。第四安装运行需要的python依赖包，网上有个requirement.txt一次运行安装所有依赖包，对于没有安装成功的包，具体问题具体分析对待。</p><ul><li><p>安装postgresql：sudo  apt-get install postgresql  ;</p></li><li><p>检查安装：psql --version</p></li><li><p>安装pip: sudo apt-get install python-pip</p></li><li><p>切换postgres用户：sudo  su - postgres</p></li><li><p>创建新的数据库用户yuyuan：createuser --createdb --username postgres --no-createrole --no-superuser --pwprompt yuyuan</p></li><li><p>退出用户：exit</p></li><li><p>安装各个依赖包：sudo apt-get install python-dateutil python-docutils python-feedparser python-gdata</p></li><li><p>python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid</p></li><li><p>python-psycopg2 python-psutil python-pybabel python-pychart python-pydot python-pyparsing</p></li><li><p>python-reportlab python-simplejson python-tz python-unittest2 python-vatnumber python-vobject</p></li><li><p>python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-pyPdf</p></li><li><p>python-decorator python-passlib python-requests</p></li><li><p>其中pypdf如不能安装，www.python.org下载pyPdf.tar.gz  解压  tar zxvf  pyPdf.tar.gz,进入文件夹，sudo python <a href="http://setup.py" target="_blank" rel="noopener">setup.py</a> install</p></li><li><p>安装nodes：sudo apt -get install nodes-legacy;sudo apt install -y npm;sudo npm install -g less less-plugin-clean-css;sudo ln -s /usr/bin/nodejs  /usr/bin/node</p></li><li><p>安装git ：sudo apt-get install git</p></li><li><p>进入某个目录：git clone -b 9.0 <a href="https://github.com/odoo/odoo.git" target="_blank" rel="noopener">https://github.com/odoo/odoo.git</a>  .</p></li><li><p>安装pgadmin3: sudo apt-get  install pgadmin3</p></li><li><p>安装sublime text3：sudo add-apt-repository ppa:webupd8team/sublime-text-3；sudo apt-get update ；sudo apt-get install sublime-text-installer</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;ubuntu安装odoo环境&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#ubuntu安装odoo环境&quot;&gt;&lt;/a&gt; ubuntu安装odoo环境&lt;/h1&gt;
-&lt;p&gt;接触odoo几个月的期间，刚开始装环境也是缺东少西，按照文档一步一步来，
-      
-    
-    </summary>
-    
-      <category term="关于一些事儿" scheme="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-    
-    
-      <category term="odoo" scheme="http://Scofieldsu.github.io/tags/odoo/"/>
-    
-      <category term="ubuntu" scheme="http://Scofieldsu.github.io/tags/ubuntu/"/>
-    
-      <category term="postgresql" scheme="http://Scofieldsu.github.io/tags/postgresql/"/>
-    
-      <category term="python" scheme="http://Scofieldsu.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>When you are old</title>
-    <link href="http://Scofieldsu.github.io/2016/07/15/When-you-are-old/"/>
-    <id>http://Scofieldsu.github.io/2016/07/15/When-you-are-old/</id>
-    <published>2016-07-14T17:46:58.000Z</published>
-    <updated>2018-11-05T18:59:04.490Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">When you are old</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Yeats</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">When you are old and grey and full of sleep,</span><br><span class="line"></span><br><span class="line">And nodding by the fire, take down this book,</span><br><span class="line"></span><br><span class="line">And slowly read, and dream of the soft look</span><br><span class="line"></span><br><span class="line">Your eyes had once, and of their shadows deep;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How many loved your moments of glad grace,</span><br><span class="line"></span><br><span class="line">And loved your beauty with love false or true,</span><br><span class="line"></span><br><span class="line">But one man loved the pilgrim Soul in you,</span><br><span class="line"></span><br><span class="line">And loved the sorrows of your changing face;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">And bending down beside the glowing bars,</span><br><span class="line"></span><br><span class="line">Murmur, a little sadly, how Love fled</span><br><span class="line"></span><br><span class="line">And paced upon the mountains overhead</span><br><span class="line"></span><br><span class="line">And hid his face amid a crowd of stars.</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-      <category term="诗词说文" scheme="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-    
-    
-      <category term="The_Life_You_Want" scheme="http://Scofieldsu.github.io/tags/The-Life-You-Want/"/>
     
   </entry>
   
