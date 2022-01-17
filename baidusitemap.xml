@@ -1,665 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/09/08/%E5%B8%B8%E7%94%A8%E4%B8%8E%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/</loc>
-    <lastmod>2018-11-06T19:32:21.603Z</lastmod>
-    <data>
-        <display>
-        <title>常用与有趣的工具推荐</title>
-        <pubTime>2018-09-08T13:13:45.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>重装系统</tag>
-         
-        <tag>环境搭建</tag>
-         
-        <tag>Java</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/15/%E5%A6%82%E6%9E%9C/</loc>
-    <lastmod>2018-11-06T19:31:51.882Z</lastmod>
-    <data>
-        <display>
-        <title>如果</title>
-        <pubTime>2017-06-15T15:20:26.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/12/18/linux%E5%91%BD%E4%BB%A4&shell%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2018-11-06T19:25:04.007Z</lastmod>
-    <data>
-        <display>
-        <title>linux命令&shell使用</title>
-        <pubTime>2017-12-18T12:13:45.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>shell</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/05/20/python%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97--ast%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2018-11-06T19:18:57.320Z</lastmod>
-    <data>
-        <display>
-        <title>python源码模块--ast语法分析</title>
-        <pubTime>2017-05-20T05:14:21.000Z</pubTime>
-        
-        <tag>ast</tag>
-         
-        <tag>语法分析</tag>
-         
-        <tag>抽象语法树</tag>
-         
-         
-           
-             
-              <breadCrumb title="python源码模块" url="http://Scofieldsu.github.io/categories/python%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2015/07/15/win7%E5%92%8Cubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%BE%E7%BD%AE/</loc>
-    <lastmod>2018-11-06T17:30:06.786Z</lastmod>
-    <data>
-        <display>
-        <title>win7和ubuntu双系统的一些设置</title>
-        <pubTime>2015-07-14T17:21:09.000Z</pubTime>
-        
-        <tag>双系统启动</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/11/01/%E5%85%B3%E4%BA%8E%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3&%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3&%E8%B4%A8%E6%95%B0%E7%9A%84%E7%A5%9E%E7%A7%98/</loc>
-    <lastmod>2018-11-05T19:49:14.713Z</lastmod>
-    <data>
-        <display>
-        <title>关于黎曼猜想&哥德巴赫猜想&质数的神秘</title>
-        <pubTime>2018-10-31T17:00:29.000Z</pubTime>
-        
-        <tag>黎曼猜想</tag>
-         
-        <tag>欧拉</tag>
-         
-        <tag>哥德巴赫猜想</tag>
-         
-        <tag>陈景润</tag>
-         
-        <tag>质数</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/09/02/%E5%85%B3%E4%BA%8E%E7%89%B9%E6%96%AF%E6%8B%89%E7%BA%BF%E5%9C%88/</loc>
-    <lastmod>2018-11-05T19:38:18.391Z</lastmod>
-    <data>
-        <display>
-        <title>关于特斯拉线圈</title>
-        <pubTime>2018-09-02T15:08:58.000Z</pubTime>
-        
-        <tag>小黑盒</tag>
-         
-        <tag>特斯拉线圈</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/05/16/%E5%91%BD%E8%8B%A5%E7%90%B4%E5%BC%A6/</loc>
-    <lastmod>2018-11-05T18:59:04.498Z</lastmod>
-    <data>
-        <display>
-        <title>命若琴弦</title>
-        <pubTime>2016-05-16T14:31:46.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
   <url>
     <loc>http://Scofieldsu.github.io/2018/05/08/%E9%86%92%E6%9D%A5%E5%95%8A%EF%BC%8C%E9%BA%A6%E5%85%8B%E7%99%BD/</loc>
-    <lastmod>2018-11-05T18:59:04.493Z</lastmod>
-    <data>
-        <display>
-        <title>醒来啊，麦克白</title>
-        <pubTime>2018-05-08T15:02:10.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/05/12/%E8%87%B4%E6%A9%A1%E6%A0%91/</loc>
-    <lastmod>2018-11-05T18:59:04.493Z</lastmod>
-    <data>
-        <display>
-        <title>致橡树</title>
-        <pubTime>2016-05-11T16:23:21.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/05/18/%E5%88%9D%E7%9B%B8%E9%81%87/</loc>
-    <lastmod>2018-11-05T18:59:04.492Z</lastmod>
-    <data>
-        <display>
-        <title>初相遇</title>
-        <pubTime>2016-05-18T15:44:23.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/07/15/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/</loc>
-    <lastmod>2018-11-05T18:59:04.492Z</lastmod>
-    <data>
-        <display>
-        <title>百年孤独</title>
-        <pubTime>2016-07-14T17:45:21.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/10/10/%E6%88%91%E4%BB%AC%E4%BB%8D%E6%9C%AA%E7%9F%A5%E9%81%93%E9%82%A3%E5%A4%A9%E6%89%80%E7%9C%8B%E8%A7%81%E7%9A%84%E8%8A%B1%E7%9A%84%E5%90%8D%E5%AD%97(%E6%9C%AA%E9%97%BB%E8%8A%B1%E5%90%8D)/</loc>
-    <lastmod>2018-11-05T18:59:04.492Z</lastmod>
-    <data>
-        <display>
-        <title>我们仍未知道那天所看见的花的名字(未闻花名)</title>
-        <pubTime>2018-10-10T13:44:23.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/20/%E7%83%9F%E7%81%AB%E9%87%8C%E7%9A%84%E5%B0%98%E5%9F%83/</loc>
-    <lastmod>2018-11-05T18:59:04.492Z</lastmod>
-    <data>
-        <display>
-        <title>烟火里的尘埃</title>
-        <pubTime>2017-06-20T13:44:23.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/06/03/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/</loc>
-    <lastmod>2018-11-05T18:59:04.492Z</lastmod>
-    <data>
-        <display>
-        <title>热爱生命</title>
-        <pubTime>2016-06-03T14:54:04.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/05/08/%E4%B8%80%E9%A2%97%E5%BC%80%E8%8A%B1%E7%9A%84%E6%A0%91/</loc>
-    <lastmod>2018-11-05T18:59:04.491Z</lastmod>
-    <data>
-        <display>
-        <title>一颗开花的树</title>
-        <pubTime>2016-05-08T15:02:10.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/07/15/When-you-are-old/</loc>
-    <lastmod>2018-11-05T18:59:04.490Z</lastmod>
-    <data>
-        <display>
-        <title>When you are old</title>
-        <pubTime>2016-07-14T17:46:58.000Z</pubTime>
-        
-        <tag>The_Life_You_Want</tag>
-         
-         
-           
-             
-              <breadCrumb title="诗词说文" url="http://Scofieldsu.github.io/categories/%E8%AF%97%E8%AF%8D%E8%AF%B4%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/10/20/%E5%85%B3%E4%BA%8E%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F-%E5%AD%97%E8%8A%82%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
-    <lastmod>2018-11-02T21:59:26.979Z</lastmod>
-    <data>
-        <display>
-        <title>字节序的大小端模式-字节与基础类型的转换</title>
-        <pubTime>2018-10-19T18:13:45.000Z</pubTime>
-        
-        <tag>字节序</tag>
-         
-        <tag>大小端</tag>
-         
-        <tag>字节对齐</tag>
-         
-        <tag>ByteBuffer</tag>
-         
-        <tag>ctypes</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2018-11-02T21:57:19.428Z</lastmod>
-    <data>
-        <display>
-        <title>关于ubuntu安装odoo环境</title>
-        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
-        
-        <tag>odoo</tag>
-         
-        <tag>ubuntu</tag>
-         
-        <tag>postgresql</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2016/12/08/git%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2018-11-02T21:56:45.913Z</lastmod>
-    <data>
-        <display>
-        <title>git使用</title>
-        <pubTime>2016-12-08T13:13:45.000Z</pubTime>
-        
-        <tag>git</tag>
-         
-        <tag>workflow</tag>
-         
-        <tag>branch</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/11/02/%E5%85%B3%E4%BA%8E%E7%94%BB%E5%9B%BE%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/</loc>
-    <lastmod>2018-11-01T20:44:56.049Z</lastmod>
-    <data>
-        <display>
-        <title>关于画图那些事儿</title>
-        <pubTime>2018-11-01T19:09:23.000Z</pubTime>
-        
-        <tag>流程图</tag>
-         
-        <tag>架构图</tag>
-         
-        <tag>思维导图</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/10/23/%E6%84%9F%E5%90%8C%E8%BA%AB%E5%8F%97%E7%9A%84%E9%80%A0%E6%A2%A6%E7%A9%BA%E9%97%B4/</loc>
-    <lastmod>2018-10-26T01:10:09.901Z</lastmod>
-    <data>
-        <display>
-        <title>感同身受的造梦空间</title>
-        <pubTime>2018-10-22T16:01:40.000Z</pubTime>
-        
-        <tag>感同身受</tag>
-         
-         
-           
-             
-              <breadCrumb title="随笔" url="http://Scofieldsu.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2018/04/08/%E7%8E%A9%E4%B8%80%E7%8E%A9locust/</loc>
-    <lastmod>2018-09-25T18:27:14.882Z</lastmod>
-    <data>
-        <display>
-        <title>玩一玩locust</title>
-        <pubTime>2018-04-08T12:47:23.000Z</pubTime>
-        
-        <tag>locust</tag>
-         
-        <tag>性能，压力测试</tag>
-         
-        <tag>QPS</tag>
-         
-         
-           
-             
-              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/12/15/%E5%85%B3%E4%BA%8EMAC%E5%9C%B0%E5%9D%80/</loc>
-    <lastmod>2018-09-25T18:18:04.213Z</lastmod>
-    <data>
-        <display>
-        <title>关于MAC地址</title>
-        <pubTime>2017-12-15T12:47:23.000Z</pubTime>
-        
-        <tag>MAC</tag>
-         
-        <tag>伪MAC</tag>
-         
-        <tag>探针</tag>
-         
-         
-           
-             
-              <breadCrumb title="关于一些事儿" url="http://Scofieldsu.github.io/categories/%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/05/08/%E7%8E%A9%E4%B8%80%E7%8E%A9docker/</loc>
-    <lastmod>2018-09-25T18:15:28.195Z</lastmod>
-    <data>
-        <display>
-        <title>玩一玩docker</title>
-        <pubTime>2017-05-08T12:47:23.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>centos7</tag>
-         
-        <tag>2048</tag>
-         
-         
-           
-             
-              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/01/%E7%8E%A9%E4%B8%80%E7%8E%A9vue/</loc>
-    <lastmod>2018-09-25T18:13:46.119Z</lastmod>
-    <data>
-        <display>
-        <title>玩一玩vue</title>
-        <pubTime>2017-06-01T14:39:08.000Z</pubTime>
-        
-        <tag>vue.js</tag>
-         
-        <tag>npm</tag>
-         
-        <tag>elementUI</tag>
-         
-        <tag>axios</tag>
-         
-        <tag>vuex</tag>
-         
-         
-           
-             
-              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://Scofieldsu.github.io/2017/06/08/%E7%8E%A9%E4%B8%80%E7%8E%A9jenkins/</loc>
-    <lastmod>2018-09-25T18:13:10.000Z</lastmod>
-    <data>
-        <display>
-        <title>玩一玩jenkins</title>
-        <pubTime>2017-06-08T12:47:23.000Z</pubTime>
-        
-        <tag>jenkins</tag>
-         
-         
-           
-             
-              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
+    <lastmod>2022-01-16</lastmod>
+  </url>
   <url>
     <loc>http://Scofieldsu.github.io/2018/05/09/%E7%8E%A9%E4%B8%80%E7%8E%A9selenium/</loc>
-    <lastmod>2018-09-25T18:12:03.945Z</lastmod>
-    <data>
-        <display>
-        <title>玩一玩selenium</title>
-        <pubTime>2018-05-09T12:47:23.000Z</pubTime>
-        
-        <tag>selenium</tag>
-         
-        <tag>自动化</tag>
-         
-        <tag>xpath</tag>
-         
-        <tag>webdriver</tag>
-         
-        <tag>headless</tag>
-         
-         
-           
-             
-              <breadCrumb title="搞点事情" url="http://Scofieldsu.github.io/categories/%E6%90%9E%E7%82%B9%E4%BA%8B%E6%83%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/07/15/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/01/%E7%8E%A9%E4%B8%80%E7%8E%A9vue/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/12/%E8%87%B4%E6%A9%A1%E6%A0%91/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/20/%E7%83%9F%E7%81%AB%E9%87%8C%E7%9A%84%E5%B0%98%E5%9F%83/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/06/03/%E7%83%AD%E7%88%B1%E7%94%9F%E5%91%BD/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/05/08/%E7%8E%A9%E4%B8%80%E7%8E%A9docker/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/08/%E7%8E%A9%E4%B8%80%E7%8E%A9jenkins/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/04/08/%E7%8E%A9%E4%B8%80%E7%8E%A9locust/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/09/08/%E5%B8%B8%E7%94%A8%E4%B8%8E%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/10/23/%E6%84%9F%E5%90%8C%E8%BA%AB%E5%8F%97%E7%9A%84%E9%80%A0%E6%A2%A6%E7%A9%BA%E9%97%B4/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/10/10/%E6%88%91%E4%BB%AC%E4%BB%8D%E6%9C%AA%E7%9F%A5%E9%81%93%E9%82%A3%E5%A4%A9%E6%89%80%E7%9C%8B%E8%A7%81%E7%9A%84%E8%8A%B1%E7%9A%84%E5%90%8D%E5%AD%97(%E6%9C%AA%E9%97%BB%E8%8A%B1%E5%90%8D)/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
   <url>
     <loc>http://Scofieldsu.github.io/2017/08/20/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E6%9C%8B%E5%8F%8B%E5%B7%B2%E7%BB%8F%E6%AD%BB%E4%BA%86/</loc>
-    <lastmod>2018-09-25T17:28:56.143Z</lastmod>
-    <data>
-        <display>
-        <title>我最好的朋友已经死了</title>
-        <pubTime>2017-08-20T05:14:40.000Z</pubTime>
-        
-        <tag>丧</tag>
-         
-         
-           
-             
-              <breadCrumb title="随笔" url="http://Scofieldsu.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-    
-    
-    
-    
-    
-    
-</urlset>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/18/%E5%88%9D%E7%9B%B8%E9%81%87/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/06/15/%E5%A6%82%E6%9E%9C/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/16/%E5%91%BD%E8%8B%A5%E7%90%B4%E5%BC%A6/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/10/20/%E5%85%B3%E4%BA%8E%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F-%E5%AD%97%E8%8A%82%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/09/02/%E5%85%B3%E4%BA%8E%E7%89%B9%E6%96%AF%E6%8B%89%E7%BA%BF%E5%9C%88/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/11/02/%E5%85%B3%E4%BA%8E%E7%94%BB%E5%9B%BE%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2018/11/01/%E5%85%B3%E4%BA%8E%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3&%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3&%E8%B4%A8%E6%95%B0%E7%9A%84%E7%A5%9E%E7%A7%98/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/12/08/ubuntu%E5%AE%89%E8%A3%85odoo%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/05/20/python%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97--ast%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2015/07/15/win7%E5%92%8Cubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/05/08/%E4%B8%80%E9%A2%97%E5%BC%80%E8%8A%B1%E7%9A%84%E6%A0%91/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/12/15/%E5%85%B3%E4%BA%8EMAC%E5%9C%B0%E5%9D%80/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/07/15/When-you-are-old/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2016/12/08/git%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+  <url>
+    <loc>http://Scofieldsu.github.io/2017/12/18/linux%E5%91%BD%E4%BB%A4&shell%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2022-01-16</lastmod>
+  </url>
+</urlset> 
