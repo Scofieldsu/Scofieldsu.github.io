@@ -25,12 +25,12 @@
 <meta property="og:description" content="1234567891011121314151617181920212223Docker是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。Docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性">
 <meta property="og:locale">
 <meta property="og:image" content="https://raw.githubusercontent.com/Scofieldsu/Image_hosting/master/blog/2048.png">
-<meta property="og:image" content="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/gitlab.png?raw=true">
-<meta property="og:image" content="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/rancher-1.png?raw=true">
-<meta property="og:image" content="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/rancher-2.png?raw=true">
-<meta property="og:image" content="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/rancher-3.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/gitlab.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-1.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-2.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-3.png?raw=true">
 <meta property="article:published_time" content="2017-05-08T12:47:23.000Z">
-<meta property="article:modified_time" content="2022-01-17T07:08:20.796Z">
+<meta property="article:modified_time" content="2022-01-18T18:21:24.298Z">
 <meta property="article:author" content="俞 元">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Centos">
@@ -342,7 +342,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -h gitlab-p 9999:22-p 8081:80-p 8443:443-v /docker/gitlab/config:/etc/gitlab -v /docker/gitlab/logs:/var/log/gitlab -v /docker/gitlab/data:/var/opt/gitlab --restart always --name gitlab gitlab/gitlab-ce:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/gitlab.png?raw=true" alt="gitlab" /></p>
+<p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/gitlab.png?raw=true" alt="gitlab" /></p>
 <h3 id="docker运行rancher"><a class="markdownIt-Anchor" href="#docker运行rancher"></a> docker运行rancher</h3>
 <blockquote>
 <p>Rancher是一个容器管理平台，专为在生产中部署容器的组织而构建。Rancher使您可以轻松地在任何地方运行Kubernetes.</p>
@@ -350,9 +350,9 @@
 <ul>
 <li>命令： docker run -d --restart=unless-stopped -p 8989:80 -p 443:443 rancher/rancher:stable</li>
 </ul>
-<p><img src="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/rancher-1.png?raw=true" alt="rancher-1" /><br />
-<img src="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/rancher-2.png?raw=true" alt="rancher-2" /><br />
-<img src="https://github.com/Scofieldsu/Image_hosting/blob/master/blog/rancher-3.png?raw=true" alt="rancher-3" /></p>
+<p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-1.png?raw=true" alt="rancher-1" /><br />
+<img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-2.png?raw=true" alt="rancher-2" /><br />
+<img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-3.png?raw=true" alt="rancher-3" /></p>
 <hr />
 <h3 id="3-docker-命令"><a class="markdownIt-Anchor" href="#3-docker-命令"></a> 3. docker 命令</h3>
 <h3 id="4-dockerfile"><a class="markdownIt-Anchor" href="#4-dockerfile"></a> 4. dockerfile</h3>
