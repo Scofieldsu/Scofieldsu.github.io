@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>设备MAC地址随机化与WiFi探针 | ScofieldYu</title>
+  <meta name="description" content="关于MAC 地址（Media Access Control Address）   1. MAC地址共48位（6个字节），以十六进制表示。前24位由IEEE决定如何分配，后24位由实际生产该网络设备的厂商自行指定。  图片来源  wikipedia链接：https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;MAC_address   区分方法  通过B1位区分一些修改过的MAC地址 这个6个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设备MAC地址随机化与WiFi探针">
+<meta property="og:url" content="http://scofieldsu.github.io/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="关于MAC 地址（Media Access Control Address）   1. MAC地址共48位（6个字节），以十六进制表示。前24位由IEEE决定如何分配，后24位由实际生产该网络设备的厂商自行指定。  图片来源  wikipedia链接：https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;MAC_address   区分方法  通过B1位区分一些修改过的MAC地址 这个6个">
+<meta property="og:locale">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/MACadress.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/beaconframe.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/probe.png?raw=true">
+<meta property="og:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/wifi-run.png?raw=true">
+<meta property="article:published_time" content="2017-12-15T12:47:23.000Z">
+<meta property="article:modified_time" content="2022-01-18T18:00:21.514Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="伪MAC">
+<meta property="article:tag" content="探针">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Scofieldsu/blog-source/blob/main/source/images/MACadress.png?raw=true">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://scofieldsu.github.io/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">ScofieldYu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">高筑墙｜广积粮｜缓称王</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> XiaMen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+       <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%BD%B1/">书影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Ast/" style="font-size: 13px;">Ast</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Develop/" style="font-size: 13px;">Develop</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13px;">Locust</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/Python/" style="font-size: 13.67px;">Python</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/Selenium/" style="font-size: 13px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.33px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/Windows/" style="font-size: 13px;">Windows</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%8F%8C%E7%B3%BB%E7%BB%9F/" style="font-size: 13px;">双系统</a> <a href="/tags/%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3/" style="font-size: 13px;">哥德巴赫猜想</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/" style="font-size: 13px;">思维导图</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">性能测试</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%BD%B1/" style="font-size: 13.33px;">推荐书影</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" style="font-size: 13px;">流程图</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 13px;">源码</a> <a href="/tags/%E7%89%B9%E6%96%AF%E6%8B%89%E7%BA%BF%E5%9C%88/" style="font-size: 13px;">特斯拉线圈</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13px;">自动化</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3/" style="font-size: 13px;">黎曼猜想</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-设备MAC地址随机化与WiFi探针" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设备MAC地址随机化与WiFi探针
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/" class="article-date">
+	  <time datetime="2017-12-15T12:47:23.000Z" itemprop="datePublished">2017-12-15</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E4%BC%AAMAC/" rel="tag">伪MAC</a>, <a class="article-tag-link-link" href="/tags/%E6%8E%A2%E9%92%88/" rel="tag">探针</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <h1 id="关于mac-地址media-access-control-address"><a class="markdownIt-Anchor" href="#关于mac-地址media-access-control-address"></a> 关于MAC 地址（Media Access Control Address）</h1>
+<hr />
+<h2 id="1-mac地址共48位6个字节以十六进制表示-前24位由ieee决定如何分配后24位由实际生产该网络设备的厂商自行指定"><a class="markdownIt-Anchor" href="#1-mac地址共48位6个字节以十六进制表示-前24位由ieee决定如何分配后24位由实际生产该网络设备的厂商自行指定"></a> 1. MAC地址共48位（6个字节），以十六进制表示。前24位由IEEE决定如何分配，后24位由实际生产该网络设备的厂商自行指定。</h2>
+<p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/MACadress.png?raw=true" alt="mac" /></p>
+<p>图片来源  wikipedia链接：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MAC_address">https://en.wikipedia.org/wiki/MAC_address</a></p>
+<hr />
+<h2 id="区分方法"><a class="markdownIt-Anchor" href="#区分方法"></a> 区分方法</h2>
+<h4 id="通过b1位区分一些修改过的mac地址"><a class="markdownIt-Anchor" href="#通过b1位区分一些修改过的mac地址"></a> 通过B1位区分一些修改过的MAC地址</h4>
+<p>这个6个字节中的最高有效字节中的最低有效位（b0）用来标识 unicast,和mulcast，即单播 和多播  而<strong>次最低有效位（b1）则用来标识 universally administered address 和  locally administered address</strong>  其中：universally administered address 是指烧录在固件中由厂商指定的地址，也也即大家通常所理解的MAC地址，  而 locally administered address 则是指由网络管理员为了加强自己对网络管理而指定的地址，由定义可知， locally administered address的U/L位要设置成1.所以 要表示 locally administered address的话，那 MAC 地址的第一个字节应该是 0x02, 因此不能够把MAC地址改成其它已经被厂商占用的 universally administered address了。</p>
+<p>但是通常情况下，很多人都不会遵守上面的约定。因为 MAC地址通常只能在局域网里发挥作用，因为在网络上传输，MAC地址是会被不断的替换掉的。所以即使你用了 已经被厂商占用的 universally administered address也不用担心会产生冲突。  说到着就更清楚了吧。说到底， <strong>locally administered address 和 universally administered address的区别在于是直接由生产的时候确定的还是由你自己修改过的。</strong></p>
+<p>原文链接：<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_9950926401019kzx.html">http://blog.sina.com.cn/s/blog_9950926401019kzx.html</a></p>
+<h4 id="通过前3个字节查询对应注册厂商"><a class="markdownIt-Anchor" href="#通过前3个字节查询对应注册厂商"></a> 通过前3个字节查询对应注册厂商</h4>
+<p>IEEE注册厂商查询，通过匹配MAC的前3个字节查找对应厂商，如无对应则可认为是一些低级的伪MAC地址。但这个注册厂商列表是公开的，一般的模拟MAC地址时，前3个字节从列表中取即可，而且这样伪造的MAC地址也不存在上面通过B2位判断的问题。</p>
+<p>IEEE官网查询地址（可以下载oui.csv）：<a target="_blank" rel="noopener" href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries">https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries</a></p>
+<p>在线oui对应列表：<a target="_blank" rel="noopener" href="http://standards-oui.ieee.org/oui/oui.txt">http://standards-oui.ieee.org/oui/oui.txt</a></p>
+<h4 id="通过流量判断"><a class="markdownIt-Anchor" href="#通过流量判断"></a> 通过流量判断</h4>
+<p>CSNA网络分析论坛有一种说法是 通过流量判断：伪造的IP或MAC地址，一般都只有单向流量，而且你可以看到其接收或发送的数据包都非常的少。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="http://www.csna.cn/archiver/tid-2040.html">http://www.csna.cn/archiver/tid-2040.html</a></p>
+<h4 id="通过mac地址前3字节后3字节"><a class="markdownIt-Anchor" href="#通过mac地址前3字节后3字节"></a> 通过MAC地址前3字节+后3字节</h4>
+<p>这种整体判断MAC真伪方式暂时还没找到。</p>
+<hr />
+<h5 id="其他相关链接"><a class="markdownIt-Anchor" href="#其他相关链接"></a> 其他相关链接</h5>
+<ul>
+<li>知乎问题《iOS 8 设备随机 MAC 地址躲避 Wi-Fi 热点的记录追踪，技术上是怎么实现，有何影响？》<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24094236">https://www.zhihu.com/question/24094236</a></li>
+</ul>
+<h1 id="ios8-mac随机化分析"><a class="markdownIt-Anchor" href="#ios8-mac随机化分析"></a> ios8 MAC随机化分析</h1>
+<p>在iPhone 5s中发现了MAC随机化（细节如下），但在iPhone 5和iPad Mini中却没有。我怀疑这与新一代iPhone的操作系统架构差异有关。</p>
+<h4 id="在iphone-5s中mac随机化仅在以下情况下发生"><a class="markdownIt-Anchor" href="#在iphone-5s中mac随机化仅在以下情况下发生"></a> <em>在iPhone 5s中，MAC随机化仅在以下情况下发生：</em></h4>
+<ul>
+<li>手机处于睡眠模式（显示关闭，未被使用）</li>
+<li>Wi-Fi应该打开但不关联</li>
+<li>位置服务应在隐私设置中关闭</li>
+</ul>
+<h4 id="在上述条件下iphone5s将在探测请求中使用随机mac具有以下特征"><a class="markdownIt-Anchor" href="#在上述条件下iphone5s将在探测请求中使用随机mac具有以下特征"></a> <em>在上述条件下，iPhone5s将在探测请求中使用随机MAC，具有以下特征：</em></h4>
+<ul>
+<li>
+<p>随机化的MAC是本地管理的MAC。</p>
+</li>
+<li>
+<p><strong>在电话显示屏关闭后大约120-150秒钟，手机将传送第一批具有随机MAC的探测请求</strong>。</p>
+</li>
+<li>
+<p>在2.4 GHz和5 GHz频段内，批次内和所有通道内的所有探测请求都使用相同的随机MAC地址。</p>
+</li>
+<li>
+<p><strong>下一批次的探测请求会随着批次之间的升级间隔而增加，最大间隔约为385秒，然后下一批次再次以大约120-150秒作为初始时间。跟踪时间为1小时</strong>。</p>
+</li>
+<li>
+<p>所有这些探测请求都使用相同的随机MAC地址。</p>
+</li>
+<li>
+<p><strong>探测请求中使用的随机MAC地址在每次手机被激活并随后进入睡眠模式时都会更改。意味着每个新的睡眠周期都使用一个新的随机MAC</strong>。</p>
+</li>
+<li>
+<p>处于睡眠模式的探测请求不要求特定的SSID（称为空探测）。这似乎是一个额外的隐私功能，以防止在手机的无线配置文件中的SSID显示在睡眠模式。</p>
+</li>
+<li>
+<p>无论手机是否在充电，MAC随机化都会发生。</p>
+</li>
+</ul>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p><strong>测请求中使用的随机MAC地址在每次手机被激活并随后进入睡眠模式时都会更改。意味着每个新的睡眠周期都使用一个新的随机MAC</strong>。</p>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://blog.mojonetworks.com/ios8-mac-randomization-analyzed/">https://blog.mojonetworks.com/ios8-mac-randomization-analyzed/</a></p>
+<hr />
+<p>相关：<a target="_blank" rel="noopener" href="https://blog.mojonetworks.com/ios8-mac-randomgate/">https://blog.mojonetworks.com/ios8-mac-randomgate/</a></p>
+<p>专利《一种获取WiFi终端真实MAC地址的装置及方法》：   <a target="_blank" rel="noopener" href="https://www.google.com/patents/CN107094293A?cl=zh">https://www.google.com/patents/CN107094293A?cl=zh</a></p>
+<hr />
+<h1 id="关于探针"><a class="markdownIt-Anchor" href="#关于探针"></a> 关于探针</h1>
+<h3 id="wifi使用的网络协议wifi采用的是ieee80211协议集此协议集包含许多子协议-其中按照时间顺序发展主要有"><a class="markdownIt-Anchor" href="#wifi使用的网络协议wifi采用的是ieee80211协议集此协议集包含许多子协议-其中按照时间顺序发展主要有"></a> WiFi使用的网络协议，WiFi采用的是IEEE802.11协议集，此协议集包含许多子协议。其中按照时间顺序发展，主要有：</h3>
+<p>（1）802.11a，</p>
+<p>（2）802.11b，</p>
+<p>（3）802.11g</p>
+<p>（4）802.11n，。</p>
+<p>在网络通信中，数据被封装成了帧，帧就是指通信中的一个数据块。但是帧在数据链路层传输的时候是有固定格式的，不是随便的封装和打包就可以传输，大小有限制，最小46字节，最大1500字节所以我们必须按照这个规则来封装。</p>
+<p>下面802.11的帧结构：</p>
+<p>| 前导码 | 前定界符 | 目的地址 | 源目的地址 | 长度字段 | 数据字段 | 校验字段 |<br />
+| - - - -|- - - - -| - - - - | - - - - - | - - - - | - - - - -| - - - - |<br />
+| 7B     |  1B     |   6B    |    6B     |    2B   |  46-1500 |   4B    |</p>
+<p>在802.11中的帧有三种类型：管理帧（Management Frame，例如Beacon帧、Probe Request帧）、控制帧（Control Frame，例如RTS帧、CTS帧、ACK帧）、数据帧（Data Frame，承载数据的载体，其中的DS字段用来标识方向很重要）。帧头部中的类型字段中会标识出该帧属于哪个字段。</p>
+<p>我们主要介绍下WiFi探针技术相关的几种帧：</p>
+<p><strong>1.管理帧：</strong></p>
+<ul>
+<li>
+<p><em>BeaconFrame</em>：信标帧，是相当重要的维护机制，主要来宣告某个AP网络的存在。定期发送的信标，可让移动WiFi设备得知该网络的存在，从而调整加入该网络所必要的参数。在基础网络里，AP必须负责发送Beacon帧，Beacon帧所及范围即为基本服务区域。  在基础型网络里，所有沟通都必须通过接入点，因此WiFi设备不能距离太远，否则无法接收到信标。</p>
+<p>下图是帧格式：</p>
+<p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/beaconframe.png?raw=true" alt="BeaconFrame" /></p>
+</li>
+<li>
+<p><em>Probe Request</em>：探测请求帧，WiFi设备将会利用Probe Request帧，扫描所在区域内目前有哪些802.11网络。</p>
+<p>下图是帧格式：<br />
+<img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/probe.png?raw=true" alt="probe" /></p>
+</li>
+</ul>
+<p><strong>2.数据帧</strong>：</p>
+<ul>
+<li><em>Data</em>：数据帧，当接入点要送出一个帧给WiFi设备但是不必确认之前所传送的信息时，就会使用标准的数据帧。标准的数据帧并不会征询对方是否有数据待传，因此不允许接收端传送任何数据。无竞争周期所使用的纯数据（Data-Only)帧和无竞争周期所使用的数据帧完全相同。</li>
+</ul>
+<p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/wifi-run.png?raw=true" alt="wifi-run" /></p>
+<p>就像图中描述的一样，我们的WiFi探针其实就是一个AP，它定时的向自己的四周广播发送Beacon帧，用来通知附近的WiFi设备，AP是存在的，（好比它一直在向周围喊着，我在这里，大家快来连接我啊）。</p>
+<p>我们的WiFi设备，手机，平板电脑等，也不停的发送着probe帧，去寻找附近可用的AP。在probe帧的介绍中就我们可以看到probe帧包含了设备的mac地址，当我们的AP接收到probe帧之后就获取了这个设备的MAC地址，而这个AP就是我们的WIFI探针。因此只要在WiFi探针覆盖区域内的设备打开着WiFi，探针就能收集到他的MAC地址。</p>
+<hr />
+<p>关于探针安全</p>
+<ul>
+<li>
+<p>探针所收集的数据内容</p>
+<blockquote>
+<p>我们来看看WiFi探针设备究竟会收集什么信息？前面我们已经看到了，在不连接WiFi的情况下，移动设备只会发送probe帧，此时我们并不能通过探针访问网络进行数据传输，探针仅仅只能接收到WiFi设备发送的probe帧，收集probe帧携带的MAC地址，所以此时我们收集到信息是绝对无关用户个人信息和设备上其他信息的。</p>
+</blockquote>
+</li>
+<li>
+<p>探针不提供上网功能，WiFi提供上网功能</p>
+<blockquote>
+<p>探针不提供上网功能，所以用户与探针之间的数据流量仅限在探针发送广播，移动设备发送一次连接请求，而手机号码，用户姓名，性别等等个人信息和设备的详细信息都不包含在里面。但是WiFi就不一样了。因为用户可以用它来上网，可以说用户所有流量都是WiFi可以看到的。而流量的内容里面有很多是关于用户个人信息的。比如用户在网上填写市场调查问卷，可能就有一些用户信息，比如性别，年龄，手机号码等。甚至那种别有用心的人提供的WiFi会估计记录用户的一些敏感信息，比如用户上网时输入的密码等等。这也是安全相关人士经常提到的不要随便上别人的WiFi的原因。</p>
+</blockquote>
+</li>
+<li>
+<p>探针的数据处理</p>
+<blockquote>
+<p>由于探针本身设计仅仅是探测周边有些什么设备，因此并不产生大量数据，设计的时候就不会将收集到的数据存储在本身，而是通过有线连接直接发送到中心服务器上，这样即使有恶意的人将探针取走，也不能获得探针收集到的信息。同时有线连接也保证数据传输过程不容易通过电磁波的形式被监听和窃取。中心服务器一般都是在IDC机房里，而要进入IDC机房是需要经过IDC层层许可的。因而不论是数据的传输还是存储，探针的数据都是安全的。</p>
+</blockquote>
+</li>
+</ul>
+<p>原文链接：<a target="_blank" rel="noopener" href="http://blog.51cto.com/11926581/1834693">http://blog.51cto.com/11926581/1834693</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://scofieldsu.github.io/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/" title="设备MAC地址随机化与WiFi探针" target="_blank" rel="external">http://scofieldsu.github.io/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2017/12/18/linux%E5%91%BD%E4%BB%A4&shell%E4%BD%BF%E7%94%A8/" title="linux命令&amp;shell使用"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2017/08/20/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E6%9C%8B%E5%8F%8B%E5%B7%B2%E7%BB%8F%E6%AD%BB%E4%BA%86/" title="我最好的朋友已经死了">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2022 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://scofieldsu.github.io/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/';
+        
+        this.page.identifier = '设备MAC地址随机化与WiFi探针';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>
