@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://Scofieldsu.github.io/"/>
-  <updated>2022-01-18T17:51:56.849Z</updated>
+  <updated>2022-01-19T02:48:00.185Z</updated>
   <id>http://Scofieldsu.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://Scofieldsu.github.io/2022/01/18/59%E6%9D%A1%E7%BC%96%E7%A8%8B%E8%AF%AD%E5%BD%95/"/>
     <id>http://Scofieldsu.github.io/2022/01/18/59条编程语录/</id>
     <published>2022-01-18T12:56:40.000Z</published>
-    <updated>2022-01-18T17:51:56.849Z</updated>
+    <updated>2022-01-19T02:48:00.185Z</updated>
     
     <content type="html"><![CDATA[<h2 id="59条搞笑但却真实无比的编程语录"><a class="markdownIt-Anchor" href="#59条搞笑但却真实无比的编程语录"></a> 59条搞笑但却真实无比的编程语录</h2><blockquote><p>英文原文：59 Hilarious but True Programming Quotes for Software Developers</p></blockquote><p>收集了很多编程语录，这些语录涉及软件开发，代码维护，调试纠错，软件bug，系统设计、文档，代码质量，测试和软件开发团队管理等方面。</p><p>下面的这59条语录虽然很搞笑，但却真实无比。只有牛逼的程序员才能理解这些编程语句里的真正内涵。</p><hr /><h3 id="软件开发人员和程序员语录"><a class="markdownIt-Anchor" href="#软件开发人员和程序员语录"></a> 软件开发人员和程序员语录</h3><ol><li>A good programmer is someone who always looks both ways before crossing a one-way street.(Doug Linder)</li></ol><blockquote><p>好的程序员即使在过单行道时也总是会环顾两边。</p></blockquote><ol start="2"><li>Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.(Mosher’s Law of Software Engineering)</li></ol><blockquote><p>不要担心它能否正常工作。如果一切正常，那么你就会失去工作。</p></blockquote><ol start="3"><li>The trouble with programmers is that you can never tell what a programmer is doing until it’s too late. (Seymour Cray)</li></ol><blockquote><p>程序员的烦恼是，你永远无法知道一个程序员在做什么，直到为时已晚。</p></blockquote><ol start="4"><li>Most of you are familiar with the virtues of a programmer. There are three, of course: laziness, impatience, and hubris. (Larry Wall)</li></ol><blockquote><p>程序员的美德：懒惰，没有耐心以及老子天下第一。</p></blockquote><ol start="5"><li>Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live. (Martin Golding)</li></ol><blockquote><p>写代码的时候总是想象维护你代码的家伙是一个知道你住在哪里的暴力精神病患者。</p></blockquote><ol start="6"><li>One man’s crappy software is another man’s full time job. (Jessica Gaston)</li></ol><blockquote><p>一个人写的烂软件将会给另一个人带来一份全职工作。</p></blockquote><ol start="7"><li>If builders built buildings the way programmers wrote programs, then the first woodpecker that came along wound destroy civilization. (Gerald Weinberg)</li></ol><blockquote><p>如果建筑工人用程序员写程序的方式建造建筑物，那么来的第一只啄木鸟（找bug）就将摧毁文明。</p></blockquote><ol start="8"><li>The most likely way for the world to be destroyed, most experts agree, is by accident. That’s where we come in; we’re computer professionals. We cause accidents. (Nathaniel Borenstein)</li></ol><blockquote><p>大多数专家认为，世界被破坏的最有可能的方式是，是因为偶然。那就是我们所要进入的领域：我们是计算机专家。我们制造偶然。</p></blockquote><ol start="9"><li>It’s a curious thing about our industry: not only do we not learn from our mistakes, we also don’t learn from our successes. (Keith Braithwaite)</li></ol><blockquote><p>这是我们这个行业的一件咄咄怪事：我们不仅不从错误中学习，我们也不从成功中学习。</p></blockquote><ol start="10"><li>Once a new technology starts rolling, if you’re not part of the steamroller, you’re part of the road. (Stewart Brand)</li></ol><blockquote><p>一旦一种新技术开始滚动碾压道路，如果你不能成为压路机的一部分，那么你就只能成为道路的一部分。</p></blockquote><ol start="11"><li>If at first you don’t succeed, call it version 1.0 (unknown)</li></ol><blockquote><p>如果第一次你没有成功，那么称之为1.0版，继续加油。</p></blockquote><ol start="12"><li>All programmers are playwrights and all computers are lousy actors. (Anonymous Hack Actor)</li></ol><blockquote><p>所有的程序员都剧作家，而所有计算机都是糟糕的演员。</p></blockquote><ol start="13"><li>The sooner you get behind in your work, the more time you have to catch up. (Anonymous Scheduler)</li></ol><blockquote><p>工作拉下得越早，赶上去所需要的时间越多。</p></blockquote><ol start="14"><li>When a programming language is created that allows programmers to program in simple English, it will be discovered that programmers cannot speak English. (Anonymous Linguist)</li></ol><blockquote><p>当创建一种编程语言允许程序员使用简单英语编程的时候，那么新问题又来了，你会发现程序员不说英语。</p></blockquote><ol start="15"><li>Why do we never have time to do it right, but always have time to do it over? (Anonymous)</li></ol><blockquote><p>为什么我们总是没有时间把事情做对，却有时间做完它？</p></blockquote><ol start="16"><li>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</li></ol><blockquote><p>傻瓜写计算机能理解的代码。优秀的程序员写人类能读懂的代码。</p></blockquote><ol start="17"><li>Any code of your own that you haven’t looked at for six or more months might as well have been written by someone else. (Eagleson’s law)</li></ol><blockquote><p>自己的代码六个月或更久不见，还不如别人写的代码。</p></blockquote><hr /><h3 id="编程软件开发语录"><a class="markdownIt-Anchor" href="#编程软件开发语录"></a> 编程/软件开发语录</h3><ol><li>Measuring programming progress by lines of code is like measuring aircraft building progress by weight. (Bill Gates)</li></ol><blockquote><p>通过代码行数衡量开发进程就好比用重量来衡量飞机制造进度。</p></blockquote><ol start="2"><li>Programming is like sex. One mistake and you have to support it for the rest of your life. (Michael Sinz)</li></ol><blockquote><p>编程就像性爱一样。一个错误就能绑住你的余生。</p></blockquote><ol start="3"><li>Walking on water and developing software from a specification are easy if both are frozen. (Edward V Berard)</li></ol><blockquote><p>在目的明确的基础上开发软件就像在结冰的水上行走一样简单。</p></blockquote><ol start="4"><li>The first 90 percent of the code accounts for the first 90 percent of the development time…The remaining 10 percent of the code accounts for the other 90 percent of the development time.(Tom Cargill)</li></ol><blockquote><p>开始90％的代码占开始90％的开发时间……剩下10％的代码还是占90％的开发时间。</p></blockquote><ol start="5"><li>Commenting your code is like cleaning your bathroom — you never want to do it, but it really does create a more pleasant experience for you and your guests. (Ryan Campbell)</li></ol><blockquote><p>注释代码就像是清洁浴室——尽管你满心不情愿，但它确实可以为你和你的客人创造一种更舒适的体验。</p></blockquote><ol start="6"><li>Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the universe trying to produce bigger and better idiots. So far, the universe is winning. (Rick Cook)</li></ol><blockquote><p>当今的编程是软件工程师——努力建设更大多更好的傻瓜式程序，和上帝——试图产出更大多更好的傻瓜之间的竞争。到目前为止，世上帝是获胜者。</p></blockquote><ol start="7"><li>The hardest part of design … is keeping features out. (Donald Norman)</li></ol><blockquote><p>设计中最难的部分……是阻止功能。</p></blockquote><ol start="8"><li>In order to understand recursion, one must first understand recursion. (Anonymous)</li></ol><blockquote><p>要想了解递归，首先必须理解递归。</p></blockquote><ol start="9"><li>There are only two kinds of programming languages: those people always bitch about and those nobody uses. (Bjarne Stroustrup)</li></ol><blockquote><p>只有两种编程语言：一种是天天挨骂的，另一种是没人用的。</p></blockquote><ol start="10"><li>The best thing about a boolean is even if you are wrong, you are only off by a bit. (Anonymous)</li></ol><blockquote><p>关于布尔值最妙的一点是，就算你错了，你也只是错了这一处而已。</p></blockquote><ol start="11"><li>If Java had true garbage collection, most programs would delete themselves upon execution. (Robert Swell)</li></ol><blockquote><p>如果Java真的有垃圾收集，那么大多数程序会执行自我删除。</p></blockquote><ol start="12"><li>In theory, there is no difference between theory and practice. But, in practice, there is. (Jan L. A. van de Snepscheut)</li></ol><blockquote><p>理论上看，理论和实践之间是没有差别的。但是，在实践中，有。</p></blockquote><ol start="13"><li>Ready, fire, aim: the fast approach to software development. Ready, aim, aim, aim, aim: the slow approach to software development. (Anonymous)</li></ol><blockquote><p>准备，开火，瞄准：快速的软件开发方法。准备，瞄准，瞄准，瞄准，瞄准：缓慢的软件开发方法。</p></blockquote><ol start="14"><li>Programming is 10% science, 20% ingenuity, and 70% getting the ingenuity to work with the science. (Anonymous)</li></ol><blockquote><p>编程就是10％的科学，20％得的独创性，再加70％和这门科学的灵巧合作。</p></blockquote><ol start="15"><li>It is easier to measure something than to understand what you have measured. (Anonymous)</li></ol><blockquote><p>衡量比理解你衡量了什么容易。</p></blockquote><ol start="16"><li>Benchmarks don’t lie, but liars do benchmarks. (Anonymous)</li></ol><blockquote><p>基准不会撒谎，但制定基准的人会撒谎。</p></blockquote><ol start="17"><li>Better train people and risk they leave – than do nothing and risk they stay. (Anonymous)</li></ol><blockquote><p>就算是培训好的员工离开——也好过他们什么也不做却留下来。</p></blockquote><ol start="18"><li>The goal of Computer Science is to build something that will last at least until we’ve finished building it. (Anonymous)</li></ol><blockquote><p>计算机科学的目标是构建一个至少能持续到我们构建完成的东西。</p></blockquote><ol start="19"><li>Java is to JavaScript what Car is to Carpet. (Chris Heilmann)</li></ol><blockquote><p>Java之于JavaScript就像car之于carpet（地毯）。后者看上去像是前者的衍生物，实则是完全不同的两个东西。</p></blockquote><ol start="20"><li>It’s not at all important to get it right the first time. It’s vitally important to get it right the last time. (Andrew Hunt and David Thomas)</li></ol><blockquote><p>第一次是否正确完成一点也不重要。最后一次正确完成才至关重要。</p></blockquote><ol start="21"><li>Should array indices start at 0 or 1? My compromise of 0.5 was rejected without, I thought, proper consideration. (Stan Kelly-Bootle)</li></ol><blockquote><p>数组的下标一定要从0或1开始吗？我认为，我采取的中间值0.5没有经过适当考虑就被驳回了。</p></blockquote><ol start="22"><li>Programs must be written for people to read, and only incidentally for machines to execute. (Abelson / Sussman)</li></ol><blockquote><p>程序必须写得能供人阅读，机器执行只是附带。</p></blockquote><ol start="23"><li>Programming can be fun, so can cryptography; however they should not be combined. (Kreitzberg and Shneiderman)</li></ol><blockquote><p>编程可以很有趣，密码学也是如此；但是两者不应该搅和在一起。</p></blockquote><ol start="24"><li>Copy and paste is a design error. (David Parnas)</li></ol><blockquote><p>复制粘贴是一个设计错误。</p></blockquote><ol start="25"><li>Computers are good at following instructions, but not at reading your mind. (Donald Knuth)</li></ol><blockquote><p>计算机善于遵循指令，不善于读取你的想法。</p></blockquote><hr /><h3 id="软件调试语录"><a class="markdownIt-Anchor" href="#软件调试语录"></a> 软件调试语录</h3><ol><li>Deleted code is debugged code. (Jeff Sickel)</li></ol><blockquote><p>删除的代码是经过调试的代码。</p></blockquote><ol start="2"><li>If debugging is the process of removing software bugs, then programming must be the process of putting them in. (Edsger Dijkstra)</li></ol><blockquote><p>如果调试是消除软件bug的过程，那么编程就是产出bug的过程。</p></blockquote><ol start="3"><li>Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are–by definition–not smart enough to debug it.</li></ol><blockquote><p>调试一段程序的难度是写出这段程序的难度的两倍，因此，如果你的代码尽可能清楚的话，那么你就不用费力地调试它。</p></blockquote><ol start="4"><li>It’s hard enough to find an error in your code when you’re looking for it; it’s even harder when you’ve assumed your code is error-free. (Steve McConnel)</li></ol><blockquote><p>你的目的是找bug的时候，bug已经很难找了；更不要说当你认为自己的代码中没有错误的时候。</p></blockquote><hr /><h3 id="软件bug语录"><a class="markdownIt-Anchor" href="#软件bug语录"></a> 软件bug语录</h3><ol><li>It’s not a bug – it’s an undocumented feature. (Anonymous)</li></ol><blockquote><p>这不是bug——这是没有被证明的功能。</p></blockquote><ol start="2"><li>Without requirements or design, programming is the art of adding bugs to an empty text file. (Louis Srygley)</li></ol><blockquote><p>如果没有需求和设计，那么编程就是添加bug到空的文本文件的艺术。</p></blockquote><ol start="3"><li>Bad code isn’t bad, its just misunderstood. (Anonymous Code Behaviorist)</li></ol><blockquote><p>所谓坏的代码并不坏，它只是被误解了。</p></blockquote><ol start="4"><li>There are two ways to write error-free programs; only the third one works. (Alan J. Perlis)</li></ol><blockquote><p>写没有错误的程序有两种方式；但第三种才有效。</p></blockquote><ol start="5"><li>Beware of bugs in the above code; I have only proved it correct, not tried it. (Donald Knuth)</li></ol><blockquote><p>小心上面代码中的bug；我只证明了它是正确的，还没有尝试过。</p></blockquote><hr /><h3 id="软件终端产品语录"><a class="markdownIt-Anchor" href="#软件终端产品语录"></a> 软件/终端产品语录</h3><ol><li>Before software can be reusable it first has to be usable. (Ralph Johnson)</li></ol><blockquote><p>在软件可以被可重复使用前，它首先必须是可用的。</p></blockquote><ol start="2"><li>Software undergoes beta testing shortly before it’s released. Beta is Latin for “still doesn’t work”. (Anonymous)</li></ol><blockquote><p>软件在发布前要经过beta测试。beta即拉丁语“仍然无法正常工作”的意思。</p></blockquote><ol start="3"><li>The best performance improvement is the transition from the nonworking state to the working state. (J. Osterhout)</li></ol><blockquote><p>最佳性能改进是指从不可工作状态向工作状态的转变。</p></blockquote><ol start="4"><li>The cheapest, fastest, and most reliable components are those that aren’t there. (Gordon Bell)</li></ol><blockquote><p>最便宜，最快和最可靠的组件是不存在的。</p></blockquote><ol start="5"><li>I think Microsoft named .Net so it wouldn’t show up in a Unix directory listing. (Oktal)</li></ol><blockquote><p><a href="http://xn--siqv5luj359ai1csy4gjtf.Net">我认为微软命名.Net</a>，它就不会在Unix目录列表显示出来。</p></blockquote><ol start="6"><li>Software and cathedrals are much the same – first we build them, then we pray. (Sam Redwine)</li></ol><blockquote><p>软件和教堂非常相似——首先，我们建造它们，然后我们祈祷。</p></blockquote><ol start="7"><li>The software isn’t finished until the last user is dead. (Anonymous)</li></ol><blockquote><p>直到最后一个用户死去，软件才算完成。</p></blockquote><ol start="8"><li>Most software today is very much like an Egyptian pyramid with millions of bricks piled on top of each other, with no structural integrity, but just done by brute force and thousands of slaves. (Alan Kay)</li></ol><blockquote><p>现在的大多数软件非常像埃及金字塔，在彼此之间堆建了成千上万的砖块，缺乏结构完整性，只是靠蛮力和成千上万的奴隶完成。</p></blockquote>]]></content>
     
@@ -39,7 +39,145 @@
       <category term="编程" scheme="http://Scofieldsu.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="Develop" scheme="http://Scofieldsu.github.io/tags/Develop/"/>
+  </entry>
+  
+  <entry>
+    <title>Python测试框架</title>
+    <link href="http://Scofieldsu.github.io/2021/12/08/Python%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
+    <id>http://Scofieldsu.github.io/2021/12/08/Python测试框架/</id>
+    <published>2021-12-08T13:13:45.000Z</published>
+    <updated>2022-01-19T02:55:44.941Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Python" scheme="http://Scofieldsu.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>App自动化测试</title>
+    <link href="http://Scofieldsu.github.io/2021/11/08/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    <id>http://Scofieldsu.github.io/2021/11/08/App自动化测试/</id>
+    <published>2021-11-08T13:13:45.000Z</published>
+    <updated>2022-01-19T02:57:28.998Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Appium" scheme="http://Scofieldsu.github.io/tags/Appium/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Web自动化测试</title>
+    <link href="http://Scofieldsu.github.io/2021/11/08/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    <id>http://Scofieldsu.github.io/2021/11/08/Web自动化测试/</id>
+    <published>2021-11-08T13:13:45.000Z</published>
+    <updated>2022-01-19T02:56:48.941Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Selenium" scheme="http://Scofieldsu.github.io/tags/Selenium/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>服务端接口测试</title>
+    <link href="http://Scofieldsu.github.io/2021/11/08/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
+    <id>http://Scofieldsu.github.io/2021/11/08/服务端接口测试/</id>
+    <published>2021-11-08T13:13:45.000Z</published>
+    <updated>2022-01-19T03:04:16.841Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Mock" scheme="http://Scofieldsu.github.io/tags/Mock/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自动遍历测试</title>
+    <link href="http://Scofieldsu.github.io/2021/11/08/%E8%87%AA%E5%8A%A8%E9%81%8D%E5%8E%86%E6%B5%8B%E8%AF%95/"/>
+    <id>http://Scofieldsu.github.io/2021/11/08/自动遍历测试/</id>
+    <published>2021-11-08T13:13:45.000Z</published>
+    <updated>2022-01-19T02:59:56.478Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Monkey" scheme="http://Scofieldsu.github.io/tags/Monkey/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenSTF 远程控制设备</title>
+    <link href="http://Scofieldsu.github.io/2021/10/08/OpenSTF%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AE%BE%E5%A4%87/"/>
+    <id>http://Scofieldsu.github.io/2021/10/08/OpenSTF远程控制设备/</id>
+    <published>2021-10-08T13:13:45.000Z</published>
+    <updated>2022-01-19T03:01:34.084Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="OpenSTF" scheme="http://Scofieldsu.github.io/tags/OpenSTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>客户端专项测试</title>
+    <link href="http://Scofieldsu.github.io/2021/09/08/%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%93%E9%A1%B9%E6%B5%8B%E8%AF%95/"/>
+    <id>http://Scofieldsu.github.io/2021/09/08/客户端专项测试/</id>
+    <published>2021-09-08T13:13:45.000Z</published>
+    <updated>2022-01-19T03:02:24.471Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="自动化测试" scheme="http://Scofieldsu.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="性能测试" scheme="http://Scofieldsu.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -48,7 +186,7 @@
     <link href="http://Scofieldsu.github.io/2018/11/02/%E7%94%BB%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/"/>
     <id>http://Scofieldsu.github.io/2018/11/02/画图工具推荐/</id>
     <published>2018-11-01T19:09:23.000Z</published>
-    <updated>2022-01-18T18:22:56.555Z</updated>
+    <updated>2022-01-19T02:50:53.598Z</updated>
     
     <content type="html"><![CDATA[<p>作为一个程序员要画啥图？UML类图？时序图？流程图？系统架构图？<br />不仅仅如此，有时候我还会用思维导图记录一些东西</p><ul><li>大学时期画的一个类图😷</li></ul><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/psb.jpeg?raw=true" alt="不知道是什么系统的类图" /></p><p>画图工具千千万，在此分享我常用的几个画图工具，大家有更好的工具分享可以留言补充。</p><ul><li><p><a href="https://www.processon.com/">processon</a> 是一个可以在线画图的网站,包括但不限于流程图/时序图/架构图。</p></li><li><p><a href="https://www.draw.io/">draw.io</a> 也可以在线画图。</p><ul><li><p>代码开源：<a href="https://github.com/jgraph/drawio">github-drawio</a></p></li><li><p>客户端下载：<a href="https://github.com/jgraph/drawio-desktop/releases">drawio-desktop</a></p></li><li><p>drawio默认没有aliyun的icon，但可以在<a href="http://iconfont.cn/home/index">iconfont</a>找到aliyun的icon，先和icon版权作者联系。这个<a href="https://github.com/jgraph/drawio/issues/326">issue</a>里有提到。</p></li></ul></li><li><p>xmind 思维导图客户端。</p><ul><li><p>思维导图用于整理需求功能点比较方便。</p></li><li><p>xmind个人版只能导出图片和svg file。 pro版本可以导出pdf，excel，word，而且pro版本风格更多。</p></li></ul></li><li><p><a href="https://coggle.it/">coggle</a> 在线思维导图</p><p>示例：<br /><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/coggle.png?raw=true" alt="coggle" /></p></li><li><p>visio使用过，但不习惯。 axure试用了一下，临时想画原型图，但因素材组件不合适放弃，改用xmind描述功能点。</p></li></ul><hr /><h3 id="搭建你自己的在线画图应用"><a class="markdownIt-Anchor" href="#搭建你自己的在线画图应用"></a> 搭建你自己的在线画图应用</h3><ul><li>出于收费软件还是开源软件，在线还是离线，个人还是办公，安全规定等等因素,我们选用了开源的drawio,两种方式搭建任选。</li></ul><h4 id="1-编译部署-在此不介绍有兴趣网上查询"><a class="markdownIt-Anchor" href="#1-编译部署-在此不介绍有兴趣网上查询"></a> 1. 编译部署 在此不介绍，有兴趣网上查询</h4><h4 id="2-docker部署"><a class="markdownIt-Anchor" href="#2-docker部署"></a> 2. docker部署</h4><p>关于docker环境安装 参考我的另一篇<a href="https://scofieldsu.github.io/2017/05/08/%E7%8E%A9%E4%B8%80%E7%8E%A9docker/">玩一玩docker</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">git clone https://github.com/jgraph/drawio.git</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line">cd drawio</span><br><span class="line">docker build -t drawio -f etc/docker/Dockerfile .</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">docker run -d -p 8080:8080 --restart=always --hostname=drawio --name drawio drawio</span><br><span class="line"></span><br><span class="line">即可访问http://xxxx:8080/draw</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
@@ -69,10 +207,6 @@
       <category term="编程" scheme="http://Scofieldsu.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="流程图" scheme="http://Scofieldsu.github.io/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/"/>
-    
-      <category term="思维导图" scheme="http://Scofieldsu.github.io/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
-    
   </entry>
   
   <entry>
@@ -80,7 +214,7 @@
     <link href="http://Scofieldsu.github.io/2018/11/01/%E5%85%B3%E4%BA%8E%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3&amp;%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3&amp;%E8%B4%A8%E6%95%B0%E7%9A%84%E7%A5%9E%E7%A7%98/"/>
     <id>http://Scofieldsu.github.io/2018/11/01/关于黎曼猜想&amp;哥德巴赫猜想&amp;质数的神秘/</id>
     <published>2018-10-31T17:00:29.000Z</published>
-    <updated>2022-01-17T06:47:36.077Z</updated>
+    <updated>2022-01-19T02:49:15.336Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">黎曼猜想</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="-code1-"><a class="markdownIt-Anchor" href="#-code1-"></a> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">哥德巴赫猜想</span><br><span class="line"></span><br><span class="line">任一大于2的偶数，都可表示成两个素数之和。</span><br><span class="line"></span><br></pre></td></tr></table></figure></h2><p>从欧拉乘积<br />到调和级数<br />再到黎曼函数。</p><p>为什么<br />当s=-1时，</p><p>当s=2时，</p><hr /><ul><li><p>欧式几何</p></li><li><p>罗氏几何</p></li><li><p>黎曼几何</p></li></ul> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">23条定义</span><br><span class="line">1. 点是没有部分的东西</span><br><span class="line">2.线只有长度而没有宽度</span><br><span class="line">3.一线的两端是点</span><br><span class="line">4.直线是它上面的点一样地平放着的线</span><br><span class="line">5.面只有长度和宽度</span><br><span class="line">6.面的边缘是线</span><br><span class="line">7.平面是它上面的线一样地平放着的面</span><br><span class="line">8. 平面角是在一平面内但不在一条直线上的两条相交线相互的倾斜度.</span><br><span class="line">9. 当包含角的两条线都是直线时，这个角叫做直线角.</span><br><span class="line">10. 当一条直线和另一条直线交成邻角彼此相等时，这些角每一个被叫做直角，而且称这一条直线垂直于另一条直线。</span><br><span class="line">11. 大于直角的角称为钝角。</span><br><span class="line">12. 小于直角的角称为锐角</span><br><span class="line">13. 边界是物体的边缘</span><br><span class="line">14. 图形是一个边界或者几个边界所围成的</span><br><span class="line">15. 圆：由一条线包围着的平面图形，其内有一点与这条线上任何一个点所连成的线段都相等。</span><br><span class="line">16. 这个点（指定义15中提到的那个点）叫做圆心。</span><br><span class="line">17. 圆的直径是任意一条经过圆心的直线在两个方向被圆截得的线段，且把圆二等分。</span><br><span class="line">18.半圆是直径与被它切割的圆弧所围成的图形，半圆的圆心与原圆心相同。（暂无注释）</span><br><span class="line">19.直线形是由直线围成的.三边形是由三条直线围成的,四边形是由四条直线围成的,多边形是由四条以上直线围成的.</span><br><span class="line">20.在三边形中,三条边相等的,叫做等边三角形;只有两条边相等的,叫做等腰三角形;各边不等的,叫做不等边三角形.</span><br><span class="line">21.此外,在三边形中,有一个角是直角的,叫做直角三角形;有一个角是钝角的,叫做钝角三角形;各边不等的,叫做不等边三角形.</span><br><span class="line">22.在四边形中,四边相等且四个角是直角的,叫做正方形;角是直角,但四边不全相等的,叫做长方形;四边相等,但角不是直角的,叫做菱形;对角相等且对边相等,但边不全相等且角不是直角的,叫做斜方形;其余的四边形叫做不规则四边形.</span><br><span class="line">23.平行直线是在同一个平面内向两端无限延长不能相交的直线.</span><br><span class="line">五条公理</span><br><span class="line">1.等于同量的量彼此相等；</span><br><span class="line">2.等量加等量，其和相等；</span><br><span class="line">3.等量减等量，其差相等；</span><br><span class="line">4.彼此能重合的物体是全等的；</span><br><span class="line">5.整体大于部分。</span><br><span class="line">五条公设　　</span><br><span class="line">1.过两点能作且只能作一直线；</span><br><span class="line">2.线段(有限直线)可以无限地延长；</span><br><span class="line">3.以任一点为圆心,任意长为半径,可作一圆；</span><br><span class="line">4.凡是直角都相等；</span><br><span class="line">5.同平面内一条直线和另外两条直线相交，若在直线同侧的两个内角之和小于180°，则这两条直线经无限延长后在这一侧一定相交。（近代数学不区分公设，公理，统一称为公理）</span><br><span class="line">最后一条公设就是著名的平行公设，或者叫做第五公设。它引发了几何史上最著名的长达两千多年的关于“平行线理论”的讨论，并最终诞生了非欧几何。值得注意的是，第五公设既不能说是正确也不能说是错误，它所概括的是一种情况。非欧几何则在推翻第五公设的前提下进行了另外情况的讨论。</span><br><span class="line">——以上选自《几何原本》 第一卷《几何基础》</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -95,10 +229,6 @@
     
       <category term="探索" scheme="http://Scofieldsu.github.io/categories/%E6%8E%A2%E7%B4%A2/"/>
     
-    
-      <category term="黎曼猜想" scheme="http://Scofieldsu.github.io/tags/%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3/"/>
-    
-      <category term="哥德巴赫猜想" scheme="http://Scofieldsu.github.io/tags/%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3/"/>
     
   </entry>
   
@@ -188,11 +318,11 @@
   </entry>
   
   <entry>
-    <title>常用与有趣的工具推荐</title>
-    <link href="http://Scofieldsu.github.io/2018/09/08/%E5%B8%B8%E7%94%A8%E4%B8%8E%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/"/>
-    <id>http://Scofieldsu.github.io/2018/09/08/常用与有趣的工具推荐/</id>
+    <title>装机App备忘</title>
+    <link href="http://Scofieldsu.github.io/2018/09/08/%E8%A3%85%E6%9C%BAApp%E5%A4%87%E5%BF%98/"/>
+    <id>http://Scofieldsu.github.io/2018/09/08/装机App备忘/</id>
     <published>2018-09-08T13:13:45.000Z</published>
-    <updated>2022-01-17T07:04:27.654Z</updated>
+    <updated>2022-01-19T02:52:53.275Z</updated>
     
     <content type="html"><![CDATA[<p>windows系统重装之后整理需要安装软件和环境：</p><ol><li>环境</li></ol><ul><li><p>python2.7  目前暂不用virtualenv管理多版本python环境，安装python2.7时勾选add to path省去配置环境变量过程。</p></li><li><p>java1.8    下载jdk安装后，配置环境变量</p></li></ul>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME = C:\Program Files\Java\jdk1.8.0_91  #实际路径</span><br><span class="line">PATH = %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</span><br><span class="line">CLASSPATH = .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</span><br></pre></td></tr></table></figure><ul><li><p>nodejs 安装时默认勾选add to path</p></li><li><p>git</p></li></ul><ol start="2"><li><p>代码器</p><ul><li>IDEA，Pycharm，notepad++，Atom</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">atom 插件列表：</span><br><span class="line">主题：atom-monkai</span><br><span class="line">扩展：</span><br><span class="line">active-power-mode</span><br><span class="line">markdown-preview-plus</span><br><span class="line">platformio-ide-terminal</span><br><span class="line">simplified-chinese-menu</span><br><span class="line">file-icons</span><br><span class="line">edit-background</span><br></pre></td></tr></table></figure></li><li><p>其他工具</p></li></ol><h2 id="-code2-"><a class="markdownIt-Anchor" href="#-code2-"></a> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- heidiSQL （数据库客户端）</span><br><span class="line"></span><br><span class="line">- mobaXterm （终端工具）</span><br><span class="line"></span><br><span class="line">- PDman （数据库建模工具）</span><br></pre></td></tr></table></figure></h2><ol start="4"><li>mac app推荐</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- Termius  （ssh client）</span><br><span class="line"></span><br><span class="line">- Viper FTP （sftp client）</span><br><span class="line"></span><br><span class="line">- PAW （http client）</span><br><span class="line"></span><br><span class="line">- postico （postgresql client）</span><br><span class="line"></span><br><span class="line">- tickeys （键盘音效）</span><br><span class="line"></span><br><span class="line">- LiceCap （gif tool）</span><br><span class="line"></span><br><span class="line">- snip （截图）</span><br><span class="line"></span><br><span class="line">- pap.er (壁纸)</span><br></pre></td></tr></table></figure><ol start="5"><li>chrome插件推荐</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- Tampermonkey（脚本扩展）</span><br><span class="line"></span><br><span class="line">- fireshot （截图）</span><br><span class="line"></span><br><span class="line">- xPath finder， chropath  （xpath选择器）</span><br><span class="line"></span><br><span class="line">- octotree （github代码在线树状结构）</span><br><span class="line"></span><br><span class="line">- onetab （tab收集器）</span><br></pre></td></tr></table></figure><ol start="6"><li>一些好玩的</li></ol> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 在线协作画板  https://witeboard.com/</span><br><span class="line"></span><br></pre></td></tr></table></figure><hr />]]></content>
     
@@ -225,7 +355,7 @@
     <link href="http://Scofieldsu.github.io/2018/09/02/%E5%85%B3%E4%BA%8E%E7%89%B9%E6%96%AF%E6%8B%89%E7%BA%BF%E5%9C%88/"/>
     <id>http://Scofieldsu.github.io/2018/09/02/关于特斯拉线圈/</id>
     <published>2018-09-02T15:08:58.000Z</published>
-    <updated>2022-01-17T07:05:11.440Z</updated>
+    <updated>2022-01-19T02:49:04.886Z</updated>
     
     <summary type="html">
     
@@ -233,8 +363,6 @@
     
       <category term="探索" scheme="http://Scofieldsu.github.io/categories/%E6%8E%A2%E7%B4%A2/"/>
     
-    
-      <category term="特斯拉线圈" scheme="http://Scofieldsu.github.io/tags/%E7%89%B9%E6%96%AF%E6%8B%89%E7%BA%BF%E5%9C%88/"/>
     
   </entry>
   
@@ -353,7 +481,7 @@
     <link href="http://Scofieldsu.github.io/2017/12/15/%E8%AE%BE%E5%A4%87MAC%E5%9C%B0%E5%9D%80%E9%9A%8F%E6%9C%BA%E5%8C%96%E4%B8%8EWiFi%E6%8E%A2%E9%92%88/"/>
     <id>http://Scofieldsu.github.io/2017/12/15/设备MAC地址随机化与WiFi探针/</id>
     <published>2017-12-15T12:47:23.000Z</published>
-    <updated>2022-01-18T18:00:21.514Z</updated>
+    <updated>2022-01-19T02:53:03.689Z</updated>
     
     <content type="html"><![CDATA[<h1 id="关于mac-地址media-access-control-address"><a class="markdownIt-Anchor" href="#关于mac-地址media-access-control-address"></a> 关于MAC 地址（Media Access Control Address）</h1><hr /><h2 id="1-mac地址共48位6个字节以十六进制表示-前24位由ieee决定如何分配后24位由实际生产该网络设备的厂商自行指定"><a class="markdownIt-Anchor" href="#1-mac地址共48位6个字节以十六进制表示-前24位由ieee决定如何分配后24位由实际生产该网络设备的厂商自行指定"></a> 1. MAC地址共48位（6个字节），以十六进制表示。前24位由IEEE决定如何分配，后24位由实际生产该网络设备的厂商自行指定。</h2><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/MACadress.png?raw=true" alt="mac" /></p><p>图片来源  wikipedia链接：<a href="https://en.wikipedia.org/wiki/MAC_address">https://en.wikipedia.org/wiki/MAC_address</a></p><hr /><h2 id="区分方法"><a class="markdownIt-Anchor" href="#区分方法"></a> 区分方法</h2><h4 id="通过b1位区分一些修改过的mac地址"><a class="markdownIt-Anchor" href="#通过b1位区分一些修改过的mac地址"></a> 通过B1位区分一些修改过的MAC地址</h4><p>这个6个字节中的最高有效字节中的最低有效位（b0）用来标识 unicast,和mulcast，即单播 和多播  而<strong>次最低有效位（b1）则用来标识 universally administered address 和  locally administered address</strong>  其中：universally administered address 是指烧录在固件中由厂商指定的地址，也也即大家通常所理解的MAC地址，  而 locally administered address 则是指由网络管理员为了加强自己对网络管理而指定的地址，由定义可知， locally administered address的U/L位要设置成1.所以 要表示 locally administered address的话，那 MAC 地址的第一个字节应该是 0x02, 因此不能够把MAC地址改成其它已经被厂商占用的 universally administered address了。</p><p>但是通常情况下，很多人都不会遵守上面的约定。因为 MAC地址通常只能在局域网里发挥作用，因为在网络上传输，MAC地址是会被不断的替换掉的。所以即使你用了 已经被厂商占用的 universally administered address也不用担心会产生冲突。  说到着就更清楚了吧。说到底， <strong>locally administered address 和 universally administered address的区别在于是直接由生产的时候确定的还是由你自己修改过的。</strong></p><p>原文链接：<a href="http://blog.sina.com.cn/s/blog_9950926401019kzx.html">http://blog.sina.com.cn/s/blog_9950926401019kzx.html</a></p><h4 id="通过前3个字节查询对应注册厂商"><a class="markdownIt-Anchor" href="#通过前3个字节查询对应注册厂商"></a> 通过前3个字节查询对应注册厂商</h4><p>IEEE注册厂商查询，通过匹配MAC的前3个字节查找对应厂商，如无对应则可认为是一些低级的伪MAC地址。但这个注册厂商列表是公开的，一般的模拟MAC地址时，前3个字节从列表中取即可，而且这样伪造的MAC地址也不存在上面通过B2位判断的问题。</p><p>IEEE官网查询地址（可以下载oui.csv）：<a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries">https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries</a></p><p>在线oui对应列表：<a href="http://standards-oui.ieee.org/oui/oui.txt">http://standards-oui.ieee.org/oui/oui.txt</a></p><h4 id="通过流量判断"><a class="markdownIt-Anchor" href="#通过流量判断"></a> 通过流量判断</h4><p>CSNA网络分析论坛有一种说法是 通过流量判断：伪造的IP或MAC地址，一般都只有单向流量，而且你可以看到其接收或发送的数据包都非常的少。</p><p>原文链接：<a href="http://www.csna.cn/archiver/tid-2040.html">http://www.csna.cn/archiver/tid-2040.html</a></p><h4 id="通过mac地址前3字节后3字节"><a class="markdownIt-Anchor" href="#通过mac地址前3字节后3字节"></a> 通过MAC地址前3字节+后3字节</h4><p>这种整体判断MAC真伪方式暂时还没找到。</p><hr /><h5 id="其他相关链接"><a class="markdownIt-Anchor" href="#其他相关链接"></a> 其他相关链接</h5><ul><li>知乎问题《iOS 8 设备随机 MAC 地址躲避 Wi-Fi 热点的记录追踪，技术上是怎么实现，有何影响？》<a href="https://www.zhihu.com/question/24094236">https://www.zhihu.com/question/24094236</a></li></ul><h1 id="ios8-mac随机化分析"><a class="markdownIt-Anchor" href="#ios8-mac随机化分析"></a> ios8 MAC随机化分析</h1><p>在iPhone 5s中发现了MAC随机化（细节如下），但在iPhone 5和iPad Mini中却没有。我怀疑这与新一代iPhone的操作系统架构差异有关。</p><h4 id="在iphone-5s中mac随机化仅在以下情况下发生"><a class="markdownIt-Anchor" href="#在iphone-5s中mac随机化仅在以下情况下发生"></a> <em>在iPhone 5s中，MAC随机化仅在以下情况下发生：</em></h4><ul><li>手机处于睡眠模式（显示关闭，未被使用）</li><li>Wi-Fi应该打开但不关联</li><li>位置服务应在隐私设置中关闭</li></ul><h4 id="在上述条件下iphone5s将在探测请求中使用随机mac具有以下特征"><a class="markdownIt-Anchor" href="#在上述条件下iphone5s将在探测请求中使用随机mac具有以下特征"></a> <em>在上述条件下，iPhone5s将在探测请求中使用随机MAC，具有以下特征：</em></h4><ul><li><p>随机化的MAC是本地管理的MAC。</p></li><li><p><strong>在电话显示屏关闭后大约120-150秒钟，手机将传送第一批具有随机MAC的探测请求</strong>。</p></li><li><p>在2.4 GHz和5 GHz频段内，批次内和所有通道内的所有探测请求都使用相同的随机MAC地址。</p></li><li><p><strong>下一批次的探测请求会随着批次之间的升级间隔而增加，最大间隔约为385秒，然后下一批次再次以大约120-150秒作为初始时间。跟踪时间为1小时</strong>。</p></li><li><p>所有这些探测请求都使用相同的随机MAC地址。</p></li><li><p><strong>探测请求中使用的随机MAC地址在每次手机被激活并随后进入睡眠模式时都会更改。意味着每个新的睡眠周期都使用一个新的随机MAC</strong>。</p></li><li><p>处于睡眠模式的探测请求不要求特定的SSID（称为空探测）。这似乎是一个额外的隐私功能，以防止在手机的无线配置文件中的SSID显示在睡眠模式。</p></li><li><p>无论手机是否在充电，MAC随机化都会发生。</p></li></ul><h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2><p><strong>测请求中使用的随机MAC地址在每次手机被激活并随后进入睡眠模式时都会更改。意味着每个新的睡眠周期都使用一个新的随机MAC</strong>。</p><p>原文地址：<a href="https://blog.mojonetworks.com/ios8-mac-randomization-analyzed/">https://blog.mojonetworks.com/ios8-mac-randomization-analyzed/</a></p><hr /><p>相关：<a href="https://blog.mojonetworks.com/ios8-mac-randomgate/">https://blog.mojonetworks.com/ios8-mac-randomgate/</a></p><p>专利《一种获取WiFi终端真实MAC地址的装置及方法》：   <a href="https://www.google.com/patents/CN107094293A?cl=zh">https://www.google.com/patents/CN107094293A?cl=zh</a></p><hr /><h1 id="关于探针"><a class="markdownIt-Anchor" href="#关于探针"></a> 关于探针</h1><h3 id="wifi使用的网络协议wifi采用的是ieee80211协议集此协议集包含许多子协议-其中按照时间顺序发展主要有"><a class="markdownIt-Anchor" href="#wifi使用的网络协议wifi采用的是ieee80211协议集此协议集包含许多子协议-其中按照时间顺序发展主要有"></a> WiFi使用的网络协议，WiFi采用的是IEEE802.11协议集，此协议集包含许多子协议。其中按照时间顺序发展，主要有：</h3><p>（1）802.11a，</p><p>（2）802.11b，</p><p>（3）802.11g</p><p>（4）802.11n，。</p><p>在网络通信中，数据被封装成了帧，帧就是指通信中的一个数据块。但是帧在数据链路层传输的时候是有固定格式的，不是随便的封装和打包就可以传输，大小有限制，最小46字节，最大1500字节所以我们必须按照这个规则来封装。</p><p>下面802.11的帧结构：</p><p>| 前导码 | 前定界符 | 目的地址 | 源目的地址 | 长度字段 | 数据字段 | 校验字段 |<br />| - - - -|- - - - -| - - - - | - - - - - | - - - - | - - - - -| - - - - |<br />| 7B     |  1B     |   6B    |    6B     |    2B   |  46-1500 |   4B    |</p><p>在802.11中的帧有三种类型：管理帧（Management Frame，例如Beacon帧、Probe Request帧）、控制帧（Control Frame，例如RTS帧、CTS帧、ACK帧）、数据帧（Data Frame，承载数据的载体，其中的DS字段用来标识方向很重要）。帧头部中的类型字段中会标识出该帧属于哪个字段。</p><p>我们主要介绍下WiFi探针技术相关的几种帧：</p><p><strong>1.管理帧：</strong></p><ul><li><p><em>BeaconFrame</em>：信标帧，是相当重要的维护机制，主要来宣告某个AP网络的存在。定期发送的信标，可让移动WiFi设备得知该网络的存在，从而调整加入该网络所必要的参数。在基础网络里，AP必须负责发送Beacon帧，Beacon帧所及范围即为基本服务区域。  在基础型网络里，所有沟通都必须通过接入点，因此WiFi设备不能距离太远，否则无法接收到信标。</p><p>下图是帧格式：</p><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/beaconframe.png?raw=true" alt="BeaconFrame" /></p></li><li><p><em>Probe Request</em>：探测请求帧，WiFi设备将会利用Probe Request帧，扫描所在区域内目前有哪些802.11网络。</p><p>下图是帧格式：<br /><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/probe.png?raw=true" alt="probe" /></p></li></ul><p><strong>2.数据帧</strong>：</p><ul><li><em>Data</em>：数据帧，当接入点要送出一个帧给WiFi设备但是不必确认之前所传送的信息时，就会使用标准的数据帧。标准的数据帧并不会征询对方是否有数据待传，因此不允许接收端传送任何数据。无竞争周期所使用的纯数据（Data-Only)帧和无竞争周期所使用的数据帧完全相同。</li></ul><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/wifi-run.png?raw=true" alt="wifi-run" /></p><p>就像图中描述的一样，我们的WiFi探针其实就是一个AP，它定时的向自己的四周广播发送Beacon帧，用来通知附近的WiFi设备，AP是存在的，（好比它一直在向周围喊着，我在这里，大家快来连接我啊）。</p><p>我们的WiFi设备，手机，平板电脑等，也不停的发送着probe帧，去寻找附近可用的AP。在probe帧的介绍中就我们可以看到probe帧包含了设备的mac地址，当我们的AP接收到probe帧之后就获取了这个设备的MAC地址，而这个AP就是我们的WIFI探针。因此只要在WiFi探针覆盖区域内的设备打开着WiFi，探针就能收集到他的MAC地址。</p><hr /><p>关于探针安全</p><ul><li><p>探针所收集的数据内容</p><blockquote><p>我们来看看WiFi探针设备究竟会收集什么信息？前面我们已经看到了，在不连接WiFi的情况下，移动设备只会发送probe帧，此时我们并不能通过探针访问网络进行数据传输，探针仅仅只能接收到WiFi设备发送的probe帧，收集probe帧携带的MAC地址，所以此时我们收集到信息是绝对无关用户个人信息和设备上其他信息的。</p></blockquote></li><li><p>探针不提供上网功能，WiFi提供上网功能</p><blockquote><p>探针不提供上网功能，所以用户与探针之间的数据流量仅限在探针发送广播，移动设备发送一次连接请求，而手机号码，用户姓名，性别等等个人信息和设备的详细信息都不包含在里面。但是WiFi就不一样了。因为用户可以用它来上网，可以说用户所有流量都是WiFi可以看到的。而流量的内容里面有很多是关于用户个人信息的。比如用户在网上填写市场调查问卷，可能就有一些用户信息，比如性别，年龄，手机号码等。甚至那种别有用心的人提供的WiFi会估计记录用户的一些敏感信息，比如用户上网时输入的密码等等。这也是安全相关人士经常提到的不要随便上别人的WiFi的原因。</p></blockquote></li><li><p>探针的数据处理</p><blockquote><p>由于探针本身设计仅仅是探测周边有些什么设备，因此并不产生大量数据，设计的时候就不会将收集到的数据存储在本身，而是通过有线连接直接发送到中心服务器上，这样即使有恶意的人将探针取走，也不能获得探针收集到的信息。同时有线连接也保证数据传输过程不容易通过电磁波的形式被监听和窃取。中心服务器一般都是在IDC机房里，而要进入IDC机房是需要经过IDC层层许可的。因而不论是数据的传输还是存储，探针的数据都是安全的。</p></blockquote></li></ul><p>原文链接：<a href="http://blog.51cto.com/11926581/1834693">http://blog.51cto.com/11926581/1834693</a></p>]]></content>
     
@@ -372,185 +500,6 @@
       <category term="伪MAC" scheme="http://Scofieldsu.github.io/tags/%E4%BC%AAMAC/"/>
     
       <category term="探针" scheme="http://Scofieldsu.github.io/tags/%E6%8E%A2%E9%92%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我最好的朋友已经死了</title>
-    <link href="http://Scofieldsu.github.io/2017/08/20/%E6%88%91%E6%9C%80%E5%A5%BD%E7%9A%84%E6%9C%8B%E5%8F%8B%E5%B7%B2%E7%BB%8F%E6%AD%BB%E4%BA%86/"/>
-    <id>http://Scofieldsu.github.io/2017/08/20/我最好的朋友已经死了/</id>
-    <published>2017-08-20T05:14:40.000Z</published>
-    <updated>2022-01-17T06:07:26.926Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">占位，未完待续</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span
-      
-    
-    </summary>
-    
-      <category term="写作" scheme="http://Scofieldsu.github.io/categories/%E5%86%99%E4%BD%9C/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>烟火里的尘埃</title>
-    <link href="http://Scofieldsu.github.io/2017/06/20/%E7%83%9F%E7%81%AB%E9%87%8C%E7%9A%84%E5%B0%98%E5%9F%83/"/>
-    <id>http://Scofieldsu.github.io/2017/06/20/烟火里的尘埃/</id>
-    <published>2017-06-20T13:44:23.000Z</published>
-    <updated>2022-01-17T05:43:46.438Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">演唱：华晨宇</span><br><span class="line">作曲：西楼</span><br><span class="line">作词：林夕</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">看着飞舞的尘埃掉下来</span><br><span class="line">没人发现它存在</span><br><span class="line">多自由自在</span><br><span class="line">烟火里的尘埃</span><br><span class="line">可世界都爱热热闹闹</span><br><span class="line"></span><br><span class="line">容不下我百无聊赖</span><br><span class="line"></span><br><span class="line">不应该一个人发呆</span><br><span class="line">只有我守着安静的沙漠</span><br><span class="line">等待着花开</span><br><span class="line">只有我看着别人的快乐</span><br><span class="line">竟然会感慨</span><br><span class="line">就让我听着天大的道理</span><br><span class="line">不愿意明白</span><br><span class="line">有什么是应该不应该</span><br><span class="line">我的心里住着一个</span><br><span class="line">苍老的小孩</span><br><span class="line">如果世界听不明白</span><br><span class="line">对影子表白</span><br><span class="line">是不是只有我还在问</span><br><span class="line">为什么明天更精彩</span><br><span class="line">烟火里找不到童真的残骸</span><br><span class="line">只有我守着安静的沙漠</span><br><span class="line">等待着花开</span><br><span class="line">只有我看着别人的快乐</span><br><span class="line">竟然会感慨</span><br><span class="line">就让我听着天大的道理</span><br><span class="line">不愿意明白</span><br><span class="line">只有我就是我</span><br><span class="line">好奇怪还在感慨</span><br><span class="line">风阵阵吹过来为何不回来</span><br><span class="line">风一去不回来悲不悲哀</span><br><span class="line">麻木得那么快应不应该</span><br><span class="line">能不能慢下来</span><br><span class="line">笑得开怀哭得坦率</span><br><span class="line">为何表情要让这世界安排</span><br><span class="line">我就是我我只是我</span><br><span class="line">只是一场烟火散落的尘埃</span><br><span class="line">风阵阵吹过来</span><br><span class="line">风一去不回来</span><br><span class="line">能不能慢下来</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span c
-      
-    
-    </summary>
-    
-      <category term="分享" scheme="http://Scofieldsu.github.io/categories/%E5%88%86%E4%BA%AB/"/>
-    
-    
-      <category term="诗词文章" scheme="http://Scofieldsu.github.io/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如果</title>
-    <link href="http://Scofieldsu.github.io/2017/06/15/%E5%A6%82%E6%9E%9C/"/>
-    <id>http://Scofieldsu.github.io/2017/06/15/如果/</id>
-    <published>2017-06-15T15:20:26.000Z</published>
-    <updated>2022-01-17T05:42:27.441Z</updated>
-    
-    <content type="html"><![CDATA[<span id="more"></span><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">如 果</span><br><span class="line"></span><br><span class="line">[英]吉 卜林</span><br><span class="line"></span><br><span class="line">如果在众人六神无主时</span><br><span class="line"></span><br><span class="line">你能镇定自若而不是人云亦云</span><br><span class="line"></span><br><span class="line">如果在被众人猜忌怀疑之日</span><br><span class="line"></span><br><span class="line">你能自信如常而不去枉加辩论</span><br><span class="line"></span><br><span class="line">如果你有梦想又不迷失自我</span><br><span class="line"></span><br><span class="line">如果你有神思又不致走火入魔</span><br><span class="line"></span><br><span class="line">如果在成功之中能不妄形于色</span><br><span class="line"></span><br><span class="line">而在灾难之后也勇于咀嚼苦果</span><br><span class="line"></span><br><span class="line">如果听到自己说出的奥秘被无赖</span><br><span class="line"></span><br><span class="line">歪曲成面目全非的魔术而不生怨艾</span><br><span class="line"></span><br><span class="line">如果看到自己追求的美好受天灾</span><br><span class="line"></span><br><span class="line">破灭为零碎的瓦砾也不说放弃</span><br><span class="line"></span><br><span class="line">如果你辛苦劳作已是功成名就</span><br><span class="line"></span><br><span class="line">还是冒险一博哪怕功名成乌有</span><br><span class="line"></span><br><span class="line">即使惨遭失败也仍要从头开始</span><br><span class="line"></span><br><span class="line">如果你跟村夫交谈而不失恭敬之态</span><br><span class="line"></span><br><span class="line">和王侯散步而不露谀媚之颜</span><br><span class="line"></span><br><span class="line">如果他人的爱憎左右不了你的正气</span><br><span class="line"></span><br><span class="line">如果你和任何人为伍都能卓然独立</span><br><span class="line"></span><br><span class="line">如果昏惑的骚扰动摇不了你的意志</span><br><span class="line"></span><br><span class="line">你能等自己平心静气再作答谢</span><br><span class="line"></span><br><span class="line">那么你的修养就如同天地般博大</span><br><span class="line"></span><br><span class="line">你就是真正的男子汉了</span><br><span class="line"></span><br><span class="line">我 的 儿 子</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l
-      
-    
-    </summary>
-    
-      <category term="分享" scheme="http://Scofieldsu.github.io/categories/%E5%88%86%E4%BA%AB/"/>
-    
-    
-      <category term="诗词文章" scheme="http://Scofieldsu.github.io/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初试 Jenkins</title>
-    <link href="http://Scofieldsu.github.io/2017/06/08/%E5%88%9D%E8%AF%95Jenkins/"/>
-    <id>http://Scofieldsu.github.io/2017/06/08/初试Jenkins/</id>
-    <published>2017-06-08T12:47:23.000Z</published>
-    <updated>2022-01-18T18:21:53.436Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jenkins是一个广泛用于持续构建的可视化web工具，</span><br><span class="line">持续构建说得更直白点，就是各种项目的&quot;自动化&quot;编译、打包、分发部署。</span><br><span class="line">jenkins可以很好的支持各种语言（比如：java, c#, php等）的项目构建，</span><br><span class="line">也完全兼容ant、maven、gradle等多种第三方构建工具，同时跟svn、git能无缝集成，</span><br><span class="line">也支持直接与知名源代码托管网站，比如github、bitbucket直接集成。</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="安装jenkins"><a class="markdownIt-Anchor" href="#安装jenkins"></a> 安装jenkins</h3><blockquote><p>准备工作 安装java环境</p></blockquote><ol><li>配置yum源</li></ol> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span><br></pre></td></tr></table></figure><ol start="2"><li>导入公钥</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key</span><br></pre></td></tr></table></figure><ol start="3"><li><p>安装jenkins</p><p>yum install jenkins -y</p></li><li><p>修改用户</p><p>vi /etc/sysconfig/jenkins</p></li><li><p>配置文件中加入java路径</p><p>vim /etc/rc.d/init.d/jenkins</p></li><li><p>启动<br />systemctl start jenkins</p></li><li><p>初次密码路径<br />/var/lib/jenkins/secrets/initialAdminPassword</p></li></ol><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/jenkins.png?raw=true" alt="jenkins" /></p><hr /><h3 id="jenkins使用参数构建任务"><a class="markdownIt-Anchor" href="#jenkins使用参数构建任务"></a> jenkins使用参数构建任务</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-      <category term="编程" scheme="http://Scofieldsu.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="Jenkins" scheme="http://Scofieldsu.github.io/tags/Jenkins/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初试 Vue</title>
-    <link href="http://Scofieldsu.github.io/2017/06/01/%E5%88%9D%E8%AF%95Vue/"/>
-    <id>http://Scofieldsu.github.io/2017/06/01/初试Vue/</id>
-    <published>2017-06-01T14:39:08.000Z</published>
-    <updated>2022-01-18T18:22:04.521Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。</span><br><span class="line">与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。</span><br><span class="line">Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。</span><br><span class="line">另一方面，当与现代化的工具链以及各种支持类库结合使用时，</span><br><span class="line">Vue 也完全能够为复杂的单页应用提供驱动。</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="1-安装vue"><a class="markdownIt-Anchor" href="#1-安装vue"></a> 1. 安装vue</h3><p>1.下载node.js安装</p><p>2.打开命令行 npm init ，输入相应信息，系统用户路径生成npm.json文件作为默认配置</p><p>3.配置npm的taobao源，加快安装速度：  npm config set registry <a href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org/</a></p><p>4.安装vue： npm install vue</p><p>5.安装vue脚手架，快速搭建项目结构： npm install --global vue-cli</p><p>6.开始你的项目：vue init webpack your-project-name</p><p>7.安装依赖：</p><p>cd  your-project-name</p><p>npm install</p><ul><li><p>运行<br />npm run dev</p></li><li><p>构建<br />npm build</p></li></ul><h3 id="项目代码结构"><a class="markdownIt-Anchor" href="#项目代码结构"></a> 项目代码结构</h3><ul><li>build</li><li>config</li><li>dist</li><li>inspectionProfiles</li><li>noode_modules</li><li>src<ul><li>assets</li><li>components</li><li>App.vue</li><li>main.js</li></ul></li><li>static</li><li>test</li><li>theme</li><li>…</li><li>index.html</li><li>package.json</li></ul><blockquote><ul><li>其中npm install 是根据package.json中依赖安装模块到node_modules路径下。</li><li>npm run dev 会自动打开浏览器显示你的页面。</li><li>npm run build 会在dist路径下生成index.html和static文件夹，static里包括css，js，font。一般把dist中内容结合服务端显示。</li></ul></blockquote><h3 id="学习vue的常用插件"><a class="markdownIt-Anchor" href="#学习vue的常用插件"></a> 学习vue的常用插件</h3><ul><li><p>vue官网:<a href="http://cn.vuejs.org/v2/guide/">http://cn.vuejs.org/v2/guide/</a></p></li><li><p>vue-router(官方路由插件): <a href="https://router.vuejs.org/zh-cn/">https://router.vuejs.org/zh-cn/</a></p></li><li><p>axios(ajax插件): <a href="http://www.kancloud.cn/yunye/axios/234845">http://www.kancloud.cn/yunye/axios/234845</a></p></li><li><p>界面UI: <a href="http://element.eleme.io/#/zh-CN/component/installation">http://element.eleme.io/#/zh-CN/component/installation</a></p></li><li><p>树形控件ztree:  <a href="http://www.treejs.cn/v3/main.php#_zTreeInfo">http://www.treejs.cn/v3/main.php#_zTreeInfo</a></p></li><li><p>vuex(全局状态管理): <a href="https://vuex.vuejs.org/zh-cn/">https://vuex.vuejs.org/zh-cn/</a></p></li></ul><h3 id="推荐学习路线"><a class="markdownIt-Anchor" href="#推荐学习路线"></a> 推荐学习路线</h3><ol><li>安装完成后，可以根据网上视频学习做出简单的todolist，用来熟悉开发过程。</li><li>从github学习vue-admin项目，了解多页面系统怎么使用插件。</li><li>可以自由使用插件搭建你想做的应用。</li><li>学习插件的使用可以帮你更好的完成目标，学习github上项目的代码结构，帮助你在开发复杂项目时有条不紊。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-      <category term="编程" scheme="http://Scofieldsu.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="Vue" scheme="http://Scofieldsu.github.io/tags/Vue/"/>
-    
-      <category term="ElementUI" scheme="http://Scofieldsu.github.io/tags/ElementUI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python源码模块--ast语法分析</title>
-    <link href="http://Scofieldsu.github.io/2017/05/20/python%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97--ast%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
-    <id>http://Scofieldsu.github.io/2017/05/20/python源码模块--ast语法分析/</id>
-    <published>2017-05-20T05:14:21.000Z</published>
-    <updated>2022-01-17T07:04:12.594Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="编程" scheme="http://Scofieldsu.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="Ast" scheme="http://Scofieldsu.github.io/tags/Ast/"/>
-    
-      <category term="Python" scheme="http://Scofieldsu.github.io/tags/Python/"/>
-    
-      <category term="源码" scheme="http://Scofieldsu.github.io/tags/%E6%BA%90%E7%A0%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初试Docker</title>
-    <link href="http://Scofieldsu.github.io/2017/05/08/%E5%88%9D%E8%AF%95Docker/"/>
-    <id>http://Scofieldsu.github.io/2017/05/08/初试Docker/</id>
-    <published>2017-05-08T12:47:23.000Z</published>
-    <updated>2022-01-18T18:21:24.298Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Docker是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。</span><br><span class="line"></span><br><span class="line">Docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，</span><br><span class="line">然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</span><br><span class="line"></span><br><span class="line">容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,</span><br><span class="line">更重要的是容器性能开销极低。</span><br><span class="line"></span><br><span class="line">Docker 使用客户端-服务器 (C/S) 架构模式。</span><br><span class="line">Docker 客户端会与 Docker 守护进程进行通信。</span><br><span class="line">Docker 守护进程会处理复杂繁重的任务，例如建立、运行、发布你的 Docker 容器。</span><br><span class="line">Docker 客户端和守护进程可以运行在同一个系统上，</span><br><span class="line">当然你也可以使用 Docker 客户端去连接一个远程的 Docker 守护进程。</span><br><span class="line">Docker 客户端和守护进程之间通过 socket 或者 RESTful API 进行通信。</span><br><span class="line"></span><br><span class="line">- Docker 镜像是 Docker 容器运行时的只读模板，每一个镜像由一系列的层 (layers) 组成。</span><br><span class="line">  Docker 使用 UnionFS 来将这些层联合到单独的镜像中。</span><br><span class="line"></span><br><span class="line">- Docker 仓库用来保存镜像，可以理解为代码控制中的代码仓库。</span><br><span class="line"></span><br><span class="line">- Docker 容器和文件夹很类似，一个Docker容器包含了所有的某个应用运行所需要的环境。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="1-centos安装docker"><a class="markdownIt-Anchor" href="#1-centos安装docker"></a> 1. centos安装docker</h2><ol><li>安装yum-utils，它提供yum-config-manager实用程序：</li></ol><p>sudo yum install -y yum-utils</p><ol start="2"><li>使用以下命令设置稳定版本库：</li></ol>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://docs.docker.com/v1.13/engine/installation/linux/repo_files/centos/docker.repo</span><br></pre></td></tr></table></figure><ol start="3"><li>更新yum包索引。</li></ol><p>sudo yum makecache fast</p><ol start="4"><li><p>安装特定版本</p><p>yum list docker-engine.x86_64  --showduplicates |sort -r</p><p>-例如安装17.05.0.ce版本</p><p>sudo yum -y install docker-engine-17.05.0.ce-1.el7.centos</p></li><li><p>启动服务</p><p>sudo systemctl start docker</p><p>systemctl enable docker</p></li></ol><hr /><h2 id="2-好玩的docker-image"><a class="markdownIt-Anchor" href="#2-好玩的docker-image"></a> 2. 好玩的docker image</h2><h3 id="docker运行2048游戏"><a class="markdownIt-Anchor" href="#docker运行2048游戏"></a> docker运行2048游戏</h3><ul><li>命令： docker run -d -p 8989:80 alexwhen/docker-2048</li></ul><p><img src="https://raw.githubusercontent.com/Scofieldsu/Image_hosting/master/blog/2048.png" alt="2048" /></p><h3 id="docker运行gitlab"><a class="markdownIt-Anchor" href="#docker运行gitlab"></a> docker运行gitlab</h3><ul><li><p>命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -h gitlab-p 9999:22-p 8081:80-p 8443:443-v /docker/gitlab/config:/etc/gitlab -v /docker/gitlab/logs:/var/log/gitlab -v /docker/gitlab/data:/var/opt/gitlab --restart always --name gitlab gitlab/gitlab-ce:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure></li></ul><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/gitlab.png?raw=true" alt="gitlab" /></p><h3 id="docker运行rancher"><a class="markdownIt-Anchor" href="#docker运行rancher"></a> docker运行rancher</h3><blockquote><p>Rancher是一个容器管理平台，专为在生产中部署容器的组织而构建。Rancher使您可以轻松地在任何地方运行Kubernetes.</p></blockquote><ul><li>命令： docker run -d --restart=unless-stopped -p 8989:80 -p 443:443 rancher/rancher:stable</li></ul><p><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-1.png?raw=true" alt="rancher-1" /><br /><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-2.png?raw=true" alt="rancher-2" /><br /><img src="https://github.com/Scofieldsu/blog-source/blob/main/source/images/rancher-3.png?raw=true" alt="rancher-3" /></p><hr /><h3 id="3-docker-命令"><a class="markdownIt-Anchor" href="#3-docker-命令"></a> 3. docker 命令</h3><h3 id="4-dockerfile"><a class="markdownIt-Anchor" href="#4-dockerfile"></a> 4. dockerfile</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-      <category term="编程" scheme="http://Scofieldsu.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="Docker" scheme="http://Scofieldsu.github.io/tags/Docker/"/>
-    
-      <category term="Centos" scheme="http://Scofieldsu.github.io/tags/Centos/"/>
-    
-      <category term="Rancher" scheme="http://Scofieldsu.github.io/tags/Rancher/"/>
-    
-      <category term="Gitlab" scheme="http://Scofieldsu.github.io/tags/Gitlab/"/>
     
   </entry>
   
