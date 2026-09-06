@@ -25,7 +25,7 @@
 <meta property="og:description" content="asyncio 最大的误用不是写错语法，而是用错地方：把&quot;IO 密集&quot;和&quot;CPU 密集&quot;混在一个事件循环里，或者在同步测试框架里硬塞 async。2025 年把测试基础设施（Mock WS 服务、设备调度、SSE 推送）整体迁到 asyncio，这篇总结哪些地方该异步、哪些地方坚持同步。  一、判断标准：你的瓶颈在等待吗 异步化的收益公式：并发数 × 等待时">
 <meta property="og:locale">
 <meta property="article:published_time" content="2025-08-10T20:10:00.000Z">
-<meta property="article:modified_time" content="2026-09-06T13:39:42.191Z">
+<meta property="article:modified_time" content="2026-09-06T14:25:05.894Z">
 <meta property="article:author" content="俞 元">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="asyncio">
@@ -119,7 +119,7 @@
           
           
           
-          <li class="menu-item menu-item-about">
+          <li class="menu-item menu-item-about active">
             <a href="/about">
               
               <i class="icon icon-cup-fill"></i>
@@ -168,21 +168,12 @@
   <div class="page-wrap">
     <aside class="sidebar sidebar-left" itemscope itemtype="http://schema.org/WPSideBar">
       <div class="slimContent">
-  <div class="widget">
-  <h3 class="widget-title"><i class="icon icon-music"></i> 正在播放</h3>
-  <div class="widget-body">
-    <div class="music-player">
-      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="100" src="https://music.163.com/outchain/player?type=1&id=1201445&auto=1&height=100"></iframe>
-    </div>
-  </div>
-</div>
-
   
   <div class="widget">
     <h3 class="widget-title"><i class="icon icon-user"></i> 关于这个博客</h3>
     <div class="widget-body">
       <p class="side-about-text">一个测试自动化与工程质量的小站。写自动化测试、CI 流水线、性能与稳定性工程，也记录一些踩坑和解法。</p>
-      <a class="btn btn-github" href="https://github.com/Scofieldsu" target="_blank"><i class="icon icon-github"></i> GitHub</a>
+      <a class="btn btn-github btn-github-logo" href="https://github.com/Scofieldsu" target="_blank" title="GitHub"><i class="icon icon-github"></i></a>
     </div>
   </div>
   

@@ -25,7 +25,7 @@
 <meta property="og:description" content="用 Flask 搭了一个自动化测试平台（Web 控制台 + 执行引擎 + 实时日志），踩过的架构坑值得复盘。核心矛盾：Flask 的 request 上下文 vs 平台的后台线程——任务执行、定时调度、SSE 推流都活在 request 之外，怎么让所有代码取到同一份配置和状态？  一、应用工厂 + 模块自动注册 平台有十几个功能模块（任务、机器、代理、报告……），不想让 app.py 长成几百行">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-06-12T21:30:00.000Z">
-<meta property="article:modified_time" content="2026-09-06T13:39:42.191Z">
+<meta property="article:modified_time" content="2026-09-06T14:25:05.894Z">
 <meta property="article:author" content="俞 元">
 <meta property="article:tag" content="Flask">
 <meta property="article:tag" content="架构">
@@ -119,7 +119,7 @@
           
           
           
-          <li class="menu-item menu-item-about">
+          <li class="menu-item menu-item-about active">
             <a href="/about">
               
               <i class="icon icon-cup-fill"></i>
@@ -168,21 +168,12 @@
   <div class="page-wrap">
     <aside class="sidebar sidebar-left" itemscope itemtype="http://schema.org/WPSideBar">
       <div class="slimContent">
-  <div class="widget">
-  <h3 class="widget-title"><i class="icon icon-music"></i> 正在播放</h3>
-  <div class="widget-body">
-    <div class="music-player">
-      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="100" src="https://music.163.com/outchain/player?type=1&id=1201445&auto=1&height=100"></iframe>
-    </div>
-  </div>
-</div>
-
   
   <div class="widget">
     <h3 class="widget-title"><i class="icon icon-user"></i> 关于这个博客</h3>
     <div class="widget-body">
       <p class="side-about-text">一个测试自动化与工程质量的小站。写自动化测试、CI 流水线、性能与稳定性工程，也记录一些踩坑和解法。</p>
-      <a class="btn btn-github" href="https://github.com/Scofieldsu" target="_blank"><i class="icon icon-github"></i> GitHub</a>
+      <a class="btn btn-github btn-github-logo" href="https://github.com/Scofieldsu" target="_blank" title="GitHub"><i class="icon icon-github"></i></a>
     </div>
   </div>
   

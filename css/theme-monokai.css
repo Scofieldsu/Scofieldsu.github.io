@@ -448,6 +448,79 @@ body.theme-monokai .highlight .gutter pre {
   background: transparent;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
+
+/* ── 关于页 Mac 窗口容器（整页内容套窗口）──────── */
+body.theme-monokai .mac-window {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #1e1f1a;
+  border: 1px solid var(--mk-border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+body.theme-monokai .mac-window-bar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  background: #17181a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.theme-monokai .mac-dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-right: 7px;
+  flex: 0 0 auto;
+}
+body.theme-monokai .mac-dot-red {
+  background: #fc625d;
+}
+body.theme-monokai .mac-dot-yellow {
+  background: #fdbc40;
+}
+body.theme-monokai .mac-dot-green {
+  background: #35cd4b;
+}
+body.theme-monokai .mac-window-title {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--mk-text-3);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+body.theme-monokai .mac-window-body {
+  padding: 22px 26px 28px;
+}
+body.theme-monokai .mac-window-body .article-entry {
+  padding: 0;
+}
+body.theme-monokai .mac-window-body .article-entry h1,
+body.theme-monokai .mac-window-body .article-entry h2 {
+  border-bottom: 0;
+  margin-top: 18px;
+}
+body.theme-monokai .mac-window-body .article-entry h1:first-child {
+  margin-top: 0;
+}
+
+/* ── GitHub logo 按钮（仅图标，不显示文字）──────── */
+body.theme-monokai .btn-github-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 1;
+}
+body.theme-monokai .btn-github-logo .icon {
+  margin: 0;
+  vertical-align: middle;
+}
 body.theme-monokai .highlight .code pre {
   background: transparent;
 }
@@ -884,12 +957,12 @@ body.theme-monokai .article-entry li::marker {
     display: flex;
     align-items: flex-start;
   }
-  /* 左栏：流内 300px + sticky 全高，独立滚动 */
+  /* 左栏：流内 280px + sticky 全高，独立滚动 */
   body.theme-monokai .sidebar-left {
     position: sticky;
     top: 52px;
-    flex: 0 0 300px;
-    width: 300px;
+    flex: 0 0 280px;
+    width: 280px;
     height: calc(100vh - 52px);
     overflow-y: auto;
     overflow-x: hidden;
@@ -900,11 +973,11 @@ body.theme-monokai .article-entry li::marker {
   body.theme-monokai .sidebar-left .slimContent {
     padding: 20px 18px 30px;
   }
-  /* 中栏：占满剩余宽度（不限制文章宽度 → 与底部翻页控件同宽）*/
+  /* 中栏：占满剩余宽度（不限宽 → 与底部翻页控件同宽，与左右栏间隔收窄）*/
   body.theme-monokai .col-main {
     flex: 1 1 auto;
     min-width: 0;
-    padding: 24px 28px 40px;
+    padding: 24px 20px 40px;
   }
   body.theme-monokai .col-main .main {
     width: 100% !important;
@@ -913,12 +986,12 @@ body.theme-monokai .article-entry li::marker {
     padding: 0 !important;
     min-height: 0;
   }
-  /* 右栏：流内 300px + sticky 全高，独立滚动 */
+  /* 右栏：流内 280px + sticky 全高，独立滚动 */
   body.theme-monokai .sidebar-right {
-    flex: 0 0 300px;
+    flex: 0 0 280px;
     position: sticky;
     top: 52px;
-    width: 300px;
+    width: 280px;
     height: calc(100vh - 52px);
     overflow-y: auto;
     overflow-x: hidden;
@@ -971,30 +1044,13 @@ body.theme-monokai .article-entry li::marker {
   }
 }
 
-/* ── ≥1200px：内容列收窄居中，两侧留白 ── */
-@media (min-width: 1200px) {
-  body.theme-monokai .col-main {
-    width: 880px;
-    flex: 0 1 880px;
-    margin: 0 auto;
-  }
-}
-
-/* ── ≥1600px：更宽视口给内容列更多空间 ── */
-@media (min-width: 1600px) {
-  body.theme-monokai .col-main {
-    width: 1000px;
-    flex: 0 1 1000px;
-  }
-}
-
 /* ── 768~1199：窄桌面隐藏右栏（空间不够），搜索框保留 ── */
 @media (min-width: 768px) and (max-width: 1199px) {
   body.theme-monokai .sidebar-right {
     display: none !important;
   }
   body.theme-monokai .col-main {
-    padding: 20px 24px 36px;
+    padding: 20px 16px 36px;
   }
 }
 

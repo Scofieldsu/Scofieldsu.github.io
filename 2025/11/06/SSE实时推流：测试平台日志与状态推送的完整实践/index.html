@@ -25,7 +25,7 @@
 <meta property="og:description" content="测试平台的实时性需求很朴素：任务在跑，浏览器要现在看到日志和进度。技术选型时 WebSocket 是惯性答案，但我们的场景（单向推送 + HTTP 基建 + 内网环境）用 SSE 更简单更稳。这篇是 Flask + SSE 的完整实践：从事件设计到断线重连到性能边界。  一、为什么选 SSE 而不是 WebSocket    维度 SSE WebSocket     方向 单向（服务端→客户端）✅">
 <meta property="og:locale">
 <meta property="article:published_time" content="2025-11-06T20:40:00.000Z">
-<meta property="article:modified_time" content="2026-09-06T13:39:42.191Z">
+<meta property="article:modified_time" content="2026-09-06T14:25:05.894Z">
 <meta property="article:author" content="俞 元">
 <meta property="article:tag" content="Flask">
 <meta property="article:tag" content="SSE">
@@ -119,7 +119,7 @@
           
           
           
-          <li class="menu-item menu-item-about">
+          <li class="menu-item menu-item-about active">
             <a href="/about">
               
               <i class="icon icon-cup-fill"></i>
@@ -168,21 +168,12 @@
   <div class="page-wrap">
     <aside class="sidebar sidebar-left" itemscope itemtype="http://schema.org/WPSideBar">
       <div class="slimContent">
-  <div class="widget">
-  <h3 class="widget-title"><i class="icon icon-music"></i> 正在播放</h3>
-  <div class="widget-body">
-    <div class="music-player">
-      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="100" src="https://music.163.com/outchain/player?type=1&id=1201445&auto=1&height=100"></iframe>
-    </div>
-  </div>
-</div>
-
   
   <div class="widget">
     <h3 class="widget-title"><i class="icon icon-user"></i> 关于这个博客</h3>
     <div class="widget-body">
       <p class="side-about-text">一个测试自动化与工程质量的小站。写自动化测试、CI 流水线、性能与稳定性工程，也记录一些踩坑和解法。</p>
-      <a class="btn btn-github" href="https://github.com/Scofieldsu" target="_blank"><i class="icon icon-github"></i> GitHub</a>
+      <a class="btn btn-github btn-github-logo" href="https://github.com/Scofieldsu" target="_blank" title="GitHub"><i class="icon icon-github"></i></a>
     </div>
   </div>
   
