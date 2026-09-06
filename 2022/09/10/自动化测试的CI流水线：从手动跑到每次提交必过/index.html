@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>自动化测试的 CI 流水线：从&#34;手动跑&#34;到&#34;每次提交必过&#34; | ScofieldYu</title>
+  <meta name="description" content="“这个改动会不会弄坏别的”——这句话在团队里每说一次，就是一次隐性成本。CI 流水线的存在就是让这句话不再需要说：每次提交自动验证，红了就不许合。这篇讲一条自动化测试 CI 流水线的完整设计，从触发到报告到门禁。  一、流水线结构：三层闸门 1234567891011121314151617提交 (git push &#x2F; MR)   │   ▼┌─────────────┐│ L1 快速门禁   │">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化测试的 CI 流水线：从&quot;手动跑&quot;到&quot;每次提交必过&quot;">
+<meta property="og:url" content="https://scofieldsu.github.io/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="“这个改动会不会弄坏别的”——这句话在团队里每说一次，就是一次隐性成本。CI 流水线的存在就是让这句话不再需要说：每次提交自动验证，红了就不许合。这篇讲一条自动化测试 CI 流水线的完整设计，从触发到报告到门禁。  一、流水线结构：三层闸门 1234567891011121314151617提交 (git push &#x2F; MR)   │   ▼┌─────────────┐│ L1 快速门禁   │">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-09-10T20:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T06:17:12.104Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="pytest">
+<meta property="article:tag" content="Jenkins">
+<meta property="article:tag" content="CI">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://scofieldsu.github.io/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link rel="stylesheet" href="/css/theme-monokai.css">
+  
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-monokai" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="topbar-profile">
+        <a id="avatar" class="topbar-avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="64" height="64">
+        </a>
+        <div class="topbar-meta">
+          <h2 id="name">ScofieldYu</h2>
+          <small id="title" class="topbar-motto">高筑墙｜广积粮｜缓称王</small>
+        </div>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">App自动化测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PC%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96/">PC端自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPA/">RPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E8%87%AA%E5%8A%A8%E5%8C%96/">Web自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS%E6%B5%8B%E8%AF%95/">iOS测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%92%8C%E7%94%B5%E5%BD%B1/">书和电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%93%E9%AA%8C%E6%B5%8B%E8%AF%95/">体验测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%91%E5%B8%83%E5%B7%A5%E7%A8%8B/">发布工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95/">发布测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/">安全测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A6%E7%A7%BB/">测试左移</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%BA%A6%E9%87%8F/">测试度量</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1/">测试设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/">混沌工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">设备管理</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Appium/" style="font-size: 13.4px;">Appium</a> <a href="/tags/CI/" style="font-size: 13.2px;">CI</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Flask/" style="font-size: 13.2px;">Flask</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13.2px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13.2px;">Locust</a> <a href="/tags/Mock/" style="font-size: 13.2px;">Mock</a> <a href="/tags/Monkey/" style="font-size: 13px;">Monkey</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/OpenSTF/" style="font-size: 13px;">OpenSTF</a> <a href="/tags/Playwright/" style="font-size: 13px;">Playwright</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Python%E6%BA%90%E7%A0%81/" style="font-size: 13px;">Python源码</a> <a href="/tags/RPA/" style="font-size: 13px;">RPA</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/SSE/" style="font-size: 13px;">SSE</a> <a href="/tags/Selenium/" style="font-size: 13.2px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.2px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/WebDriverAgent/" style="font-size: 13px;">WebDriverAgent</a> <a href="/tags/WebSocket/" style="font-size: 13px;">WebSocket</a> <a href="/tags/Windows/" style="font-size: 13.2px;">Windows</a> <a href="/tags/XCUITest/" style="font-size: 13px;">XCUITest</a> <a href="/tags/asyncio/" style="font-size: 13px;">asyncio</a> <a href="/tags/flaky/" style="font-size: 13px;">flaky</a> <a href="/tags/i18n/" style="font-size: 13px;">i18n</a> <a href="/tags/iOS/" style="font-size: 13px;">iOS</a> <a href="/tags/mitmproxy/" style="font-size: 13px;">mitmproxy</a> <a href="/tags/pytest/" style="font-size: 13.4px;">pytest</a> <a href="/tags/pywinauto/" style="font-size: 13px;">pywinauto</a> <a href="/tags/%E4%B9%A6/" style="font-size: 13px;">书</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">任务调度</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" style="font-size: 13px;">元素定位</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 13px;">分布式</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" style="font-size: 13.2px;">前端测试</a> <a href="/tags/%E5%8F%91%E5%B8%83/" style="font-size: 13.2px;">发布</a> <a href="/tags/%E5%8F%91%E5%B8%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">发布管理</a> <a href="/tags/%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/" style="font-size: 13px;">可访问性</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">安全测试</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AD%96%E7%95%A5/" style="font-size: 13px;">定位策略</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" style="font-size: 13px;">实时推送</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 13.8px;">工程化</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">平台设计</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%BA%A6%E9%87%8F/" style="font-size: 13.2px;">度量</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E6%95%88%E7%8E%87/" style="font-size: 13px;">开发者效率</a> <a href="/tags/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">弱网测试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13.4px;">性能测试</a> <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA/" style="font-size: 13px;">执行机</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 13px;">抓包</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">接口测试</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/" style="font-size: 13px;">故障注入</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 13px;">数据可视化</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82/" style="font-size: 13px;">数据工厂</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/" style="font-size: 13px;">数据驱动</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13px;">架构</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.2px;">桌面自动化</a> <a href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">泄漏检测</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 13px;">流程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">测试工程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A6%E7%A7%BB/" style="font-size: 13px;">测试左移</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" style="font-size: 13px;">测试报告</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/" style="font-size: 13px;">测试数据</a> <a href="/tags/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">混沌工程</a> <a href="/tags/%E7%81%B0%E5%BA%A6/" style="font-size: 13px;">灰度</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">环境管理</a> <a href="/tags/%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">用例设计</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 13px;">电影</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13px;">监控</a> <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 13.6px;">稳定性</a> <a href="/tags/%E7%AD%89%E4%BB%B7%E7%B1%BB/" style="font-size: 13px;">等价类</a> <a href="/tags/%E7%BC%BA%E9%99%B7%E7%AE%A1%E7%90%86/" style="font-size: 13px;">缺陷管理</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F/" style="font-size: 13px;">网络模拟</a> <a href="/tags/%E8%81%94%E8%B0%83/" style="font-size: 13px;">联调</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.2px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 13.8px;">自动化测试</a> <a href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 13px;">自愈选择器</a> <a href="/tags/%E8%A6%86%E7%9B%96%E7%8E%87/" style="font-size: 13px;">覆盖率</a> <a href="/tags/%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BA/" style="font-size: 13px;">设备农场</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">调度</a> <a href="/tags/%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B/" style="font-size: 13.2px;">质量工程</a> <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" style="font-size: 13px;">跨平台</a> <a href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">长稳测试</a> <a href="/tags/%E9%A3%8E%E9%99%A9%E9%A9%B1%E5%8A%A8/" style="font-size: 13px;">风险驱动</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/08/">August 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-自动化测试的CI流水线：从手动跑到每次提交必过" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自动化测试的 CI 流水线：从&#34;手动跑&#34;到&#34;每次提交必过&#34;
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/" class="article-date">
+	  <time datetime="2022-09-10T20:00:00.000Z" itemprop="datePublished">2022-09-10</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/CI/" rel="tag">CI</a>, <a class="article-tag-link-link" href="/tags/Jenkins/" rel="tag">Jenkins</a>, <a class="article-tag-link-link" href="/tags/pytest/" rel="tag">pytest</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>“这个改动会不会弄坏别的”——这句话在团队里每说一次，就是一次隐性成本。CI 流水线的存在就是让这句话<strong>不再需要说</strong>：每次提交自动验证，红了就不许合。这篇讲一条自动化测试 CI 流水线的完整设计，从触发到报告到门禁。</p>
+<h2 id="一-流水线结构三层闸门"><a class="markdownIt-Anchor" href="#一-流水线结构三层闸门"></a> 一、流水线结构：三层闸门</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">提交 (git push / MR)</span><br><span class="line">   │</span><br><span class="line">   ▼</span><br><span class="line">┌─────────────┐</span><br><span class="line">│ L1 快速门禁   │  编译 + 单测 + lint        目标：5 分钟内</span><br><span class="line">│ (每次提交)   │  挂了直接红，不浪费后续资源</span><br><span class="line">└──────┬──────┘</span><br><span class="line">       ▼ 通过</span><br><span class="line">┌─────────────┐</span><br><span class="line">│ L2 集成验证   │  接口自动化 + Mock 环境     目标：30 分钟内</span><br><span class="line">│ (每次提交)   │  依赖起容器/服务，真调用</span><br><span class="line">└──────┬──────┘</span><br><span class="line">       ▼ 通过</span><br><span class="line">┌─────────────┐</span><br><span class="line">│ L3 回归+发布  │  UI 回归（设备池）+ 长稳    目标：发版前/每日</span><br><span class="line">│ (每日/发版)  │  报告 → 发版门禁</span><br><span class="line">└─────────────┘</span><br></pre></td></tr></table></figure>
+<p><strong>分层的原则：越便宜越快越靠前</strong>。L1 挂了还跑 L3 是纯浪费——编译都过不了，UI 跑出来也是噪音。L1+L2 合并成&quot;提交必过&quot;，L3 是&quot;发版必过&quot;。</p>
+<h2 id="二-jenkins-pipeline-骨架"><a class="markdownIt-Anchor" href="#二-jenkins-pipeline-骨架"></a> 二、Jenkins Pipeline 骨架</h2>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">&#x27;test-linux&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line">    parameters &#123;</span><br><span class="line">        choice(<span class="attr">name:</span> <span class="string">&#x27;PROFILE&#x27;</span>, <span class="attr">choices:</span> [<span class="string">&#x27;smoke&#x27;</span>, <span class="string">&#x27;api&#x27;</span>, <span class="string">&#x27;regression&#x27;</span>],</span><br><span class="line">               <span class="symbol">description:</span> <span class="string">&#x27;测试档位（MR 默认 smoke，定时任务跑 regression）&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Checkout&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout scm</span><br><span class="line">                sh <span class="string">&#x27;git rev-parse HEAD &gt; build.env&#x27;</span>    <span class="comment">// 记录版本指纹</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;L1 快速门禁&#x27;</span>) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(<span class="string">&#x27;编译&#x27;</span>) &#123; steps &#123; sh <span class="string">&#x27;make build&#x27;</span> &#125; &#125;</span><br><span class="line">                stage(<span class="string">&#x27;单测&#x27;</span>) &#123; steps &#123; sh <span class="string">&#x27;pytest -m &quot;unit&quot; -q --junitxml=report/unit.xml&#x27;</span> &#125; &#125;</span><br><span class="line">                stage(<span class="string">&#x27;Lint&#x27;</span>) &#123; steps &#123; sh <span class="string">&#x27;ruff check . &amp;&amp; black --check .&#x27;</span> &#125; &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;L2 集成验证&#x27;</span>) &#123;</span><br><span class="line">            when &#123; expression &#123; params.PROFILE != <span class="string">&#x27;smoke&#x27;</span> || currentBuild.getBuildCauses().toString().contains(<span class="string">&#x27;TimerTrigger&#x27;</span>) &#125; &#125;</span><br><span class="line">            environment &#123;</span><br><span class="line">                <span class="symbol">BASE_URL:</span> <span class="string">&#x27;https://staging.api.internal&#x27;</span>   <span class="comment">// 集成环境</span></span><br><span class="line">                <span class="symbol">ENV_FINGERPRINT:</span> sh(<span class="attr">script:</span> <span class="string">&#x27;python tools/env_fingerprint.py&#x27;</span>, <span class="attr">returnStdout:</span> <span class="literal">true</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">                    pytest -m &quot;$&#123;PROFILE&#125;&quot; -q \</span></span><br><span class="line"><span class="string">                        --junitxml=report/integration.xml \</span></span><br><span class="line"><span class="string">                        --html=report/integration.html --self-contained-html</span></span><br><span class="line"><span class="string">                &#x27;&#x27;&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">            post &#123;</span><br><span class="line">                always &#123;</span><br><span class="line">                    archiveArtifacts <span class="string">&#x27;report/**&#x27;</span>     <span class="comment">// 报告+截图归档，带 run_id</span></span><br><span class="line">                &#125;</span><br><span class="line">                failure &#123;</span><br><span class="line">                    <span class="comment">// 失败归因提示：环境指纹随消息发出，排查先 diff 指纹</span></span><br><span class="line">                    dingtalkRobot(<span class="attr">text:</span> <span class="string">&quot;集成失败 @$&#123;gitBranch()&#125; $&#123;ENV_FINGERPRINT&#125;&quot;</span>, <span class="attr">at:</span> committer)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;L3 UI 回归&#x27;</span>) &#123;</span><br><span class="line">            when &#123; expression &#123; params.PROFILE == <span class="string">&#x27;regression&#x27;</span> &#125; &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="comment">// 设备池调度：按平台分片并行（见设备农场那篇）</span></span><br><span class="line">                sh <span class="string">&#x27;python tools/dispatch_ui_regression.py --profile regression&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    post &#123;</span><br><span class="line">        always &#123;</span><br><span class="line">            <span class="comment">// 结果汇总：JUnit XML → 趋势图 + 失败列表 → 推送</span></span><br><span class="line">            sh <span class="string">&#x27;python tools/report_agg.py --build-id $&#123;BUILD_NUMBER&#125;&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三-四个决定流水线可信度的细节"><a class="markdownIt-Anchor" href="#三-四个决定流水线可信度的细节"></a> 三、四个决定流水线&quot;可信度&quot;的细节</h2>
+<h3 id="1-环境指纹随报告走"><a class="markdownIt-Anchor" href="#1-环境指纹随报告走"></a> 1. 环境指纹随报告走</h3>
+<p>每次 run 的 <code>ENV_FINGERPRINT</code>（部署版本 + 配置 hash + 数据版本）写进报告头和失败消息。<strong>&quot;环境是不是被人动过&quot;从猜变成 diff</strong>——这是流水线跑红后最省时间的排查动作。</p>
+<h3 id="2-失败必带现场且可追溯"><a class="markdownIt-Anchor" href="#2-失败必带现场且可追溯"></a> 2. 失败必带现场，且可追溯</h3>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 失败消息模板（钉钉/飞书）</span></span><br><span class="line"><span class="string">❌</span> [<span class="string">api</span>] <span class="string">test_order_pay</span> <span class="string">失败（3/3</span> <span class="string">重试均失败）</span></span><br><span class="line">   <span class="string">断言:</span> <span class="string">status</span> <span class="string">==</span> <span class="string">&quot;PAID&quot;</span><span class="string">,</span> <span class="string">got</span> <span class="string">&quot;TIMEOUT&quot;</span></span><br><span class="line">   <span class="string">现场:</span> <span class="string">&lt;报告链接#用例锚点&gt;</span>   <span class="comment"># 截图 + 请求响应 + 相关日志</span></span><br><span class="line">   <span class="string">环境:</span> <span class="string">staging</span> <span class="string">@</span> <span class="string">a3f9c21</span> <span class="string">(seed-0910)</span></span><br><span class="line">   <span class="string">历史:</span> <span class="string">该用例近</span> <span class="number">7</span> <span class="string">天</span> <span class="number">2</span> <span class="string">红</span> <span class="number">5</span> <span class="string">绿（疑似</span> <span class="string">flaky，见清单）</span></span><br></pre></td></tr></table></figure>
+<p>&quot;重试均失败&quot;和&quot;近 7 天红绿记录&quot;是<strong>区分产品 bug 和 flaky</strong> 的第一手信息，没有历史数据的失败消息只是噪音。</p>
+<h3 id="3-flaky-隔离区红了先隔离不许带病放行"><a class="markdownIt-Anchor" href="#3-flaky-隔离区红了先隔离不许带病放行"></a> 3. flaky 隔离区：红了先隔离，不许带病放行</h3>
+<p>flaky 用例（间歇失败）是流水线公信力的头号杀手——团队一旦觉得&quot;红了也正常&quot;，流水线就形同虚设。机制：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">用例连续 2 次&quot;重跑后通过&quot; → 自动进隔离区（quarantine）</span><br><span class="line">隔离区用例：不阻塞合并，但每 build 仍跑，结果单独统计</span><br><span class="line">每周例会过隔离区：修稳定（出清单）或永久移除</span><br><span class="line">隔离区 &gt; 5% 用例总数 → 告警（流水线健康度指标）</span><br></pre></td></tr></table></figure>
+<p><strong>关键</strong>：隔离不是&quot;假装没发生&quot;，是&quot;显式承认不稳定 + 限期治理&quot;。</p>
+<h3 id="4-门禁要有例外通道但留痕"><a class="markdownIt-Anchor" href="#4-门禁要有例外通道但留痕"></a> 4. 门禁要有例外通道，但留痕</h3>
+<p>“紧急 hotfix 等不了 30 分钟集成&quot;是真实需求。解法不是&quot;绕过”，是<strong>显式降级 + 补跑</strong>：</p>
+<ul>
+<li>MR 打上 <code>skip-ci</code> 标签 → L2/L3 不阻塞合并，但<strong>合并后自动补跑</strong>，补跑红 = 回滚流程启动；</li>
+<li>所有跳过记录进周报（谁跳的、什么理由、补跑结果），<strong>例外透明化</strong>，否则门禁会被慢慢钻空。</li>
+</ul>
+<h2 id="四-流水线自身的度量"><a class="markdownIt-Anchor" href="#四-流水线自身的度量"></a> 四、流水线自身的度量</h2>
+<p>流水线也是产品，要自己看板：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>健康线</th>
+<th>异常含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 平均时长</td>
+<td>&lt;5min</td>
+<td>超了 → 开发者会开始跳过</td>
+</tr>
+<tr>
+<td>L2 平均时长</td>
+<td>&lt;30min</td>
+<td>超了 → 拆并行/缩数据</td>
+</tr>
+<tr>
+<td>flaky 率</td>
+<td>&lt;2%</td>
+<td>超了 → 隔离区积压，公信力下降</td>
+</tr>
+<tr>
+<td>失败→修复 MTTR</td>
+<td>&lt;1day</td>
+<td>超了 → 失败现场不够用</td>
+</tr>
+<tr>
+<td>误报率（环境原因失败占比）</td>
+<td>&lt;10%</td>
+<td>超了 → 环境不稳定，先修环境</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五-小结"><a class="markdownIt-Anchor" href="#五-小结"></a> 五、小结</h2>
+<p>CI 流水线的四个支柱：<strong>分层闸门</strong>（便宜的先跑）、<strong>环境指纹</strong>（排查先 diff）、<strong>flaky 隔离区</strong>（保住公信力）、<strong>透明例外</strong>（门禁能活下来）。最终衡量标准只有一个：<strong>开发者愿不愿意等它</strong>——等得值，门禁才有意义；等不起，再严格的门禁也形同虚设。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://scofieldsu.github.io/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/" title="自动化测试的 CI 流水线：从&#34;手动跑&#34;到&#34;每次提交必过&#34;" target="_blank" rel="external">https://scofieldsu.github.io/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/11/08/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95%EF%BC%9A%E7%94%A8mitmproxy%E6%A8%A1%E6%8B%9F%E7%9C%9F%E5%AE%9E%E7%BD%91%E7%BB%9C%E5%8A%A3%E5%8C%96/" title="弱网测试怎么做：用 mitmproxy 模拟真实网络劣化"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/07/20/pytest%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E%E5%8D%95%E6%96%87%E4%BB%B6%E8%84%9A%E6%9C%AC%E5%88%B0%E5%8F%AF%E7%BB%B4%E6%8A%A4%E7%9A%84%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" title="pytest 实战：从单文件脚本到可维护的测试工程">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2026 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://scofieldsu.github.io/2022/09/10/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84CI%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E8%B7%91%E5%88%B0%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%BF%85%E8%BF%87/';
+        
+        this.page.identifier = '自动化测试的CI流水线：从手动跑到每次提交必过';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>

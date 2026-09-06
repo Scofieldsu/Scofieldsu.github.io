@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>灰度测试实战：让新版本先被 1% 的用户验证 | ScofieldYu</title>
+  <meta name="description" content="“测试全过了为什么线上还炸？”——因为测试环境验不出真实流量 × 真实用户 × 真实规模的交叉问题。灰度（金丝雀）的本质：把&quot;全量发布&quot;拆成&quot;逐级放大&quot;，每一级用真实用户当验证者，出了问题影响面可控。这篇讲测试团队在灰度链路里的职责——不是&quot;发布完就下班&quot;，而是&quot;每一级放大前都要过一道闸&quot;。  一、灰度的三级闸门：放大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="灰度测试实战：让新版本先被 1% 的用户验证">
+<meta property="og:url" content="https://scofieldsu.github.io/2025/07/22/%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%EF%BC%9A%E8%AE%A9%E6%96%B0%E7%89%88%E6%9C%AC%E5%85%88%E8%A2%AB1%%E7%9A%84%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="“测试全过了为什么线上还炸？”——因为测试环境验不出真实流量 × 真实用户 × 真实规模的交叉问题。灰度（金丝雀）的本质：把&quot;全量发布&quot;拆成&quot;逐级放大&quot;，每一级用真实用户当验证者，出了问题影响面可控。这篇讲测试团队在灰度链路里的职责——不是&quot;发布完就下班&quot;，而是&quot;每一级放大前都要过一道闸&quot;。  一、灰度的三级闸门：放大">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-07-22T19:50:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T06:17:12.104Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="发布">
+<meta property="article:tag" content="灰度">
+<meta property="article:tag" content="监控">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://scofieldsu.github.io/2025/07/22/%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%EF%BC%9A%E8%AE%A9%E6%96%B0%E7%89%88%E6%9C%AC%E5%85%88%E8%A2%AB1%%E7%9A%84%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link rel="stylesheet" href="/css/theme-monokai.css">
+  
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-monokai" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="topbar-profile">
+        <a id="avatar" class="topbar-avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="64" height="64">
+        </a>
+        <div class="topbar-meta">
+          <h2 id="name">ScofieldYu</h2>
+          <small id="title" class="topbar-motto">高筑墙｜广积粮｜缓称王</small>
+        </div>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">App自动化测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PC%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96/">PC端自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPA/">RPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E8%87%AA%E5%8A%A8%E5%8C%96/">Web自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS%E6%B5%8B%E8%AF%95/">iOS测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%92%8C%E7%94%B5%E5%BD%B1/">书和电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%93%E9%AA%8C%E6%B5%8B%E8%AF%95/">体验测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%91%E5%B8%83%E5%B7%A5%E7%A8%8B/">发布工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95/">发布测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/">安全测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A6%E7%A7%BB/">测试左移</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%BA%A6%E9%87%8F/">测试度量</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1/">测试设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/">混沌工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">设备管理</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Appium/" style="font-size: 13.4px;">Appium</a> <a href="/tags/CI/" style="font-size: 13.2px;">CI</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Flask/" style="font-size: 13.2px;">Flask</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13.2px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13.2px;">Locust</a> <a href="/tags/Mock/" style="font-size: 13.2px;">Mock</a> <a href="/tags/Monkey/" style="font-size: 13px;">Monkey</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/OpenSTF/" style="font-size: 13px;">OpenSTF</a> <a href="/tags/Playwright/" style="font-size: 13px;">Playwright</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Python%E6%BA%90%E7%A0%81/" style="font-size: 13px;">Python源码</a> <a href="/tags/RPA/" style="font-size: 13px;">RPA</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/SSE/" style="font-size: 13px;">SSE</a> <a href="/tags/Selenium/" style="font-size: 13.2px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.2px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/WebDriverAgent/" style="font-size: 13px;">WebDriverAgent</a> <a href="/tags/WebSocket/" style="font-size: 13px;">WebSocket</a> <a href="/tags/Windows/" style="font-size: 13.2px;">Windows</a> <a href="/tags/XCUITest/" style="font-size: 13px;">XCUITest</a> <a href="/tags/asyncio/" style="font-size: 13px;">asyncio</a> <a href="/tags/flaky/" style="font-size: 13px;">flaky</a> <a href="/tags/i18n/" style="font-size: 13px;">i18n</a> <a href="/tags/iOS/" style="font-size: 13px;">iOS</a> <a href="/tags/mitmproxy/" style="font-size: 13px;">mitmproxy</a> <a href="/tags/pytest/" style="font-size: 13.4px;">pytest</a> <a href="/tags/pywinauto/" style="font-size: 13px;">pywinauto</a> <a href="/tags/%E4%B9%A6/" style="font-size: 13px;">书</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">任务调度</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" style="font-size: 13px;">元素定位</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 13px;">分布式</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" style="font-size: 13.2px;">前端测试</a> <a href="/tags/%E5%8F%91%E5%B8%83/" style="font-size: 13.2px;">发布</a> <a href="/tags/%E5%8F%91%E5%B8%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">发布管理</a> <a href="/tags/%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/" style="font-size: 13px;">可访问性</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">安全测试</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AD%96%E7%95%A5/" style="font-size: 13px;">定位策略</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" style="font-size: 13px;">实时推送</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 13.8px;">工程化</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">平台设计</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%BA%A6%E9%87%8F/" style="font-size: 13.2px;">度量</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E6%95%88%E7%8E%87/" style="font-size: 13px;">开发者效率</a> <a href="/tags/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">弱网测试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13.4px;">性能测试</a> <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA/" style="font-size: 13px;">执行机</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 13px;">抓包</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">接口测试</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/" style="font-size: 13px;">故障注入</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 13px;">数据可视化</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82/" style="font-size: 13px;">数据工厂</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/" style="font-size: 13px;">数据驱动</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13px;">架构</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.2px;">桌面自动化</a> <a href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">泄漏检测</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 13px;">流程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">测试工程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A6%E7%A7%BB/" style="font-size: 13px;">测试左移</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" style="font-size: 13px;">测试报告</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/" style="font-size: 13px;">测试数据</a> <a href="/tags/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">混沌工程</a> <a href="/tags/%E7%81%B0%E5%BA%A6/" style="font-size: 13px;">灰度</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">环境管理</a> <a href="/tags/%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">用例设计</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 13px;">电影</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13px;">监控</a> <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 13.6px;">稳定性</a> <a href="/tags/%E7%AD%89%E4%BB%B7%E7%B1%BB/" style="font-size: 13px;">等价类</a> <a href="/tags/%E7%BC%BA%E9%99%B7%E7%AE%A1%E7%90%86/" style="font-size: 13px;">缺陷管理</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F/" style="font-size: 13px;">网络模拟</a> <a href="/tags/%E8%81%94%E8%B0%83/" style="font-size: 13px;">联调</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.2px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 13.8px;">自动化测试</a> <a href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 13px;">自愈选择器</a> <a href="/tags/%E8%A6%86%E7%9B%96%E7%8E%87/" style="font-size: 13px;">覆盖率</a> <a href="/tags/%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BA/" style="font-size: 13px;">设备农场</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">调度</a> <a href="/tags/%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B/" style="font-size: 13.2px;">质量工程</a> <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" style="font-size: 13px;">跨平台</a> <a href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">长稳测试</a> <a href="/tags/%E9%A3%8E%E9%99%A9%E9%A9%B1%E5%8A%A8/" style="font-size: 13px;">风险驱动</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/08/">August 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-灰度测试实战：让新版本先被1%的用户验证" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      灰度测试实战：让新版本先被 1% 的用户验证
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2025/07/22/p%EF%BF%BDK%D5%9E%18%1A%EF%BF%BD%EF%BF%BDH,H%EF%BF%BD1%25%EF%BF%BD(7%EF%BF%BD%EF%BF%BD/" class="article-date">
+	  <time datetime="2025-07-22T19:50:00.000Z" itemprop="datePublished">2025-07-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95/">发布测试</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%8F%91%E5%B8%83/" rel="tag">发布</a>, <a class="article-tag-link-link" href="/tags/%E7%81%B0%E5%BA%A6/" rel="tag">灰度</a>, <a class="article-tag-link-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2025/07/22/p%EF%BF%BDK%D5%9E%18%1A%EF%BF%BD%EF%BF%BDH,H%EF%BF%BD1%25%EF%BF%BD(7%EF%BF%BD%EF%BF%BD/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.9k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>“测试全过了为什么线上还炸？”——因为测试环境验不出<strong>真实流量 × 真实用户 × 真实规模</strong>的交叉问题。灰度（金丝雀）的本质：<strong>把&quot;全量发布&quot;拆成&quot;逐级放大&quot;，每一级用真实用户当验证者，出了问题影响面可控</strong>。这篇讲测试团队在灰度链路里的职责——不是&quot;发布完就下班&quot;，而是&quot;每一级放大前都要过一道闸&quot;。</p>
+<h2 id="一-灰度的三级闸门放大不是目的验证才是"><a class="markdownIt-Anchor" href="#一-灰度的三级闸门放大不是目的验证才是"></a> 一、灰度的三级闸门：放大不是目的，验证才是</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐</span><br><span class="line">│ 1% 金丝雀 │ →  │ 10% 灰度  │ →  │ 50%      │ →  │ 100% 全量 │</span><br><span class="line">│ (1-4h)   │    │ (4-24h)  │    │ (24h)    │    │          │</span><br><span class="line">└──────────┘    └──────────┘    └──────────┘    └──────────┘</span><br><span class="line">     │               │               │</span><br><span class="line">  闸1:冒烟+核心指标   闸2:核心+业务指标  闸3:全指标+容量确认</span><br><span class="line">  任一指标越界 → 自动回滚，不许&quot;再观察观察&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>每一级闸门的判据必须提前写死</strong>（灰度计划的一部分），而不是发布时凭感觉：“P99 涨了 30% 要不要等？”——没有预设判据的灰度 = 没有灰度。</p>
+<h2 id="二-灰度期的测试动作按级"><a class="markdownIt-Anchor" href="#二-灰度期的测试动作按级"></a> 二、灰度期的测试动作（按级）</h2>
+<h3 id="1-金丝雀1~4-小时机器验机器"><a class="markdownIt-Anchor" href="#1-金丝雀1~4-小时机器验机器"></a> 1% 金丝雀（1~4 小时）：机器验机器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">测试侧动作：</span><br><span class="line">1. 冒烟套件自动跑（金丝雀实例上）：核心 20 用例，10 分钟内</span><br><span class="line">2. 流量染色验证：确认&quot;进来的 1% 流量真的全走了新版本&quot;</span><br><span class="line">   （灰度失效 = 测了个寂寞——分流配置错误是最常见的灰度事故）</span><br><span class="line">3. 指标对比启动：金丝雀组 vs 对照组（未放量的 99%）同屏对比</span><br><span class="line">   对比维度（提前声明）：</span><br><span class="line">   - 功能：核心链路成功率（登录/下单/支付）</span><br><span class="line">   - 性能：P50/P99 延迟、错误率</span><br><span class="line">   - 资源：CPU/内存/GC（新版本可能更&quot;吃&quot;）</span><br><span class="line">   - 业务：转化率（支付按钮点击率——性能没坏但体验坏了，只有业务指标能抓）</span><br></pre></td></tr></table></figure>
+<p><strong>流量染色验证是最容易被跳过、又最致命的一步</strong>：分流规则写错（按 IP 分但网关做了负载均衡），金丝雀组实际混了旧版本流量，指标对比全是噪音，&quot;灰度通过&quot;是假象。</p>
+<h3 id="10-灰度4~24-小时真实用户进场"><a class="markdownIt-Anchor" href="#10-灰度4~24-小时真实用户进场"></a> 10% 灰度（4~24 小时）：真实用户进场</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">测试侧动作：</span><br><span class="line">1. 工单/舆情监听：灰度用户反馈自动打标（&quot;灰度用户&quot;标签进客服系统）</span><br><span class="line">   - 关键词告警：&quot;打不开/白屏/扣了钱没单/闪退&quot;</span><br><span class="line">   - 灰度组投诉率 vs 对照组投诉率（同口径对比）</span><br><span class="line">2. 缺陷快速通道：灰度期缺陷自动打 P0/P1 标签（线上真实用户 = 最高优先级）</span><br><span class="line">3. 长尾场景补测：</span><br><span class="line">   - 1% 流量覆盖不到的路径（低频功能）→ 在 staging 用全量流量模型补跑</span><br><span class="line">   - 弱网/低端机：灰度组的机型分布里低端机占比 × 错误率（低端机问题</span><br><span class="line">     在 1% 阶段样本太少看不出，10% 阶段要单独看这个切片）</span><br><span class="line">4. 数据一致性巡检：</span><br><span class="line">   - 新旧版本双写/迁移场景：灰度用户的数据在新旧版本间读一致吗？</span><br><span class="line">   - 这是&quot;灰度特有&quot;的检查——全量发布没有&quot;新旧并存&quot;，灰度有</span><br></pre></td></tr></table></figure>
+<p><strong>灰度期最容易漏的是&quot;数据一致性&quot;</strong>：存储结构变了、缓存 key 变了，旧版本用户和新版本用户读同一份数据——10% 阶段新旧版本真实并存，是发现数据层问题的唯一窗口。</p>
+<h3 id="50-100从正确性到容量"><a class="markdownIt-Anchor" href="#50-100从正确性到容量"></a> 50% → 100%：从&quot;正确性&quot;到&quot;容量&quot;</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">50% 放大前：</span><br><span class="line">1. 容量确认：新版本单实例容量 ≥ 旧版本？（压测报告 vs 灰度期真实负载）</span><br><span class="line">   灰度期 10% 流量下 P99 正常，50% 流量下可能撞限流/连接池</span><br><span class="line">2. 全量回滚预案确认：</span><br><span class="line">   - 回滚时长（&quot;10 分钟回滚&quot;是目标，实际演练过吗？）</span><br><span class="line">   - 回滚后数据怎么办？（新版本写入的数据旧版本读得了吗？——数据回滚兼容）</span><br><span class="line">3. 全指标复核：10% 阶段的 7 天趋势，不是最后一天的快照</span><br></pre></td></tr></table></figure>
+<p><strong>&quot;回滚预案演练&quot;是灰度制度的灵魂</strong>——灰度的安全垫是&quot;能退&quot;，但&quot;能退&quot;必须是演练过的，不是 PPT 里画的。回滚预案三问：多快？数据兼容吗？回滚后流量怎么切回来？</p>
+<h2 id="三-灰度判据的自动化指标对比不能靠人肉刷大盘"><a class="markdownIt-Anchor" href="#三-灰度判据的自动化指标对比不能靠人肉刷大盘"></a> 三、灰度判据的自动化：指标对比不能靠人肉刷大盘</h2>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># canary/gates/gate-1.yaml（金丝雀闸）</span></span><br><span class="line"><span class="attr">window:</span> <span class="string">4h</span></span><br><span class="line"><span class="attr">compare:</span> <span class="string">canary_group</span> <span class="string">vs</span> <span class="string">control_group</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">metric:</span> <span class="string">core_flow_success_rate</span></span><br><span class="line">    <span class="attr">threshold:</span> <span class="string">&quot;canary &lt; control × 0.99&quot;</span>     <span class="comment"># 比对照组低 1% 以上</span></span><br><span class="line">    <span class="attr">action:</span> <span class="string">auto_rollback</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">metric:</span> <span class="string">p99_latency</span></span><br><span class="line">    <span class="attr">threshold:</span> <span class="string">&quot;canary &gt; control × 1.3&quot;</span></span><br><span class="line">    <span class="attr">action:</span> <span class="string">auto_rollback</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">metric:</span> <span class="string">error_rate</span></span><br><span class="line">    <span class="attr">threshold:</span> <span class="string">&quot;canary &gt; 1%&quot;</span></span><br><span class="line">    <span class="attr">action:</span> <span class="string">auto_rollback</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">metric:</span> <span class="string">payment_conversion</span></span><br><span class="line">    <span class="attr">threshold:</span> <span class="string">&quot;canary &lt; control × 0.98&quot;</span>     <span class="comment"># 业务指标容忍度更严</span></span><br><span class="line">    <span class="attr">action:</span> <span class="string">pause_and_alert</span>                   <span class="comment"># 业务指标异常先暂停不自动回滚（可能是流量结构差异）</span></span><br><span class="line"><span class="attr">sample_guard:</span>                                  <span class="comment"># 样本量保护</span></span><br><span class="line">  <span class="attr">min_requests_per_group:</span> <span class="number">1000</span>                <span class="comment"># 样本不够不出结论（1% 流量低频功能样本少）</span></span><br><span class="line">  <span class="attr">insufficient:</span> <span class="string">extend_window</span>                 <span class="comment"># 样本不足 → 延长窗口而不是&quot;没看到问题=通过&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>两个自动化要点</strong>：</p>
+<ol>
+<li><strong>对照组对比，不是绝对阈值</strong>：&quot;P99 &lt; 500ms&quot;是绝对判据，&quot;金丝雀 P99 &gt; 对照组 × 1.3&quot;是相对判据——后者排除大盘共性问题（如全量都在涨的午高峰），<strong>灰度期的信号全在&quot;差异&quot;里</strong>；</li>
+<li><strong>样本量保护</strong>：1% 流量下低频功能（如&quot;退款&quot;）一天可能只有 30 个请求，30 个样本出不了任何统计结论——<strong>样本不足必须延长窗口，“没看到异常&quot;不等于&quot;没有异常”</strong>。</li>
+</ol>
+<h2 id="四-灰度事故的三种典型形态和对应防线"><a class="markdownIt-Anchor" href="#四-灰度事故的三种典型形态和对应防线"></a> 四、灰度事故的三种典型形态（和对应防线）</h2>
+<table>
+<thead>
+<tr>
+<th>事故形态</th>
+<th>案例</th>
+<th>防线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分流失效</td>
+<td>分流规则错误，金丝雀组混旧版本流量，&quot;灰度通过&quot;是假象，全量后爆炸</td>
+<td>流量染色验证（1% 阶段强制项）</td>
+</tr>
+<tr>
+<td>小样本误判</td>
+<td>低频功能 1% 阶段无样本，&quot;没看到问题&quot;放大，全量后高频暴露</td>
+<td>样本量保护 + 低频路径 staging 补测</td>
+</tr>
+<tr>
+<td>回滚不兼容</td>
+<td>新版本数据旧版本读不了，回滚后故障扩大</td>
+<td>数据回滚兼容检查 + 回滚预案演练</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五-和测试体系的关系"><a class="markdownIt-Anchor" href="#五-和测试体系的关系"></a> 五、和测试体系的关系</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">灰度不是&quot;另一个测试阶段&quot;，是测试体系的&quot;最后一层验证 + 第一层生产监控&quot;：</span><br><span class="line">- 用例资产：灰度期的冒烟套件 = @critical 用例集（复用）</span><br><span class="line">- 数据工厂：灰度用户的数据准备（1% 白名单用户）</span><br><span class="line">- 监控/报告：灰度指标对比 = 实时&quot;报告&quot;，判据 = 发版门禁</span><br><span class="line">- 缺陷管理：灰度缺陷自动最高优先级，复盘进&quot;缺陷归因&quot;</span><br><span class="line">- 度量：灰度拦截率（灰度期发现问题 / 全部上线问题）——</span><br><span class="line">  这个指标衡量&quot;灰度制度本身值不值&quot;，长期趋近 0 说明前面的闸门已经足够好（好事）</span><br></pre></td></tr></table></figure>
+<h2 id="六-小结"><a class="markdownIt-Anchor" href="#六-小结"></a> 六、小结</h2>
+<p>灰度测试的五个支柱：<strong>三级闸门 + 预设判据</strong>（放大前过闸，判据提前写死）、<strong>流量染色验证</strong>（灰度失效 = 测了个寂寞）、<strong>对照组相对判据</strong>（信号在差异里）、<strong>样本量保护</strong>（没看到 ≠ 没有）、<strong>回滚预案演练</strong>（安全垫必须是演练过的）。测试团队在灰度期的角色从&quot;验证者&quot;变成&quot;守门人&quot;——<strong>每一次放大都是一次发布决策，决策的依据是提前写好的判据，不是最后一眼大盘</strong>。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://scofieldsu.github.io/2025/07/22/%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%EF%BC%9A%E8%AE%A9%E6%96%B0%E7%89%88%E6%9C%AC%E5%85%88%E8%A2%AB1%%E7%9A%84%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81/" title="灰度测试实战：让新版本先被 1% 的用户验证" target="_blank" rel="external">https://scofieldsu.github.io/2025/07/22/%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%EF%BC%9A%E8%AE%A9%E6%96%B0%E7%89%88%E6%9C%AC%E5%85%88%E8%A2%AB1%%E7%9A%84%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2025/08/10/Python%E5%BC%82%E6%AD%A5%E5%B9%B6%E5%8F%91%E5%9C%A8%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%87%8C%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/" title="Python 异步并发在测试基础设施里的正确用法"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2025/05/15/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BB%8E%E8%B7%91%E8%84%9A%E6%9C%AC%E5%88%B0%E7%94%A8%E4%BE%8B%E8%B5%84%E4%BA%A7/" title="接口自动化平台设计：从&#34;跑脚本&#34;到&#34;用例资产&#34;">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2026 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://scofieldsu.github.io/2025/07/22/%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%EF%BC%9A%E8%AE%A9%E6%96%B0%E7%89%88%E6%9C%AC%E5%85%88%E8%A2%AB1%%E7%9A%84%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81/';
+        
+        this.page.identifier = '灰度测试实战：让新版本先被1%的用户验证';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>

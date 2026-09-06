@@ -732,3 +732,563 @@ body.theme-monokai .article-entry li::marker {
   color: var(--mk-accent-hover);
 }
 
+/* ============================================================
+ * at-web 顶部菜单栏布局（桌面端 ≥768px）
+ * ------------------------------------------------------------
+ * 结构变化（header.ejs 已改）：
+ *   profile 从"大 hero 居中"改为顶栏内"头像+名字/座右铭"一行
+ *   顶栏 = 一行 flex：左侧 profile | 中间菜单 | 右侧搜索
+ *   侧栏隐藏（文章 TOC 保留为文章内浮层），内容区全宽
+ * 所有规则桌面端限定，移动端保留原汉堡菜单行为。
+ * ============================================================ */
+
+@media (min-width: 768px) {
+  /* ── 顶栏：单行 flex（at-web 顶部导航模式）── */
+  body.theme-monokai .header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    border-bottom: 1px solid var(--mk-border);
+  }
+  body.theme-monokai .header .slimContent {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 56px;
+  }
+  body.theme-monokai .navbar-header {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-right: 0;
+    margin-left: 0;
+    float: none;
+  }
+  body.theme-monokai .navbar-header .topbar-profile {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+    text-align: left;
+  }
+  body.theme-monokai .topbar-avatar {
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: 0 12px 0 0;
+    flex: 0 0 auto;
+  }
+  body.theme-monokai .topbar-avatar img {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--mk-border);
+    box-shadow: 0 0 0 3px rgba(109, 112, 246, 0.12);
+  }
+  body.theme-monokai .topbar-meta {
+    line-height: 1.2;
+    min-width: 0;
+  }
+  body.theme-monokai #name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  body.theme-monokai #title.topbar-motto {
+    display: block;
+    margin: 2px 0 0;
+    font-size: 11px;
+    color: var(--mk-text-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+  }
+  /* 旧 hero 布局的 location（hidden-xs 已无）保险隐藏 */
+  body.theme-monokai #location {
+    display: none;
+  }
+
+  /* ── 菜单：居左紧凑（Linear 风 13px/500，激活 Indigo 淡底）── */
+  body.theme-monokai #main-navbar {
+    flex: 1 1 auto;
+    width: auto;
+    float: none;
+    min-height: 0;
+    background: transparent;
+    margin: 0;
+  }
+  body.theme-monokai .main-nav {
+    float: none;
+    display: flex;
+    align-items: stretch;
+    height: 56px;
+  }
+  body.theme-monokai .main-nav > li {
+    float: none;
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+  }
+  body.theme-monokai .main-nav > li > a {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--mk-text-2);
+    border-radius: 0;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  body.theme-monokai .main-nav > li > a .icon {
+    font-size: 14px;
+    margin-right: 6px;
+  }
+  body.theme-monokai .main-nav > li > a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  body.theme-monokai .main-nav > .active > a,
+  body.theme-monokai .main-nav > li > a.active {
+    color: var(--mk-accent-hover) !important;
+    background: var(--mk-accent-bg) !important;
+  }
+  body.theme-monokai .main-nav > .active > a .icon,
+  body.theme-monokai .main-nav > li > a.active .icon {
+    color: var(--mk-accent-hover);
+  }
+
+  /* ── 搜索：顶栏右侧紧凑框 ── */
+  body.theme-monokai .navbar-header .search {
+    flex: 0 0 auto;
+    margin: 0 0 0 auto;
+  }
+  body.theme-monokai .search .sidebar-form {
+    width: 180px;
+  }
+  body.theme-monokai .navbar-toggle {
+    display: none;
+  }
+
+  /* ── 侧栏隐藏，内容区全宽（at-web 无侧栏布局）── */
+  body.theme-monokai .sidebar {
+    display: none !important;
+  }
+  body.theme-monokai .main {
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 24px;
+  }
+
+  /* ── 文章内 TOC 浮层（原侧栏 TOC 隐藏后的替代）── */
+  body.theme-monokai .sidebar-toc.in {
+    display: block !important;
+    position: fixed;
+    right: 24px;
+    top: 80px;
+    bottom: 24px;
+    left: auto;
+    width: 220px;
+    z-index: 1020;
+    overflow-y: auto;
+    background: var(--mk-card);
+    border: 1px solid var(--mk-border);
+    border-radius: 4px;
+    padding: 0;
+  }
+  body.theme-monokai .sidebar-toc.in .slimContent {
+    padding: 14px 16px;
+  }
+  body.theme-monokai .sidebar-toc.in .toc {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  body.theme-monokai .sidebar-toc.in .toc ul ul {
+    padding-left: 12px;
+  }
+  /* 文章主体给右侧 TOC 让位 */
+  body.theme-monokai .article-body {
+    position: relative;
+  }
+
+  /* ── 页脚：全宽居中 ── */
+  body.theme-monokai .footer {
+    margin-top: 24px;
+  }
+}
+
+/* ── 响应式微调：窄桌面（768~1199）TOC 收起为默认关闭 ── */
+@media (min-width: 768px) and (max-width: 1199px) {
+  body.theme-monokai .sidebar-toc.in {
+    width: 190px;
+    right: 16px;
+  }
+  body.theme-monokai .topbar-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  body.theme-monokai .topbar-avatar img {
+    width: 32px;
+    height: 32px;
+  }
+  body.theme-monokai #name {
+    font-size: 14px;
+  }
+  body.theme-monokai #title.topbar-motto {
+    max-width: 120px;
+  }
+  body.theme-monokai .main-nav > li > a {
+    padding: 0 10px;
+  }
+}
+
+/* ============================================================
+ * 深色白色残留修复（全端，对齐 at-web 深色规范）
+ * ------------------------------------------------------------
+ * 根因：style.css 的浅色基线（table tr #fff / .bar-footer #fff /
+ * .highlight pre #fafafa / form-control #fff / .bg #f6f6f6 等）
+ * 未被皮肤覆盖。hexo 代码块是 <figure.highlight><table><td> 结构，
+ * 正好命中 "table tr { background:#fff }"，故代码区发白。
+ * ============================================================ */
+
+/* ── 代码区：figure.highlight 内的表格强制透明（最高优先级压掉 table tr #fff）── */
+body.theme-monokai figure.highlight,
+body.theme-monokai figure.highlight table,
+body.theme-monokai figure.highlight table tr,
+body.theme-monokai figure.highlight table td,
+body.theme-monokai figure.highlight pre,
+body.theme-monokai figure.highlight .gutter,
+body.theme-monokai figure.highlight .code {
+  background: #272822 !important;
+  color: #f8f8f2;
+}
+body.theme-monokai figure.highlight {
+  padding: 0;
+  margin: 14px 0;
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+body.theme-monokai figure.highlight table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin: 0;
+}
+/* Mac 窗口标题栏（深色，红黄绿圆点保留）*/
+body.theme-monokai figure.highlight:before {
+  content: " ";
+  display: block;
+  height: 32px;
+  background: #1e1f1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+body.theme-monokai figure.highlight:after {
+  content: " ";
+  position: absolute;
+  top: 11px;
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fc625d;
+  -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+}
+body.theme-monokai figure.highlight td.gutter {
+  width: 1%;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.theme-monokai figure.highlight td.gutter pre {
+  color: #75715e;
+  margin: 0;
+  padding: 14px 12px;
+}
+body.theme-monokai figure.highlight td.code {
+  width: 100%;
+}
+body.theme-monokai figure.highlight td.code pre {
+  margin: 0;
+  padding: 14px 12px;
+}
+/* 兼容旧 .highlight 类（非 figure 包裹时）*/
+body.theme-monokai .highlight,
+body.theme-monokai .highlight table,
+body.theme-monokai .highlight table tr,
+body.theme-monokai .highlight table td,
+body.theme-monokai .highlight pre {
+  background: #272822 !important;
+}
+body.theme-monokai .highlight:before {
+  background-color: #1e1f1a !important;
+}
+body.theme-monokai .highlight table:before {
+  background-color: #1e1f1a !important;
+}
+/* 正文中独立 pre（非代码块场景）*/
+body.theme-monokai pre,
+body.theme-monokai .article-entry pre {
+  background: #272822;
+  color: #f8f8f2;
+}
+
+/* ── 翻页区：bar-footer 白底 → 深色卡片 ── */
+body.theme-monokai .bar.bar-footer,
+body.theme-monokai .bar.bar-footer:before,
+body.theme-monokai .bar.bar-footer:after {
+  background-color: var(--mk-card);
+}
+body.theme-monokai .bar.bar-footer {
+  border-top: 1px solid var(--mk-border);
+  border-radius: 4px;
+  margin: 20px 0 10px;
+}
+body.theme-monokai .bar-inner {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+body.theme-monokai .pager > li > a,
+body.theme-monokai .pager > li > span,
+body.theme-monokai .pager a {
+  background: var(--mk-card-alt);
+  border: 1px solid var(--mk-border);
+  color: var(--mk-text-2);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+  margin: 0 4px;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+body.theme-monokai .pager > li > a:hover,
+body.theme-monokai .pager a:hover {
+  color: var(--mk-accent-hover);
+  border-color: var(--mk-accent);
+  background: var(--mk-accent-bg);
+}
+body.theme-monokai .pager .disabled a,
+body.theme-monokai .pager a.disabled {
+  color: var(--mk-text-3) !important;
+  background: var(--mk-card) !important;
+  border-color: var(--mk-border-light) !important;
+  cursor: not-allowed;
+}
+/* 数字分页（pagination.number 模式）*/
+body.theme-monokai .page-number {
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+  padding: 5px 8px;
+  margin: 0 2px;
+  border-radius: 4px;
+  color: var(--mk-text-2);
+  font-size: 13px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+body.theme-monokai .page-number:hover {
+  color: var(--mk-accent-hover);
+  background: var(--mk-accent-bg);
+}
+body.theme-monokai .page-number.current {
+  background: var(--mk-accent);
+  color: #ffffff;
+}
+body.theme-monokai .total-article {
+  color: var(--mk-text-3);
+  font-size: 13px;
+  line-height: 34px;
+}
+
+/* ── 表格：正文表格行底色（压掉 table tr #fff / nth-child #f8f8f8）── */
+body.theme-monokai table tr,
+body.theme-monokai table tr:nth-child(2n),
+body.theme-monokai table > tbody > tr:hover {
+  background-color: transparent;
+}
+body.theme-monokai .article-entry table {
+  background: transparent;
+}
+body.theme-monokai .table td,
+body.theme-monokai .table th {
+  background-color: transparent;
+}
+body.theme-monokai .table-bordered td,
+body.theme-monokai .table-bordered th {
+  border: 1px solid var(--mk-border);
+}
+body.theme-monokai .table > thead > tr > th {
+  border-bottom: 1px solid var(--mk-border);
+  color: var(--mk-text);
+  font-weight: 500;
+}
+
+/* ── 表单控件：白底 → 深色 ── */
+body.theme-monokai .form-control,
+body.theme-monokai input[type="text"],
+body.theme-monokai input[type="email"],
+body.theme-monokai input[type="password"],
+body.theme-monokai input[type="search"],
+body.theme-monokai textarea,
+body.theme-monokai select {
+  background-color: #262a34;
+  border: 1px solid #333745;
+  color: var(--mk-text);
+}
+body.theme-monokai .form-control:focus,
+body.theme-monokai input:focus,
+body.theme-monokai textarea:focus,
+body.theme-monokai select:focus {
+  background-color: #262a34;
+  border-color: var(--mk-accent);
+  box-shadow: 0 0 0 3px rgba(109, 112, 246, 0.18);
+}
+
+/* ── 按钮：btn-default 白底 → 深色描边 ── */
+body.theme-monokai .btn-default {
+  background-color: var(--mk-card-alt);
+  border-color: #333745;
+  color: #d4d4d8;
+}
+body.theme-monokai .btn-default:hover,
+body.theme-monokai .btn-default:focus {
+  background-color: #2f3542;
+  border-color: var(--mk-accent);
+  color: var(--mk-accent-hover);
+}
+
+/* ── 下拉菜单 / modal / well / mark 等杂项白面 ── */
+body.theme-monokai .dropdown-menu {
+  background-color: var(--mk-card-alt);
+  border: 1px solid var(--mk-border);
+  color: var(--mk-text-2);
+}
+body.theme-monokai .dropdown-menu > li > a {
+  color: var(--mk-text-2);
+}
+body.theme-monokai .dropdown-menu > li > a:hover,
+body.theme-monokai .dropdown-menu > li > a:focus {
+  background-color: var(--mk-accent-bg);
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .modal-content {
+  background-color: var(--mk-card);
+  color: var(--mk-text);
+}
+body.theme-monokai .modal-header,
+body.theme-monokai .modal-footer {
+  border-color: var(--mk-border);
+}
+body.theme-monokai .modal-backdrop.in {
+  opacity: 0.65;
+}
+body.theme-monokai .well {
+  background-color: var(--mk-card-alt);
+  border: 1px solid var(--mk-border);
+  color: var(--mk-text-2);
+}
+body.theme-monokai .mark,
+body.theme-monokai mark {
+  background-color: rgba(255, 214, 102, 0.25);
+  color: #ffd666;
+}
+body.theme-monokai .navbar-default {
+  background-color: var(--mk-header);
+  border-color: var(--mk-border);
+}
+body.theme-monokai .thumbnail,
+body.theme-monokai .img-thumbnail {
+  background-color: var(--mk-card-alt);
+  border: 1px solid var(--mk-border);
+}
+body.theme-monokai .list-group-item {
+  background-color: transparent;
+  border-color: var(--mk-border-light);
+  color: var(--mk-text-2);
+}
+body.theme-monokai .list-group-item.active {
+  background-color: var(--mk-accent-bg);
+  border-color: var(--mk-accent);
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .nav-tabs > li > a {
+  color: var(--mk-text-2);
+}
+body.theme-monokai .nav-tabs > li.active > a,
+body.theme-monokai .nav-tabs > li.active > a:hover,
+body.theme-monokai .nav-tabs > li.active > a:focus {
+  background-color: var(--mk-card);
+  color: var(--mk-accent-hover);
+  border-color: var(--mk-border) var(--mk-border) var(--mk-border);
+}
+body.theme-monokai .radio label:before,
+body.theme-monokai .checkbox label:before {
+  background-color: #262a34;
+  border-color: #333745;
+}
+body.theme-monokai .radio label:after,
+body.theme-monokai .checkbox label:after {
+  background-color: var(--mk-accent);
+}
+
+/* ── Insight 本地搜索：覆盖浅色浮层残留 ── */
+body.theme-monokai .ins-section-container {
+  background: #1a1c23;
+}
+body.theme-monokai .ins-search-input {
+  background: transparent;
+}
+
+/* ── 页面级背景类（.bg #f6f6f6!important 压深色底）── */
+body.theme-monokai .bg {
+  background-color: var(--mk-page) !important;
+}
+body.theme-monokai .bg-inverse {
+  background-color: #000000;
+}
+
+/* ── 文章头 / 文章卡细节 ── */
+body.theme-monokai .article-header {
+  color: var(--mk-text);
+}
+body.theme-monokai .article-header h1 {
+  color: #ffffff;
+}
+body.theme-monokai .text-muted {
+  color: var(--mk-text-3) !important;
+}
+
+/* ── 移动端（<768）：保持汉堡菜单，顶栏两行 ── */
+@media (max-width: 767px) {
+  body.theme-monokai .topbar-profile {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 12px;
+  }
+  body.theme-monokai .topbar-avatar {
+    width: 44px;
+    height: 44px;
+  }
+  body.theme-monokai .topbar-avatar img {
+    width: 44px;
+    height: 44px;
+  }
+  body.theme-monokai #name {
+    margin-top: 6px;
+    font-size: 16px;
+  }
+  body.theme-monokai #title.topbar-motto {
+    margin-top: 2px;
+  }
+  body.theme-monokai .main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
