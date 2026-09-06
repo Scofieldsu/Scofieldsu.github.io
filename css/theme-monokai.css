@@ -3,7 +3,7 @@
  * ------------------------------------------------------------
  * 底色调性：Monokai 经典深色（代码区 #272822 / 语法色经典 Monokai）
  * 框架配色：at-web-theme-kit 深色规范
- *   - 页面底 #0d0f13 / 卡片 #1e2028 / 侧栏 #16181e / 顶栏 #1a1c23
+ *   - 页面底 #0d0f13 / 卡片 #1e2028 / 侧栏 #16181e / 顶栏 #101828（深墨蓝）
  *   - 边框 #2a2d38 / 文字 #e5e7eb · #9ca3af · #6b7280
  *   - 主色 Indigo 深色档 #6d70f6（hover #7c7ffa / active #5b5ef0）
  *   - 语义色深色档：#3bb97e / #ff8c3a / #f26a6f / #1fa3ff
@@ -21,7 +21,7 @@ body.theme-monokai {
   --mk-page: #0d0f13;
   --mk-card: #1e2028;
   --mk-card-alt: #262a34;
-  --mk-header: #1a1c23;
+  --mk-header: #101828;
   --mk-sidebar: #16181e;
   --mk-border: #2a2d38;
   --mk-border-light: #202329;
@@ -70,18 +70,123 @@ body.theme-monokai ::-webkit-scrollbar-track-piece {
   background-color: #14161c;
 }
 
-/* ── 顶栏：kit 深色顶部栏（毛玻璃 + 吸顶）──────────── */
+/* ── 顶栏：单行，深墨蓝底 + 毛玻璃 + 细边框 ──────────── */
+/* 单行结构：[hamburger] [头像|名字/座右铭] [nav 菜单…] …… [搜索]
+   基础 CSS 桌面端 #main-navbar 是 position:absolute 的独立第二行，
+   下方 ≥768px 段把它拉回 .navbar-header 同一行。 */
 body.theme-monokai .header {
   background-color: var(--mk-header);
-  background-color: rgba(22, 24, 31, 0.85);
+  background-color: rgba(16, 24, 40, 0.88);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   backdrop-filter: saturate(180%) blur(12px);
   color: var(--mk-text);
-  border-bottom: 1px solid var(--mk-border);
-  box-shadow: none;
+  border-bottom: 1px solid #22304a;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
 }
 body.theme-monokai .header a {
   color: #d4d4d8;
+}
+body.theme-monokai .header .slimContent {
+  padding: 0 16px;
+}
+
+/* ── ≥768px：单行顶栏（第二行菜单拉回第一行）── */
+@media (min-width: 768px) {
+  body.theme-monokai .navbar-header {
+    display: flex;
+    align-items: center;
+    float: none;
+    margin: 0;
+    min-height: 52px;
+  }
+  body.theme-monokai .navbar-header .topbar-profile {
+    margin-right: 18px;
+  }
+  body.theme-monokai #main-navbar {
+    position: static;
+    width: auto;
+    float: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    background: transparent;
+    border-top: 0;
+    border-bottom: 0;
+    box-shadow: none;
+  }
+  body.theme-monokai #main-navbar .container {
+    display: block;
+    padding: 0;
+  }
+  body.theme-monokai #main-navbar .nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+  }
+  body.theme-monokai #main-navbar .nav > li {
+    float: none;
+    display: flex;
+    align-items: center;
+  }
+  body.theme-monokai #main-navbar .nav > li > a {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    margin: 0;
+    padding: 0 12px;
+    color: #a5b0c8;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  body.theme-monokai #main-navbar .nav > li > a .icon {
+    font-size: 13px;
+    margin-right: 6px;
+    color: var(--mk-text-3);
+  }
+  body.theme-monokai #main-navbar .nav > li > a:hover {
+    color: #e8ebf3;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  body.theme-monokai #main-navbar .nav > li > a:hover .icon {
+    color: var(--mk-text-2);
+  }
+  body.theme-monokai #main-navbar .nav > li.active > a {
+    color: var(--mk-accent-hover);
+    background: var(--mk-accent-bg);
+  }
+  body.theme-monokai #main-navbar .nav > li.active > a .icon {
+    color: var(--mk-accent-hover);
+  }
+  /* 搜索框推到最右端 */
+  body.theme-monokai .navbar-header .search {
+    float: none;
+    width: auto;
+    margin: 0 0 0 auto;
+    flex: 0 0 auto;
+  }
+  body.theme-monokai .search .sidebar-form {
+    width: 180px;
+    border-radius: 6px;
+  }
+  body.theme-monokai .search .search-form-input {
+    border-radius: 6px;
+  }
+}
+
+/* 移动端 hamburger：套浅色圆角底，与头像同高 */
+body.theme-monokai .navbar-toggle {
+  margin: 0 12px 0 8px;
+  padding: 6px 10px;
+  border: 1px solid #2a2e39;
+  border-radius: 4px;
+  background-color: #262a34;
+}
+body.theme-monokai .navbar-toggle:hover,
+body.theme-monokai .navbar-toggle:focus {
+  background-color: #303541;
+  border-color: #3a4152;
 }
 body.theme-monokai .navbar-toggle .icon-bar {
   background-color: #9ca3af;
@@ -91,12 +196,19 @@ body.theme-monokai .navbar-header .topbar-profile {
 }
 
 /* 顶栏 profile：头像 + 名字/座右铭（保留 ScofieldYu / 座右铭） */
+body.theme-monokai .topbar-profile {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 240px;
+}
 body.theme-monokai .topbar-avatar {
   display: block;
+  flex: 0 0 auto;
   line-height: 1;
 }
 body.theme-monokai .topbar-avatar img {
-  border: 2px solid var(--mk-border);
+  border: 2px solid #33405e;
   box-shadow: 0 0 0 3px rgba(109, 112, 246, 0.15);
 }
 body.theme-monokai .topbar-meta {
@@ -107,6 +219,8 @@ body.theme-monokai #name {
   margin: 0;
   color: var(--mk-text);
   font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
 }
 body.theme-monokai #title.topbar-motto {
   display: block;
@@ -723,323 +837,172 @@ body.theme-monokai .article-entry li::marker {
 }
 
 /* ============================================================
- * 页面整体布局 — 顶部菜单栏模式
+ * 页面整体布局 — 单行吸顶栏 + 三栏
  * ------------------------------------------------------------
- * 参考主流深色博客（GitHub / Linear / Medium dark）：
- *   吸顶毛玻璃全宽顶栏：
- *     行 1：profile（头像 + 名字/座右铭）左 | 搜索 右
- *     行 2：导航胶囊水平居中（图标+文字，激活项 Indigo 淡底）
- *   内容区：文章 720px 居中（阅读最舒适宽度）
- *   宽屏（≥1460px）：文章 TOC 右侧悬浮卡（文章头按钮切换）
- *   页脚：网易云音乐播放器 + GitHub + 版权，居中
- * 根因修复（上一版"挤左上角"的原因）：
- *   基础 CSS ≥768px 是三栏布局：.header 与 .footer 都是
- *   position:fixed 的左侧窄条（width 4.17%→16.67%），
- *   body.main-center .main 被 margin-left:16.67% 推向右侧。
- *   上一版只覆盖了 position，width/bottom/left 仍生效 →
- *   顶栏缩成左上角窄条、内容偏右。
- *   本版用 body.theme-monokai（特异性 1,2,0）整体覆盖固定栏
- *   几何，回到"全宽顶栏 + 居中内容"模式。
+ * 顶栏（.header，52px 单行）：
+ *   [hamburger] [头像|名字/座右铭] [nav 菜单…] …… [搜索]
+ *   基础 CSS 把 #main-navbar 放在 absolute 的第二行，
+ *   文件前部的 ≥768px 段已把它拉回 .navbar-header 同一行。
+ * 主体：
+ *   左栏 aside.sidebar.sidebar-left（.page-wrap 内，播放器/关于/分类/标签云/版权）
+ *   中栏 .col-main > .main（.page-wrap 内，文章 + 底部翻页）
+ *   右栏 aside.sidebar.sidebar-right（.page-wrap 内第三个 flex 子项，
+ *     内嵌 .sidebar-toc + .sidebar，board/archive/recent_posts）
+ *   左右栏 position:sticky + height:calc(100vh - 52px) 跟随滚动、独立滚动，
+ *   中列不限制宽度（与底部翻页控件同宽）。
+ * 基础 CSS ≥768px 把 .header/.footer/.sidebar 做成 fixed 左侧窄条、
+ * .main 靠 margin-left 让位 —— 下面全部用同特异性 + 后置规则覆盖。
  * ============================================================ */
 
-/* ── ≥768px：全宽顶栏（覆盖基础左侧固定栏布局）── */
+/* ── ≥768px：全宽吸顶顶栏（覆盖基础左侧固定栏）── */
 @media (min-width: 768px) {
   body.theme-monokai .header {
-    position: sticky;
+    position: sticky !important;
     top: 0;
-    bottom: auto;
-    left: 0;
-    width: 100%;
+    bottom: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    width: 100% !important;
     z-index: 1030;
     display: block;
     padding: 0;
     overflow: visible;
     border-right: 0;
-    border-bottom: 1px solid var(--mk-border);
   }
   body.theme-monokai .header .slimContent {
     padding: 0 20px;
   }
-
-  /* 行 1：profile 左 | 搜索右 */
-  body.theme-monokai .navbar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    float: none;
-    margin: 0;
-    padding: 10px 0 4px;
-  }
-  body.theme-monokai .navbar-header .topbar-profile {
-    display: flex;
-    align-items: center;
-    text-align: left;
-  }
-  body.theme-monokai #avatar {
-    display: flex;
-    width: 34px;
-    height: 34px;
-    margin: 0 12px 0 0;
-    flex: 0 0 auto;
-  }
-  body.theme-monokai #avatar img {
-    width: 34px;
-    height: 34px;
-  }
-  body.theme-monokai #name {
-    font-size: 14px;
-    letter-spacing: -0.01em;
-  }
-  body.theme-monokai #title.topbar-motto {
-    max-width: 240px;
-  }
+  /* 搜索框：基础 CSS 给了 width:91.67% + float，必须重置 */
   body.theme-monokai .navbar-header .search {
-    margin: 0;
-    flex: 0 0 auto;
-  }
-  body.theme-monokai .search .sidebar-form {
-    width: 180px;
-    border-radius: 6px;
-  }
-  body.theme-monokai .search .input-group {
-    border: 0;
-    background: transparent;
-  }
-  body.theme-monokai .search .search-form-input {
-    border-radius: 6px;
+    width: auto !important;
+    float: none !important;
+    margin: 0 0 0 auto;
   }
 
-  /* 行 2：导航胶囊（拉回文档流 + 水平居中）*/
-  body.theme-monokai #main-navbar {
-    position: static;
-    width: auto;
-    float: none;
-    background: transparent;
-    border: 0;
-    margin: 0;
-    padding: 0 0 10px;
-    text-align: center;
-  }
-  body.theme-monokai .main-nav {
-    float: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--mk-border-light);
-    border-radius: 8px;
-    padding: 4px;
-    height: auto;
-  }
-  body.theme-monokai .main-nav > li {
-    float: none;
+  /* ── 三栏主体（三栏都在 flex 流内，sticky 跟随滚动）── */
+  body.theme-monokai .page-wrap {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
-  body.theme-monokai .main-nav > li > a {
-    display: flex;
-    align-items: center;
-    height: 32px;
-    padding: 0 12px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: var(--mk-text-2);
-    border-radius: 6px;
-    transition: color 0.15s ease, background-color 0.15s ease;
+  /* 左栏：流内 300px + sticky 全高，独立滚动 */
+  body.theme-monokai .sidebar-left {
+    position: sticky;
+    top: 52px;
+    flex: 0 0 300px;
+    width: 300px;
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+    border-right: 1px solid var(--mk-border-light);
+    border-left: 0;
   }
-  body.theme-monokai .main-nav > li > a .icon {
-    font-size: 13px;
-    margin-right: 6px;
-    color: var(--mk-text-3);
+  body.theme-monokai .sidebar-left .slimContent {
+    padding: 20px 18px 30px;
   }
-  body.theme-monokai .main-nav > li > a:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.06);
+  /* 中栏：占满剩余宽度（不限制文章宽度 → 与底部翻页控件同宽）*/
+  body.theme-monokai .col-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 24px 28px 40px;
   }
-  body.theme-monokai .main-nav > li > a:hover .icon {
-    color: var(--mk-text-2);
+  body.theme-monokai .col-main .main {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    min-height: 0;
   }
-  body.theme-monokai .main-nav > .active > a,
-  body.theme-monokai .main-nav > li > a.active {
-    color: var(--mk-accent-hover) !important;
-    background: var(--mk-accent-bg) !important;
+  /* 右栏：流内 300px + sticky 全高，独立滚动 */
+  body.theme-monokai .sidebar-right {
+    flex: 0 0 300px;
+    position: sticky;
+    top: 52px;
+    width: 300px;
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+    border-left: 1px solid var(--mk-border-light);
+    border-right: 0;
   }
-  body.theme-monokai .main-nav > .active > a .icon {
-    color: var(--mk-accent-hover);
+  body.theme-monokai .sidebar-right .slimContent {
+    padding: 20px 18px 30px;
   }
-
-  /* 右侧 widget 侧栏隐藏（排除 sidebar-toc，TOC 由下方规则单独处理）*/
-  body.theme-monokai .sidebar:not(.sidebar-toc) {
-    display: none !important;
+  /* 右栏内嵌套的 .sidebar（sidebar.ejs 外层）/ .sidebar-toc：
+     基础 CSS 把 .sidebar 做成 fixed 全高 25% 宽 —— 在此全部中和为流内 */
+  body.theme-monokai .sidebar-right > .sidebar,
+  body.theme-monokai .sidebar-toc {
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible;
+    display: block;
+    margin: 0 0 16px;
+    padding: 0;
+    border: 0;
   }
-
-  /* 文章 TOC：窄桌面（768~1399）侧边空间不够悬浮卡，保持收起
-     （≥1400px 显示为右侧悬浮卡，见下方媒体查询）*/
-  body.theme-monokai .sidebar-toc.in {
-    display: none !important;
+  body.theme-monokai .sidebar-right > .sidebar {
+    margin: 0;
   }
-
-  /* 页脚：基础 CSS 是 fixed 左下窄条 → 居中块（保留音乐播放器 + GitHub）*/
-  body.theme-monokai .footer {
-    position: static;
+  body.theme-monokai .sidebar-toc:not(.in) {
+    display: none;
+  }
+  /* 翻页区（bar-footer）：与 .main 同宽贴底，去掉基础 CSS 的超宽 ::before */
+  body.theme-monokai .bar.bar-footer {
     width: 100%;
-    bottom: auto;
-    margin: 48px auto 0;
-    max-width: 720px;
-    padding: 28px 24px 36px;
-    background: transparent;
-    color: var(--mk-text-3);
-    text-align: center;
-    z-index: auto;
+    clear: both;
+    margin: 32px 0 0;
   }
-  body.theme-monokai .footer iframe {
-    display: block;
-    margin: 0 auto 16px;
-    border-radius: 8px;
+  body.theme-monokai .bar.bar-footer:before,
+  body.theme-monokai .bar.bar-footer:after {
+    display: none;
   }
-  body.theme-monokai .footer .social-links {
-    display: block;
-    text-align: center;
-    margin: 0 0 12px;
+  body.theme-monokai .bar.bar-footer .bar-inner {
+    padding: 12px 0;
   }
-  body.theme-monokai .footer .social-links li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  body.theme-monokai .footer .social-links li a {
-    color: var(--mk-text-3);
-    font-size: 18px;
-    transition: color 0.15s ease;
-  }
-  body.theme-monokai .footer .social-links li a:hover {
-    color: var(--mk-accent-hover);
-  }
-  body.theme-monokai .footer .copyright {
-    font-size: 12px;
-    color: var(--mk-text-3);
+  /* 页脚已清空（版权/播放器/GitHub 均在左栏）→ 隐藏残留空壳 */
+  body.theme-monokai .footer {
+    display: none;
   }
 }
 
-/* ── ≥1200px：内容居中 + 顶栏尺寸 ── */
+/* ── ≥1200px：内容列收窄居中，两侧留白 ── */
 @media (min-width: 1200px) {
-  body.theme-monokai .header .slimContent {
-    max-width: 1280px;
+  body.theme-monokai .col-main {
+    width: 880px;
+    flex: 0 1 880px;
     margin: 0 auto;
   }
-  body.theme-monokai #avatar {
-    width: 38px;
-    height: 38px;
-  }
-  body.theme-monokai #avatar img {
-    width: 38px;
-    height: 38px;
-  }
-  body.theme-monokai #name {
-    font-size: 15px;
-  }
-  body.theme-monokai .main {
-    width: auto !important;
-    max-width: 720px;
-    margin: 28px auto 0;
-    padding: 0 24px;
+}
+
+/* ── ≥1600px：更宽视口给内容列更多空间 ── */
+@media (min-width: 1600px) {
+  body.theme-monokai .col-main {
+    width: 1000px;
+    flex: 0 1 1000px;
   }
 }
 
-/* ── 768~1199：窄屏顶栏（图标菜单，不显搜索框）── */
+/* ── 768~1199：窄桌面隐藏右栏（空间不够），搜索框保留 ── */
 @media (min-width: 768px) and (max-width: 1199px) {
-  body.theme-monokai .navbar-header .search {
-    display: none;
+  body.theme-monokai .sidebar-right {
+    display: none !important;
   }
-  body.theme-monokai #title.topbar-motto {
-    display: none;
-  }
-  body.theme-monokai .main-nav > li > a {
-    padding: 0 10px;
-  }
-  body.theme-monokai .main-nav > li > a .menu-title {
-    display: none;
-  }
-  body.theme-monokai .main-nav > li > a .icon {
-    font-size: 15px;
-    margin-right: 0;
-  }
-  body.theme-monokai .main {
-    width: auto !important;
-    max-width: 760px;
-    margin: 20px auto 0;
-    padding: 0 20px;
+  body.theme-monokai .col-main {
+    padding: 20px 24px 36px;
   }
 }
 
-/* ── ≥1400px：文章 TOC 右侧悬浮卡 ── */
-/* TOC 是 aside.sidebar.sidebar-toc（默认 .collapse 收起，文章头按钮切换 .in）；
-   此处覆盖为右侧悬浮卡。right 用 max() 保证与 720px 文章之间留 48px 间隙，
-   窄于此间隙的宽度由上方 768px 段隐藏 TOC 兜底。*/
-@media (min-width: 1400px) {
-  body.theme-monokai .sidebar-toc.in {
-    display: block !important;
-    position: fixed !important;
-    top: 132px;
-    bottom: auto;
-    left: auto;
-    right: max(24px, calc((100vw - 720px) / 2 - 272px - 48px));
-    width: 272px;
-    max-height: calc(100vh - 152px);
-    overflow-y: auto;
-    background: var(--mk-card);
-    border: 1px solid var(--mk-border);
-    border-radius: 8px;
-    padding: 0;
-    margin: 0;
-    z-index: 950;
-  }
-  body.theme-monokai .sidebar-toc.in .slimContent {
-    padding: 14px 16px;
-  }
-  body.theme-monokai .sidebar-toc.in .toc-title {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--mk-text-3);
-    margin-bottom: 8px;
-  }
-  body.theme-monokai .sidebar-toc.in .toc {
-    font-size: 12px;
-    line-height: 1.7;
-  }
-  body.theme-monokai .sidebar-toc.in .toc ul {
-    padding-left: 0;
-    list-style: none;
-  }
-  body.theme-monokai .sidebar-toc.in .toc ul ul {
-    padding-left: 12px;
-  }
-  body.theme-monokai .sidebar-toc.in .toc a {
-    display: block;
-    padding: 2px 0 2px 10px;
-    margin-left: -12px;
-    border-left: 2px solid transparent;
-    color: var(--mk-text-3);
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  body.theme-monokai .sidebar-toc.in .toc a:hover {
-    color: var(--mk-text);
-  }
-  body.theme-monokai .sidebar-toc.in .toc .active a,
-  body.theme-monokai .sidebar-toc.in .toc a.on {
-    color: var(--mk-accent-hover);
-    border-left-color: var(--mk-accent);
-  }
-}
-
-/* ── <768px：移动端（沿用基础 float 布局：头像行 + 全宽搜索 + 汉堡菜单）── */
+/* ── <768px：移动端（基础 float 布局：头像行 + 全宽搜索 + 汉堡菜单）── */
 @media (max-width: 767px) {
-  /* 固定顶栏变高（头像行+搜索框），加大 body 顶部补偿避免内容被遮。
-     搜索框沿用基础 width:91.67% + float（已为右上角汉堡按钮留位）。*/
+  /* 固定顶栏两行（头像行 + 搜索行），加大 body 顶部补偿避免内容被遮 */
   body.theme-monokai {
-    padding-top: 112px;
+    padding-top: 118px;
   }
   body.theme-monokai .navbar-header .topbar-profile {
     display: flex;
