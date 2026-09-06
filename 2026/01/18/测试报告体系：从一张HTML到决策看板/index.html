@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>测试报告体系：从&#34;一张 HTML&#34;到&#34;决策看板&#34; | ScofieldYu</title>
+  <meta name="description" content="测试报告做到第五年，最大的变化是受众变了：早期报告是&quot;给测试自己看的记录&quot;，现在是&quot;给研发定位问题、给 PM 判断发版、给管理层看趋势&quot;的决策工具。同一份数据，三种受众要三种视角。这篇讲报告体系的分层设计。  一、三层视角：L1 结论、L2 定位、L3 追溯 一份报告同时服务三种人，结构必须分层，而不是把所有信息堆在一个页面： 123456789101112">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试报告体系：从&quot;一张 HTML&quot;到&quot;决策看板&quot;">
+<meta property="og:url" content="https://scofieldsu.github.io/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="测试报告做到第五年，最大的变化是受众变了：早期报告是&quot;给测试自己看的记录&quot;，现在是&quot;给研发定位问题、给 PM 判断发版、给管理层看趋势&quot;的决策工具。同一份数据，三种受众要三种视角。这篇讲报告体系的分层设计。  一、三层视角：L1 结论、L2 定位、L3 追溯 一份报告同时服务三种人，结构必须分层，而不是把所有信息堆在一个页面： 123456789101112">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-01-18T20:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T03:44:51.439Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="工程化">
+<meta property="article:tag" content="测试报告">
+<meta property="article:tag" content="数据可视化">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://scofieldsu.github.io/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link rel="stylesheet" href="/css/theme-monokai.css">
+  
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-monokai" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">ScofieldYu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">高筑墙｜广积粮｜缓称王</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> XiaMen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+       <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">App自动化测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PC%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96/">PC端自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPA/">RPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%92%8C%E7%94%B5%E5%BD%B1/">书和电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">设备管理</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Appium/" style="font-size: 13.17px;">Appium</a> <a href="/tags/CI/" style="font-size: 13px;">CI</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Flask/" style="font-size: 13.17px;">Flask</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13.17px;">Locust</a> <a href="/tags/Mock/" style="font-size: 13.17px;">Mock</a> <a href="/tags/Monkey/" style="font-size: 13px;">Monkey</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/OpenSTF/" style="font-size: 13px;">OpenSTF</a> <a href="/tags/Python/" style="font-size: 13.83px;">Python</a> <a href="/tags/Python%E6%BA%90%E7%A0%81/" style="font-size: 13px;">Python源码</a> <a href="/tags/RPA/" style="font-size: 13px;">RPA</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/SSE/" style="font-size: 13px;">SSE</a> <a href="/tags/Selenium/" style="font-size: 13.17px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.17px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/WebSocket/" style="font-size: 13px;">WebSocket</a> <a href="/tags/Windows/" style="font-size: 13.17px;">Windows</a> <a href="/tags/asyncio/" style="font-size: 13px;">asyncio</a> <a href="/tags/mitmproxy/" style="font-size: 13px;">mitmproxy</a> <a href="/tags/pytest/" style="font-size: 13px;">pytest</a> <a href="/tags/pywinauto/" style="font-size: 13px;">pywinauto</a> <a href="/tags/%E4%B9%A6/" style="font-size: 13px;">书</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">任务调度</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" style="font-size: 13px;">元素定位</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 13px;">分布式</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AD%96%E7%95%A5/" style="font-size: 13px;">定位策略</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" style="font-size: 13px;">实时推送</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 13.5px;">工程化</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">平台设计</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">弱网测试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13.33px;">性能测试</a> <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA/" style="font-size: 13px;">执行机</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">接口测试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 13px;">数据可视化</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82/" style="font-size: 13px;">数据工厂</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13px;">架构</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">桌面自动化</a> <a href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">泄漏检测</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">测试工程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" style="font-size: 13px;">测试报告</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/" style="font-size: 13px;">测试数据</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">环境管理</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 13px;">电影</a> <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 13.17px;">稳定性</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F/" style="font-size: 13px;">网络模拟</a> <a href="/tags/%E8%81%94%E8%B0%83/" style="font-size: 13px;">联调</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 13.67px;">自动化测试</a> <a href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 13px;">自愈选择器</a> <a href="/tags/%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BA/" style="font-size: 13px;">设备农场</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">调度</a> <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" style="font-size: 13px;">跨平台</a> <a href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">长稳测试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-测试报告体系：从一张HTML到决策看板" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      测试报告体系：从&#34;一张 HTML&#34;到&#34;决策看板&#34;
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/" class="article-date">
+	  <time datetime="2026-01-18T20:00:00.000Z" itemprop="datePublished">2026-01-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a>, <a class="article-tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag">数据可视化</a>, <a class="article-tag-link-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" rel="tag">测试报告</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>测试报告做到第五年，最大的变化是<strong>受众变了</strong>：早期报告是&quot;给测试自己看的记录&quot;，现在是&quot;给研发定位问题、给 PM 判断发版、给管理层看趋势&quot;的<strong>决策工具</strong>。同一份数据，三种受众要三种视角。这篇讲报告体系的分层设计。</p>
+<h2 id="一-三层视角l1-结论-l2-定位-l3-追溯"><a class="markdownIt-Anchor" href="#一-三层视角l1-结论-l2-定位-l3-追溯"></a> 一、三层视角：L1 结论、L2 定位、L3 追溯</h2>
+<p>一份报告同时服务三种人，结构必须分层，而不是把所有信息堆在一个页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">L1 结论层（PM/管理层，10 秒看完）</span><br><span class="line">├── 发版建议：GO / NO-GO / RISK-GO（显式结论，不是&quot;请看详情&quot;）</span><br><span class="line">├── 关键指标卡：通过率、新增失败、阻塞数、回归趋势 7 日曲线</span><br><span class="line">└── 一句话摘要：自动生成（&quot;本次 612 用例，失败 3 个均为订单模块</span><br><span class="line">    已知问题 #4821，无新增阻塞，建议发版&quot;）</span><br><span class="line"></span><br><span class="line">L2 定位层（研发，5 分钟定位）</span><br><span class="line">├── 失败用例列表：按模块聚合，同类失败折叠</span><br><span class="line">├── 每个失败：断言差异 diff + 失败时截图/控件树 + 相关日志 30 行</span><br><span class="line">└── 环境指纹：git sha、数据版本、设备/机型、配置 hash</span><br><span class="line"></span><br><span class="line">L3 追溯层（测试/审计，按需深挖）</span><br><span class="line">├── 全量用例明细（含通过的）</span><br><span class="line">├── 执行时序图：每用例开始/结束时间、重叠关系、排队等待</span><br><span class="line">└── 原始产物索引：日志全文、录屏、请求响应 dump（按 run_id 归档）</span><br></pre></td></tr></table></figure>
+<p><strong>最容易被忽略的是 L1 的&quot;显式结论&quot;</strong>。报告页面上写 600+ 行明细，但没人愿意替读者下结论——&quot;能不能发版&quot;是报告存在的理由。结论生成规则要写死：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conclude</span>(<span class="params">run, history</span>):</span></span><br><span class="line">    blockers = [c <span class="keyword">for</span> c <span class="keyword">in</span> run.failed <span class="keyword">if</span> c.severity == <span class="string">&quot;blocker&quot;</span>]</span><br><span class="line">    <span class="keyword">if</span> blockers:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;NO-GO&quot;</span>, <span class="string">f&quot;<span class="subst">&#123;<span class="built_in">len</span>(blockers)&#125;</span> 个阻塞级失败&quot;</span></span><br><span class="line">    known = [c <span class="keyword">for</span> c <span class="keyword">in</span> run.failed <span class="keyword">if</span> c.linked_issue]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(known) == <span class="built_in">len</span>(run.failed):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;RISK-GO&quot;</span>, <span class="string">&quot;失败均为已知问题&quot;</span></span><br><span class="line">    <span class="keyword">if</span> run.pass_rate &gt;= history.p75_pass_rate:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;GO&quot;</span>, <span class="string">&quot;通过率处于 7 日正常区间&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;RISK-GO&quot;</span>, <span class="string">&quot;通过率低于近 7 日 P75，建议人工确认&quot;</span></span><br></pre></td></tr></table></figure>
+<p>结论规则可审计（页面上展示&quot;结论依据&quot;），<strong>避免&quot;报告说全绿但没人敢发&quot;的信用损耗</strong>。</p>
+<h2 id="二-失败聚合把-40-个失败变成-3-个问题"><a class="markdownIt-Anchor" href="#二-失败聚合把-40-个失败变成-3-个问题"></a> 二、失败聚合：把 40 个失败变成 3 个问题</h2>
+<p>研发最痛的不是&quot;40 个用例失败&quot;，而是&quot;40 个失败其实是 1 个根因&quot;。聚合算法按<strong>失败指纹</strong>归组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fingerprint</span>(<span class="params">case, failure</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;失败指纹：模块 + 失败阶段 + 首个错误特征&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        case.module,                       <span class="comment"># 订单模块</span></span><br><span class="line">        failure.phase,                     <span class="comment"># 支付步骤</span></span><br><span class="line">        normalize(failure.first_error),    <span class="comment"># &quot;timeout waiting btn_pay visible&quot;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归组后展示：</span></span><br><span class="line"><span class="comment"># [订单·支付] 37 个用例：等待支付按钮超时 → 关联 #4821（按钮文案改版）</span></span><br><span class="line"><span class="comment"># [消息·列表] 2 个用例：会话数断言 5 != 3 → 数据工厂配置未同步</span></span><br><span class="line"><span class="comment"># [环境] 1 个用例：设备 A-03 触摸无响应 → 设备故障（非产品问题）</span></span><br></pre></td></tr></table></figure>
+<p>归组后每组的&quot;代表用例&quot;只展开一个详情，其余折叠——<strong>研发按组修，不按用例修</strong>。指纹里的 <code>normalize</code> 很关键：把具体值抹掉（“等待 btn_X 超时” → “等待按钮超时”），否则同一根因会裂成 N 组。</p>
+<h2 id="三-趋势单份报告没意义曲线才有"><a class="markdownIt-Anchor" href="#三-趋势单份报告没意义曲线才有"></a> 三、趋势：单份报告没意义，曲线才有</h2>
+<p>单份报告回答&quot;这次好不好&quot;，趋势回答&quot;在变好还是变坏&quot;：</p>
+<ul>
+<li><strong>通过率曲线</strong>：7/30/90 日，标注每次发版竖线——&quot;这个版本之后通过率掉了 5%&quot;比&quot;本次通过率 92%&quot;有信息量十倍；</li>
+<li><strong>修复时长（MTTR）</strong>：失败用例从&quot;首次失败&quot;到&quot;首次转绿&quot;的天数，按模块统计——某个模块 MTTR 从 2 天涨到 9 天，是&quot;该模块测试债在积累&quot;的先行指标；</li>
+<li><strong>flaky 率</strong>：同一用例同环境&quot;绿红交替&quot;的比例，&gt;5% 的用例进 flaky 清单强制治理（修稳定或隔离），<strong>flaky 用例是报告可信度的毒药</strong>——团队一旦相信&quot;那个用例本来就爱挂&quot;，所有报告都失去信用。</li>
+</ul>
+<h2 id="四-报告的工程实现"><a class="markdownIt-Anchor" href="#四-报告的工程实现"></a> 四、报告的工程实现</h2>
+<p>Flask 侧三个设计：</p>
+<ol>
+<li><strong>报告是纯静态产物</strong>：每次 run 结束，<code>report_builder</code> 把 L1/L2/L3 渲染成独立 HTML（数据内联，单文件可离线打开），落 <code>var/results/&lt;run_id&gt;/report.html</code>——<strong>不依赖服务端在线</strong>，链接发给任何人都能看；</li>
+<li><strong>数据与呈现分离</strong>：先落 <code>result.json</code>（结构化全量数据），HTML 只是它的视图——同一份 json 可以再生成钉钉摘要、Excel 明细、CI 门禁判定；</li>
+<li><strong>增量生成</strong>：用例逐例上报时<strong>增量更新</strong> report.html（L2 失败列表实时可见），不用等全量跑完——3 小时的回归，第一个阻塞失败出现时研发就能开始看，不用等 3 小时后&quot;报告出炉&quot;。</li>
+</ol>
+<h2 id="五-小结"><a class="markdownIt-Anchor" href="#五-小结"></a> 五、小结</h2>
+<p>报告体系的核心是<strong>受众分层</strong>（L1 结论/L2 定位/L3 追溯）、<strong>失败聚合</strong>（按指纹归组，研发按组修）、<strong>趋势指标</strong>（通过率曲线 + MTTR + flaky 率）。报告的价值不在&quot;好看&quot;，在于<strong>每个层的人都 10 秒内拿到自己要的东西</strong>——PM 拿到 GO/NO-GO，研发拿到 diff 和截图，审计拿到全量明细。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://scofieldsu.github.io/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/" title="测试报告体系：从&#34;一张 HTML&#34;到&#34;决策看板&#34;" target="_blank" rel="external">https://scofieldsu.github.io/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/" title="7×24 长稳测试：让系统在时间里暴露问题"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/" title="SSE 实时推流：测试平台日志与状态推送的完整实践">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2026 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://scofieldsu.github.io/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/';
+        
+        this.page.identifier = '测试报告体系：从一张HTML到决策看板';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>

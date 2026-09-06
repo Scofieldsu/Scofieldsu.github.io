@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SSE 实时推流：测试平台日志与状态推送的完整实践 | ScofieldYu</title>
+  <meta name="description" content="测试平台的实时性需求很朴素：任务在跑，浏览器要现在看到日志和进度。技术选型时 WebSocket 是惯性答案，但我们的场景（单向推送 + HTTP 基建 + 内网环境）用 SSE 更简单更稳。这篇是 Flask + SSE 的完整实践：从事件设计到断线重连到性能边界。  一、为什么选 SSE 而不是 WebSocket    维度 SSE WebSocket     方向 单向（服务端→客户端）✅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSE 实时推流：测试平台日志与状态推送的完整实践">
+<meta property="og:url" content="https://scofieldsu.github.io/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="测试平台的实时性需求很朴素：任务在跑，浏览器要现在看到日志和进度。技术选型时 WebSocket 是惯性答案，但我们的场景（单向推送 + HTTP 基建 + 内网环境）用 SSE 更简单更稳。这篇是 Flask + SSE 的完整实践：从事件设计到断线重连到性能边界。  一、为什么选 SSE 而不是 WebSocket    维度 SSE WebSocket     方向 单向（服务端→客户端）✅">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-11-06T20:40:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T03:44:51.437Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="Flask">
+<meta property="article:tag" content="SSE">
+<meta property="article:tag" content="实时推送">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://scofieldsu.github.io/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link rel="stylesheet" href="/css/theme-monokai.css">
+  
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-monokai" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">ScofieldYu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">高筑墙｜广积粮｜缓称王</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> XiaMen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+       <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">App自动化测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PC%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96/">PC端自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPA/">RPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%92%8C%E7%94%B5%E5%BD%B1/">书和电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">设备管理</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Appium/" style="font-size: 13.17px;">Appium</a> <a href="/tags/CI/" style="font-size: 13px;">CI</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Flask/" style="font-size: 13.17px;">Flask</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13.17px;">Locust</a> <a href="/tags/Mock/" style="font-size: 13.17px;">Mock</a> <a href="/tags/Monkey/" style="font-size: 13px;">Monkey</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/OpenSTF/" style="font-size: 13px;">OpenSTF</a> <a href="/tags/Python/" style="font-size: 13.83px;">Python</a> <a href="/tags/Python%E6%BA%90%E7%A0%81/" style="font-size: 13px;">Python源码</a> <a href="/tags/RPA/" style="font-size: 13px;">RPA</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/SSE/" style="font-size: 13px;">SSE</a> <a href="/tags/Selenium/" style="font-size: 13.17px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.17px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/WebSocket/" style="font-size: 13px;">WebSocket</a> <a href="/tags/Windows/" style="font-size: 13.17px;">Windows</a> <a href="/tags/asyncio/" style="font-size: 13px;">asyncio</a> <a href="/tags/mitmproxy/" style="font-size: 13px;">mitmproxy</a> <a href="/tags/pytest/" style="font-size: 13px;">pytest</a> <a href="/tags/pywinauto/" style="font-size: 13px;">pywinauto</a> <a href="/tags/%E4%B9%A6/" style="font-size: 13px;">书</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">任务调度</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" style="font-size: 13px;">元素定位</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 13px;">分布式</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AD%96%E7%95%A5/" style="font-size: 13px;">定位策略</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" style="font-size: 13px;">实时推送</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 13.5px;">工程化</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">平台设计</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">弱网测试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13.33px;">性能测试</a> <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA/" style="font-size: 13px;">执行机</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">接口测试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 13px;">数据可视化</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82/" style="font-size: 13px;">数据工厂</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13px;">架构</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">桌面自动化</a> <a href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">泄漏检测</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">测试工程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" style="font-size: 13px;">测试报告</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/" style="font-size: 13px;">测试数据</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">环境管理</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 13px;">电影</a> <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 13.17px;">稳定性</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F/" style="font-size: 13px;">网络模拟</a> <a href="/tags/%E8%81%94%E8%B0%83/" style="font-size: 13px;">联调</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 13.67px;">自动化测试</a> <a href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 13px;">自愈选择器</a> <a href="/tags/%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BA/" style="font-size: 13px;">设备农场</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">调度</a> <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" style="font-size: 13px;">跨平台</a> <a href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">长稳测试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-SSE实时推流：测试平台日志与状态推送的完整实践" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSE 实时推流：测试平台日志与状态推送的完整实践
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/" class="article-date">
+	  <time datetime="2025-11-06T20:40:00.000Z" itemprop="datePublished">2025-11-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Flask/" rel="tag">Flask</a>, <a class="article-tag-link-link" href="/tags/SSE/" rel="tag">SSE</a>, <a class="article-tag-link-link" href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" rel="tag">实时推送</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>测试平台的实时性需求很朴素：任务在跑，浏览器要<strong>现在</strong>看到日志和进度。技术选型时 WebSocket 是惯性答案，但我们的场景（单向推送 + HTTP 基建 + 内网环境）用 SSE 更简单更稳。这篇是 Flask + SSE 的完整实践：从事件设计到断线重连到性能边界。</p>
+<h2 id="一-为什么选-sse-而不是-websocket"><a class="markdownIt-Anchor" href="#一-为什么选-sse-而不是-websocket"></a> 一、为什么选 SSE 而不是 WebSocket</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>SSE</th>
+<th>WebSocket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方向</td>
+<td>单向（服务端→客户端）✅ 正好</td>
+<td>双向（用不上）</td>
+</tr>
+<tr>
+<td>断线重连</td>
+<td><strong>浏览器原生</strong>（<code>EventSource</code> 自动带 <code>Last-Event-ID</code>）</td>
+<td>自己写</td>
+</tr>
+<tr>
+<td>基建穿透</td>
+<td>普通 HTTP，代理/网关/鉴权全复用</td>
+<td>部分内网设备要开 ws 端口</td>
+</tr>
+<tr>
+<td>流量开销</td>
+<td>每帧带 HTTP 头（~200B）</td>
+<td>2~14B</td>
+</tr>
+<tr>
+<td>连接数</td>
+<td>受 HTTP 限制（同域 6 连接）</td>
+<td>无此限制</td>
+</tr>
+</tbody>
+</table>
+<p>我们的场景：日志推送、任务状态、SSE 事件流全是<strong>单向</strong>；同域 6 连接上限通过<strong>事件合并到 1~2 个流</strong>解决；200B 帧头对日志场景无感。<strong>省掉的&quot;重连 + 握手 + 基建&quot;复杂度，比帧头钱值钱得多</strong>。</p>
+<h2 id="二-事件设计一个流多频道"><a class="markdownIt-Anchor" href="#二-事件设计一个流多频道"></a> 二、事件设计：一个流，多频道</h2>
+<p>不要每个功能开一个 SSE 端点（吃连接数），合并成<strong>一个事件流 + 类型字段</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@bp.route(<span class="params"><span class="string">&quot;/ui/events&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">events</span>():</span></span><br><span class="line">    sub = live_log.subscribe()          <span class="comment"># 拿到专属队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stream</span>():</span></span><br><span class="line">        last_ping = time.time()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    ev = sub.get(timeout=<span class="number">15</span>)</span><br><span class="line">                <span class="keyword">except</span> queue.Empty:</span><br><span class="line">                    <span class="keyword">yield</span> <span class="string">&quot;: ping\n\n&quot;</span>          <span class="comment"># 心跳：保活 + 检测死连接</span></span><br><span class="line">                    last_ping = time.time()</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> ev <span class="keyword">is</span> SENTINEL:             <span class="comment"># 服务端通知关闭</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="comment"># SSE 帧格式：event 类型 + id（断线重连续传）+ data</span></span><br><span class="line">                <span class="keyword">yield</span> <span class="string">f&quot;id: <span class="subst">&#123;ev.seq&#125;</span>\nevent: <span class="subst">&#123;ev.<span class="built_in">type</span>&#125;</span>\ndata: <span class="subst">&#123;ev.payload&#125;</span>\n\n&quot;</span></span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            live_log.unsubscribe(sub)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Response(stream(), mimetype=<span class="string">&quot;text/event-stream&quot;</span>,</span><br><span class="line">                    headers=&#123;<span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;no-cache&quot;</span>,</span><br><span class="line">                             <span class="string">&quot;X-Accel-Buffering&quot;</span>: <span class="string">&quot;no&quot;</span>&#125;)   <span class="comment"># 关 nginx 缓冲！</span></span><br></pre></td></tr></table></figure>
+<p>三个关键细节：</p>
+<ol>
+<li><strong><code>id: seq</code> 单调递增</strong>：断线重连时浏览器自动带 <code>Last-Event-ID</code>，服务端从该 seq 续传——环形缓冲保留最近 2000 帧即可覆盖&quot;断网 30 秒&quot;的场景；</li>
+<li><strong>15s 心跳</strong>：内网代理普遍 30~60s 空闲断连，心跳必须比它短；心跳同时是死连接检测器——<code>yield</code> 给死连接会抛 BrokenPipe，finally 里退订，<strong>不泄漏订阅队列</strong>；</li>
+<li><strong><code>X-Accel-Buffering: no</code></strong>：nginx 默认缓冲 SSE 响应，日志会&quot;攒一批才出来&quot;——这个头不加，所有实时性都白搭（我们第一个版本就栽在这，表现为&quot;日志有 5 秒延迟&quot;）。</li>
+</ol>
+<p>客户端：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> es = <span class="keyword">new</span> EventSource(<span class="string">&quot;/api/ui/events&quot;</span>);</span><br><span class="line">es.addEventListener(<span class="string">&quot;log&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> appendLog(<span class="built_in">JSON</span>.parse(e.data)));</span><br><span class="line">es.addEventListener(<span class="string">&quot;task_state&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> updateBadge(<span class="built_in">JSON</span>.parse(e.data)));</span><br><span class="line"><span class="comment">// 重连由浏览器原生处理，Last-Event-ID 自动带上，服务端续传</span></span><br></pre></td></tr></table></figure>
+<h2 id="三-发布侧进程内注册表-背压"><a class="markdownIt-Anchor" href="#三-发布侧进程内注册表-背压"></a> 三、发布侧：进程内注册表 + 背压</h2>
+<p>Flask 单进程内，发布者是执行引擎的后台线程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LiveLogRegistry</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;任务 ID → 订阅者队列列表；发布 O(订阅者数)，慢订阅者不阻塞发布&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">emit</span>(<span class="params">self, task_id, <span class="built_in">type</span>, payload</span>):</span></span><br><span class="line">        seq = self._seq.<span class="built_in">next</span>()</span><br><span class="line">        self._ring.append((task_id, seq, <span class="built_in">type</span>, payload))   <span class="comment"># 环形缓冲，断线续传</span></span><br><span class="line">        <span class="keyword">for</span> q <span class="keyword">in</span> self._subs.get(task_id, []):</span><br><span class="line">            <span class="keyword">if</span> q.full():</span><br><span class="line">                <span class="comment"># 慢订阅者：丢弃旧帧 + 发一条 &quot;dropped:N&quot; 告知客户端跳帧</span></span><br><span class="line">                q.get_nowait()</span><br><span class="line">                q.put((task_id, seq, <span class="built_in">type</span>, payload))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                q.put((task_id, seq, <span class="built_in">type</span>, payload))</span><br></pre></td></tr></table></figure>
+<p><strong>背压策略：发布永不阻塞</strong>。执行引擎是生产核心，一个卡住的浏览器连接不能拖慢任务执行；代价是慢订阅者丢帧——丢帧通过 seq 缺口暴露（客户端发现 <code>id</code> 跳号，拉一次 <code>/ui/events/backfill?from=seq</code> 补全），<strong>实时性让位于完整性兜底</strong>。</p>
+<h2 id="四-性能边界与实测"><a class="markdownIt-Anchor" href="#四-性能边界与实测"></a> 四、性能边界与实测</h2>
+<p>单台 Flask 机器（4C8G）实测：</p>
+<table>
+<thead>
+<tr>
+<th>并发 SSE 连接</th>
+<th>日志吞吐（发布侧）</th>
+<th>事件循环影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50</td>
+<td>500 条/s</td>
+<td>无感</td>
+</tr>
+<tr>
+<td>200</td>
+<td>800 条/s</td>
+<td>发布线程 CPU +3%</td>
+</tr>
+<tr>
+<td>500</td>
+<td>1000 条/s（帧合并后）</td>
+<td>需要帧合并（见下）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>帧合并</strong>是 500 连接档的关键：日志高频时不逐条 yield，而是 100ms 窗口内的多条日志合并成一帧（<code>data: [ev1, ev2, ev3]</code>）——浏览器端本来也是批量渲染的，逐条推是浪费。合并窗口 100ms 对&quot;看日志&quot;场景的实时性无感知。</p>
+<p><strong>Gunicorn 注意</strong>：SSE 长连接会占死 worker。生产配置 <code>--threads</code> 或 <code>gevent worker</code>，<strong>SSE 端点单独限流</strong>（内网工具场景，单用户 2 个连接足够）。</p>
+<h2 id="五-踩过的坑"><a class="markdownIt-Anchor" href="#五-踩过的坑"></a> 五、踩过的坑</h2>
+<ol>
+<li><strong>浏览器自动重连风暴</strong>：服务端重启瞬间，200 个 <code>EventSource</code> 同时重连 + 补拉，日志接口被打满——重连加<strong>客户端随机抖动</strong>（<code>setTimeout(random 0~3s)</code> 后再 new EventSource），补拉接口限流；</li>
+<li><strong><code>yield</code> 里的异常吞掉</strong>：generator 里 BrokenPipe 不捕获，订阅队列泄漏，表现为&quot;越跑内存越高&quot;——finally 退订是硬要求；</li>
+<li><strong>时区/换行</strong>：日志 payload 里的 <code>\n</code> 必须转义成 <code>\\n</code>——SSE 协议里裸 <code>\n</code> 是帧分隔符，多行日志直接破坏帧结构（这个 bug 排查了一下午）。</li>
+</ol>
+<h2 id="六-小结"><a class="markdownIt-Anchor" href="#六-小结"></a> 六、小结</h2>
+<p>SSE 实践的四个支柱：<strong>单流多频道</strong>（省连接数）、<strong>seq + 心跳 + 缓冲续传</strong>（断线无损）、<strong>发布不阻塞 + seq 缺口补全</strong>（背压与完整性兼顾）、<strong>帧合并</strong>（规模档性能）。WebSocket 不是更好的答案——它是更贵、更复杂、我们场景里不需要的答案。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://scofieldsu.github.io/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/" title="SSE 实时推流：测试平台日志与状态推送的完整实践" target="_blank" rel="external">https://scofieldsu.github.io/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/" title="测试报告体系：从&#34;一张 HTML&#34;到&#34;决策看板&#34;"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2025/08/10/Python%E5%BC%82%E6%AD%A5%E5%B9%B6%E5%8F%91%E5%9C%A8%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%87%8C%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/" title="Python 异步并发在测试基础设施里的正确用法">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2026 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://scofieldsu.github.io/2025/11/06/SSE%E5%AE%9E%E6%97%B6%E6%8E%A8%E6%B5%81%EF%BC%9A%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%97%A5%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81%E6%8E%A8%E9%80%81%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E8%B7%B5/';
+        
+        this.page.identifier = 'SSE实时推流：测试平台日志与状态推送的完整实践';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>

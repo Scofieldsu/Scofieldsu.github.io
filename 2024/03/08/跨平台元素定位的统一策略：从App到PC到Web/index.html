@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>跨平台元素定位的统一策略：从 App 到 PC 到 Web | ScofieldYu</title>
+  <meta name="description" content="App、PC、Web 三端各写各的定位策略，同一套业务用例的维护成本是三倍的。2024 年把三端的定位层重构成统一策略 + 自愈选择器，这篇讲设计思路和落地细节。  一、统一的定位描述：Locator 规范 三端控件标识符完全不同（resource-id &#x2F; auto_id &#x2F; data-testid），但语义是同一套。先定义统一的 Locator 描述： 123456789@dataclassc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨平台元素定位的统一策略：从 App 到 PC 到 Web">
+<meta property="og:url" content="https://scofieldsu.github.io/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="App、PC、Web 三端各写各的定位策略，同一套业务用例的维护成本是三倍的。2024 年把三端的定位层重构成统一策略 + 自愈选择器，这篇讲设计思路和落地细节。  一、统一的定位描述：Locator 规范 三端控件标识符完全不同（resource-id &#x2F; auto_id &#x2F; data-testid），但语义是同一套。先定义统一的 Locator 描述： 123456789@dataclassc">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-03-08T19:50:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T03:44:51.439Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="元素定位">
+<meta property="article:tag" content="自愈选择器">
+<meta property="article:tag" content="跨平台">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://scofieldsu.github.io/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link rel="stylesheet" href="/css/theme-monokai.css">
+  
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-monokai" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">ScofieldYu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">高筑墙｜广积粮｜缓称王</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> XiaMen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+       <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">App自动化测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PC%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96/">PC端自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPA/">RPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%92%8C%E7%94%B5%E5%BD%B1/">书和电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">设备管理</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Appium/" style="font-size: 13.17px;">Appium</a> <a href="/tags/CI/" style="font-size: 13px;">CI</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Flask/" style="font-size: 13.17px;">Flask</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13.17px;">Locust</a> <a href="/tags/Mock/" style="font-size: 13.17px;">Mock</a> <a href="/tags/Monkey/" style="font-size: 13px;">Monkey</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/OpenSTF/" style="font-size: 13px;">OpenSTF</a> <a href="/tags/Python/" style="font-size: 13.83px;">Python</a> <a href="/tags/Python%E6%BA%90%E7%A0%81/" style="font-size: 13px;">Python源码</a> <a href="/tags/RPA/" style="font-size: 13px;">RPA</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/SSE/" style="font-size: 13px;">SSE</a> <a href="/tags/Selenium/" style="font-size: 13.17px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.17px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/WebSocket/" style="font-size: 13px;">WebSocket</a> <a href="/tags/Windows/" style="font-size: 13.17px;">Windows</a> <a href="/tags/asyncio/" style="font-size: 13px;">asyncio</a> <a href="/tags/mitmproxy/" style="font-size: 13px;">mitmproxy</a> <a href="/tags/pytest/" style="font-size: 13px;">pytest</a> <a href="/tags/pywinauto/" style="font-size: 13px;">pywinauto</a> <a href="/tags/%E4%B9%A6/" style="font-size: 13px;">书</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">任务调度</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" style="font-size: 13px;">元素定位</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 13px;">分布式</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AD%96%E7%95%A5/" style="font-size: 13px;">定位策略</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" style="font-size: 13px;">实时推送</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 13.5px;">工程化</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">平台设计</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">弱网测试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13.33px;">性能测试</a> <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA/" style="font-size: 13px;">执行机</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">接口测试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 13px;">数据可视化</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82/" style="font-size: 13px;">数据工厂</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13px;">架构</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">桌面自动化</a> <a href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">泄漏检测</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">测试工程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" style="font-size: 13px;">测试报告</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/" style="font-size: 13px;">测试数据</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">环境管理</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 13px;">电影</a> <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 13.17px;">稳定性</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F/" style="font-size: 13px;">网络模拟</a> <a href="/tags/%E8%81%94%E8%B0%83/" style="font-size: 13px;">联调</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 13.67px;">自动化测试</a> <a href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 13px;">自愈选择器</a> <a href="/tags/%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BA/" style="font-size: 13px;">设备农场</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">调度</a> <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" style="font-size: 13px;">跨平台</a> <a href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">长稳测试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-跨平台元素定位的统一策略：从App到PC到Web" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      跨平台元素定位的统一策略：从 App 到 PC 到 Web
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/" class="article-date">
+	  <time datetime="2024-03-08T19:50:00.000Z" itemprop="datePublished">2024-03-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" rel="tag">元素定位</a>, <a class="article-tag-link-link" href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" rel="tag">自愈选择器</a>, <a class="article-tag-link-link" href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" rel="tag">跨平台</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>App、PC、Web 三端各写各的定位策略，同一套业务用例的维护成本是三倍的。2024 年把三端的定位层重构成<strong>统一策略 + 自愈选择器</strong>，这篇讲设计思路和落地细节。</p>
+<h2 id="一-统一的定位描述locator-规范"><a class="markdownIt-Anchor" href="#一-统一的定位描述locator-规范"></a> 一、统一的定位描述：Locator 规范</h2>
+<p>三端控件标识符完全不同（resource-id / auto_id / data-testid），但<strong>语义是同一套</strong>。先定义统一的 Locator 描述：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Locator</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;业务语义化的定位描述，与具体平台解耦&quot;&quot;&quot;</span></span><br><span class="line">    role: <span class="built_in">str</span>          <span class="comment"># send_button / chat_input / order_grid ...</span></span><br><span class="line">    platform_map: <span class="built_in">dict</span>  <span class="comment"># 平台 -&gt; 具体选择器</span></span><br><span class="line">    fallback: <span class="built_in">list</span>     <span class="comment"># 主选择器失效后的兜底序列</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用例里只写 role，不写选择器</span></span><br><span class="line">send_btn = page.locate(<span class="string">&quot;send_button&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>platform_map</code> 由<strong>平台适配层</strong>维护，集中一处：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LOCATOR_REGISTRY = &#123;</span><br><span class="line">    <span class="string">&quot;send_button&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;app&quot;</span>:  &#123;<span class="string">&quot;strategy&quot;</span>: <span class="string">&quot;resource_id&quot;</span>, <span class="string">&quot;value&quot;</span>: <span class="string">&quot;com.app:id/btn_send&quot;</span>&#125;,</span><br><span class="line">        <span class="string">&quot;pc&quot;</span>:   &#123;<span class="string">&quot;strategy&quot;</span>: <span class="string">&quot;auto_id&quot;</span>,     <span class="string">&quot;value&quot;</span>: <span class="string">&quot;btnSend&quot;</span>&#125;,</span><br><span class="line">        <span class="string">&quot;web&quot;</span>:  &#123;<span class="string">&quot;strategy&quot;</span>: <span class="string">&quot;test_id&quot;</span>,     <span class="string">&quot;value&quot;</span>: <span class="string">&quot;send-message-btn&quot;</span>&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;chat_input&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;app&quot;</span>:  &#123;<span class="string">&quot;strategy&quot;</span>: <span class="string">&quot;resource_id&quot;</span>, <span class="string">&quot;value&quot;</span>: <span class="string">&quot;com.app:id/et_msg&quot;</span>&#125;,</span><br><span class="line">        <span class="string">&quot;pc&quot;</span>:   &#123;<span class="string">&quot;strategy&quot;</span>: <span class="string">&quot;auto_id&quot;</span>,     <span class="string">&quot;value&quot;</span>: <span class="string">&quot;edMessage&quot;</span>&#125;,</span><br><span class="line">        <span class="string">&quot;web&quot;</span>:  &#123;<span class="string">&quot;strategy&quot;</span>: <span class="string">&quot;test_id&quot;</span>,     <span class="string">&quot;value&quot;</span>: <span class="string">&quot;message-input&quot;</span>&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>收益</strong>：改一处选择器，三端用例不动；新人写用例只需要认识 <code>role</code> 词汇表，不用学三个平台的 API。</p>
+<h2 id="二-选择器优先级跨平台统一排序"><a class="markdownIt-Anchor" href="#二-选择器优先级跨平台统一排序"></a> 二、选择器优先级：跨平台统一排序</h2>
+<p>不同平台的&quot;稳定&quot;含义不同，统一排序如下：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>通用原则</th>
+<th>App 实例</th>
+<th>PC 实例</th>
+<th>Web 实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>开发约定的稳定 ID</td>
+<td>resource-id</td>
+<td>auto_id</td>
+<td>data-testid</td>
+</tr>
+<tr>
+<td>2</td>
+<td>无障碍/语义属性</td>
+<td>content-desc</td>
+<td>Name（UIA）</td>
+<td>aria-label</td>
+</tr>
+<tr>
+<td>3</td>
+<td>稳定文案</td>
+<td>text</td>
+<td>title</td>
+<td>text 精确匹配</td>
+</tr>
+<tr>
+<td>4</td>
+<td>结构相对定位</td>
+<td>父级 ID + 索引</td>
+<td>容器 + 相对路径</td>
+<td>CSS 相对选择器</td>
+</tr>
+<tr>
+<td>5</td>
+<td>全文查询兜底</td>
+<td>XPath</td>
+<td>UIA XPath</td>
+<td>XPath/JS 查询</td>
+</tr>
+</tbody>
+</table>
+<p><strong>铁律</strong>：第 1、2 优先级需要开发配合（约定 ID 规范），这是&quot;定位维护成本&quot;从根源上降下来的唯一办法。第 3 优先级以下的选择器全部进&quot;待治理清单&quot;，每个迭代消化一部分。</p>
+<h2 id="三-自愈选择器失效后自动找替代"><a class="markdownIt-Anchor" href="#三-自愈选择器失效后自动找替代"></a> 三、自愈选择器：失效后自动找替代</h2>
+<p>UI 改版后选择器失效是常态，人工修选择器是纯消耗。自愈的思路：<strong>主选择器失效时，用&quot;锚点元素 + 相对关系&quot;重新定位</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">locate_with_healing</span>(<span class="params">role, driver, platform</span>):</span></span><br><span class="line">    primary = LocatorResolver.resolve(role, platform)</span><br><span class="line">    el = try_find(driver, primary, timeout=<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> el:</span><br><span class="line">        <span class="keyword">return</span> el</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 自愈路径：找锚点，再走相对关系</span></span><br><span class="line">    anchor, relation = LocatorRegistry.healing_info(role)</span><br><span class="line">    anchor_el = try_find(driver, anchor, timeout=<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> anchor_el <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> LocatorStaleError(role)      <span class="comment"># 锚点也没了 = 大改版，报人工介入</span></span><br><span class="line">    el = relation.apply(anchor_el, driver)  <span class="comment"># 例如：锚点右侧第 2 个可点击控件</span></span><br><span class="line">    <span class="keyword">if</span> el:</span><br><span class="line">        <span class="comment"># 上报自愈事件：记录&quot;新位置&quot;，供下一个人工确认固化</span></span><br><span class="line">        HealingReporter.report(role, platform, primary, el)</span><br><span class="line">        <span class="keyword">return</span> el</span><br><span class="line">    <span class="keyword">raise</span> LocatorStaleError(role)</span><br></pre></td></tr></table></figure>
+<p><strong>关键设计</strong>：自愈不是&quot;随便找一个像的控件点掉&quot;，而是<strong>锚点 + 显式相对关系</strong>（“在 X 右边的第 N 个可点击元素”），关系是人审过的，错了能看出来。每次自愈事件进周报，连续自愈的 role 说明该控件该和开发重新约定 ID 了。</p>
+<p><strong>实测数据</strong>：UI 大改版周，选择器失效 47 处，自愈命中 39 处（83%），人工介入 8 处（其中 5 处是锚点自身失效的大改版）。自愈把&quot;改版周的 2 天修选择器&quot;压到 2 小时。</p>
+<h2 id="四-选择器质量门禁"><a class="markdownIt-Anchor" href="#四-选择器质量门禁"></a> 四、选择器质量门禁</h2>
+<p>定位层重构后，选择器本身也要进质量管控：</p>
+<ol>
+<li><strong>静态检查</strong>（CI lint）：用例里出现裸 XPath/绝对路径直接 fail，必须走 <code>role</code>；</li>
+<li><strong>脆弱度评分</strong>：每个 role 的选择器按优先级打分（1 级=100 分，5 级=40 分），平台选择器均分低于 70 的进治理看板；</li>
+<li><strong>失效归因</strong>：选择器失效分三类统计——“ID 被删”（开发违约，找开发）、“结构变化”（走自愈）、“文案变化”（多语言/运营改文案，换优先级）。归因数据是&quot;ID 规范&quot;能推下去的依据。</li>
+</ol>
+<h2 id="五-小结"><a class="markdownIt-Anchor" href="#五-小结"></a> 五、小结</h2>
+<p>统一定位层的三个层次：<strong>role 词汇表</strong>（用例与平台解耦）、<strong>优先级排序</strong>（脆弱性可控）、<strong>锚点自愈</strong>（改版周不瘫痪）。成本是一次性的重构（约 3 周），收益是之后每次 UI 改版的人力从&quot;天&quot;变&quot;小时&quot;，而且选择器质量第一次有了可度量的指标。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://scofieldsu.github.io/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/" title="跨平台元素定位的统一策略：从 App 到 PC 到 Web" target="_blank" rel="external">https://scofieldsu.github.io/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2024/06/15/Locust%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E%E8%84%9A%E6%9C%AC%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%8E%B0%E7%9A%84%E5%8E%8B%E6%B5%8B%E6%8A%A5%E5%91%8A/" title="Locust 性能测试实战：从脚本到可复现的压测报告"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/12/20/%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E6%9C%BA%EF%BC%9A%E8%AE%A9%E7%94%A8%E4%BE%8B%E8%B7%91%E5%9C%A8%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%E7%9A%8420%E5%80%8D%E8%A7%84%E6%A8%A1%E4%B8%8A/" title="分布式测试执行机：让用例跑在一台机器的 20 倍规模上">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2026 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://scofieldsu.github.io/2024/03/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D%E7%9A%84%E7%BB%9F%E4%B8%80%E7%AD%96%E7%95%A5%EF%BC%9A%E4%BB%8EApp%E5%88%B0PC%E5%88%B0Web/';
+        
+        this.page.identifier = '跨平台元素定位的统一策略：从App到PC到Web';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="referrer" content="never">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>7×24 长稳测试：让系统在时间里暴露问题 | ScofieldYu</title>
+  <meta name="description" content="功能测试验证&quot;能不能用&quot;，长稳（soak）测试验证&quot;能不能一直用&quot;——内存泄漏、连接池耗尽、句柄泄漏、缓存膨胀，这些 bug 的触发条件是时间，跑 30 分钟的回归永远抓不到。2026 年把 7×24 长稳做成了常态化基建，这篇讲设计。  一、长稳 ≠ “把回归跑 24 小时” 最常见的误用：把回归套件循环跑 24 小时，看最后有没有挂。这只能抓到&amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7×24 长稳测试：让系统在时间里暴露问题">
+<meta property="og:url" content="https://scofieldsu.github.io/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Scofieldyu">
+<meta property="og:description" content="功能测试验证&quot;能不能用&quot;，长稳（soak）测试验证&quot;能不能一直用&quot;——内存泄漏、连接池耗尽、句柄泄漏、缓存膨胀，这些 bug 的触发条件是时间，跑 30 分钟的回归永远抓不到。2026 年把 7×24 长稳做成了常态化基建，这篇讲设计。  一、长稳 ≠ “把回归跑 24 小时” 最常见的误用：把回归套件循环跑 24 小时，看最后有没有挂。这只能抓到&amp;quot">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-04-22T20:20:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T03:44:51.437Z">
+<meta property="article:author" content="俞 元">
+<meta property="article:tag" content="长稳测试">
+<meta property="article:tag" content="泄漏检测">
+<meta property="article:tag" content="稳定性">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://scofieldsu.github.io/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Scofieldyu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <link rel="stylesheet" href="/css/theme-monokai.css">
+  
+  
+    
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body class="main-center theme-monokai" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Scofieldsu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">ScofieldYu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">高筑墙｜广积粮｜缓称王</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> XiaMen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">码仓</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies">
+            
+            <i class="icon icon-eye"></i>
+            
+            <span class="menu-title">电影</span>
+          </a>
+        </li>
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+       <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                </br> 记录，分享，认真生活。
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">App自动化测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PC%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96/">PC端自动化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPA/">RPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%92%8C%E7%94%B5%E5%BD%B1/">书和电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E4%BD%9C/">写作</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/">测试工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">设备管理</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Appium/" style="font-size: 13.17px;">Appium</a> <a href="/tags/CI/" style="font-size: 13px;">CI</a> <a href="/tags/Centos/" style="font-size: 13px;">Centos</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/ElementUI/" style="font-size: 13px;">ElementUI</a> <a href="/tags/Flask/" style="font-size: 13.17px;">Flask</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 13px;">Gitlab</a> <a href="/tags/Jenkins/" style="font-size: 13px;">Jenkins</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/Locust/" style="font-size: 13.17px;">Locust</a> <a href="/tags/Mock/" style="font-size: 13.17px;">Mock</a> <a href="/tags/Monkey/" style="font-size: 13px;">Monkey</a> <a href="/tags/Odoo/" style="font-size: 13px;">Odoo</a> <a href="/tags/OpenSTF/" style="font-size: 13px;">OpenSTF</a> <a href="/tags/Python/" style="font-size: 13.83px;">Python</a> <a href="/tags/Python%E6%BA%90%E7%A0%81/" style="font-size: 13px;">Python源码</a> <a href="/tags/RPA/" style="font-size: 13px;">RPA</a> <a href="/tags/Rancher/" style="font-size: 13px;">Rancher</a> <a href="/tags/SSE/" style="font-size: 13px;">SSE</a> <a href="/tags/Selenium/" style="font-size: 13.17px;">Selenium</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Ubuntu/" style="font-size: 13.17px;">Ubuntu</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/WebSocket/" style="font-size: 13px;">WebSocket</a> <a href="/tags/Windows/" style="font-size: 13.17px;">Windows</a> <a href="/tags/asyncio/" style="font-size: 13px;">asyncio</a> <a href="/tags/mitmproxy/" style="font-size: 13px;">mitmproxy</a> <a href="/tags/pytest/" style="font-size: 13px;">pytest</a> <a href="/tags/pywinauto/" style="font-size: 13px;">pywinauto</a> <a href="/tags/%E4%B9%A6/" style="font-size: 13px;">书</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">任务调度</a> <a href="/tags/%E4%BC%AAMAC/" style="font-size: 13px;">伪MAC</a> <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" style="font-size: 13px;">元素定位</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 13px;">分布式</a> <a href="/tags/%E5%AD%97%E8%8A%82%E5%BA%8F/" style="font-size: 13px;">字节序</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AD%96%E7%95%A5/" style="font-size: 13px;">定位策略</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/" style="font-size: 13px;">实时推送</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 13px;">工具</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 13.5px;">工程化</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1/" style="font-size: 13px;">平台设计</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 13px;">并发</a> <a href="/tags/%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">弱网测试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 13.33px;">性能测试</a> <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA/" style="font-size: 13px;">执行机</a> <a href="/tags/%E6%8E%A2%E9%92%88/" style="font-size: 13px;">探针</a> <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">接口测试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 13px;">数据可视化</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82/" style="font-size: 13px;">数据工厂</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13px;">架构</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">桌面自动化</a> <a href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">泄漏检测</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B/" style="font-size: 13px;">测试工程</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/" style="font-size: 13px;">测试报告</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/" style="font-size: 13px;">测试数据</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" style="font-size: 13px;">环境管理</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 13px;">电影</a> <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 13.17px;">稳定性</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F/" style="font-size: 13px;">网络模拟</a> <a href="/tags/%E8%81%94%E8%B0%83/" style="font-size: 13px;">联调</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 13.17px;">自动化</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 13.67px;">自动化测试</a> <a href="/tags/%E8%87%AA%E6%84%88%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 13px;">自愈选择器</a> <a href="/tags/%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BA/" style="font-size: 13px;">设备农场</a> <a href="/tags/%E8%AF%97%E8%AF%8D%E6%96%87%E7%AB%A0/" style="font-size: 14px;">诗词文章</a> <a href="/tags/%E8%B0%83%E5%BA%A6/" style="font-size: 13px;">调度</a> <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/" style="font-size: 13px;">跨平台</a> <a href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">长稳测试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">July 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-7x24长稳测试：让系统在时间里暴露问题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      7×24 长稳测试：让系统在时间里暴露问题
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/" class="article-date">
+	  <time datetime="2026-04-22T20:20:00.000Z" itemprop="datePublished">2026-04-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B5%8B%E8%AF%95/">稳定性测试</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B/" rel="tag">泄漏检测</a>, <a class="article-tag-link-link" href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="tag">稳定性</a>, <a class="article-tag-link-link" href="/tags/%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95/" rel="tag">长稳测试</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p>功能测试验证&quot;能不能用&quot;，长稳（soak）测试验证&quot;能不能一直用&quot;——内存泄漏、连接池耗尽、句柄泄漏、缓存膨胀，这些 bug 的触发条件是<strong>时间</strong>，跑 30 分钟的回归永远抓不到。2026 年把 7×24 长稳做成了常态化基建，这篇讲设计。</p>
+<h2 id="一-长稳-把回归跑-24-小时"><a class="markdownIt-Anchor" href="#一-长稳-把回归跑-24-小时"></a> 一、长稳 ≠ “把回归跑 24 小时”</h2>
+<p>最常见的误用：把回归套件循环跑 24 小时，看最后有没有挂。这只能抓到&quot;累计执行量&quot;类问题，抓不到<strong>状态漂移</strong>类问题——长稳的核心观察对象是<strong>系统随时间的指标曲线</strong>，不是用例通过率：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># soak/plan.yaml</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">customer-service-soak</span></span><br><span class="line"><span class="attr">duration:</span> <span class="string">72h</span></span><br><span class="line"><span class="attr">target:</span> <span class="string">staging-full</span></span><br><span class="line"><span class="attr">traffic:</span>                       <span class="comment"># 流量模型：按线上比例混合</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">profile:</span> <span class="string">chat_mixed</span>        <span class="comment"># 会话 + 消息 + 搜索（见 Locust 那篇）</span></span><br><span class="line">    <span class="attr">weight:</span> <span class="number">70</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">profile:</span> <span class="string">ws_event_stream</span>   <span class="comment"># 长连接事件流（Mock WS 服务供帧）</span></span><br><span class="line">    <span class="attr">weight:</span> <span class="number">20</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">profile:</span> <span class="string">heavy_upload</span>      <span class="comment"># 大文件/富媒体（每 4h 一波）</span></span><br><span class="line">    <span class="attr">weight:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">observe:</span>                       <span class="comment"># 观察项：这才是长稳的主体</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">memory_heap:</span> &#123; <span class="attr">threshold:</span> <span class="string">&quot;growth &gt; 300MB / 12h&quot;</span> &#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">memory_rss:</span>   &#123; <span class="attr">threshold:</span> <span class="string">&quot;abs &gt; 8GB&quot;</span> &#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">goroutine_fd:</span> &#123; <span class="attr">threshold:</span> <span class="string">&quot;growth &gt; 500 / 12h&quot;</span> &#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">p99_latency:</span>  &#123; <span class="attr">threshold:</span> <span class="string">&quot;drift &gt; 50% vs baseline&quot;</span> &#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">ws_reconnect:</span> &#123; <span class="attr">threshold:</span> <span class="string">&quot;rate &gt; 0.1%/min&quot;</span> &#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">disk_logs:</span>    &#123; <span class="attr">threshold:</span> <span class="string">&quot;abs &gt; 50GB&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>用例只是背景流量</strong>，让系统&quot;活着干活&quot;；观察项的阈值告警才是长稳的产出。</p>
+<h2 id="二-三个必须预埋的探针"><a class="markdownIt-Anchor" href="#二-三个必须预埋的探针"></a> 二、三个必须预埋的探针</h2>
+<p>长稳的&quot;能看见&quot;靠三个探针，全部在长稳开始前部署：</p>
+<h3 id="1-资源采样器每-60s"><a class="markdownIt-Anchor" href="#1-资源采样器每-60s"></a> 1. 资源采样器（每 60s）</h3>
+<p>进程级（heap/RSS/fd/线程数）+ 依赖级（DB 连接池占用、Redis 内存、消息队列深度）+ 系统级（CPU/IO/磁盘）。<strong>基线是第 0~2 小时的稳态值</strong>，不是历史值——同一套系统换个部署配置，历史基线就没意义。</p>
+<h3 id="2-泄漏判定看斜率不看绝对值"><a class="markdownIt-Anchor" href="#2-泄漏判定看斜率不看绝对值"></a> 2. 泄漏判定：看&quot;斜率&quot;不看&quot;绝对值&quot;</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">leak_verdict</span>(<span class="params">samples, window_hours=<span class="number">12</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    内存/句柄曲线做线性回归：</span></span><br><span class="line"><span class="string">    - 斜率 ≈ 0：平稳（GC 正常回收）</span></span><br><span class="line"><span class="string">    - 斜率 &gt; 阈值：泄漏（持续只涨不跌）</span></span><br><span class="line"><span class="string">    - 锯齿但峰值下移：健康（周期性回收在变快，偶发正常）</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    slope = linear_regression_slope(samples[-window_hours*<span class="number">60</span>:])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;leak&quot;</span> <span class="keyword">if</span> slope &gt; LEAK_SLOPE_THRESHOLD <span class="keyword">else</span> <span class="string">&quot;ok&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>锯齿曲线要单独处理</strong>：Java/Go 的 GC 曲线天然锯齿，直接对&quot;当前值&quot;设阈值会天天误报；对<strong>峰值序列</strong>做回归（峰值也在涨 = 真泄漏）才是对的判定。</p>
+<h3 id="3-功能哨兵每小时"><a class="markdownIt-Anchor" href="#3-功能哨兵每小时"></a> 3. 功能哨兵（每小时）</h3>
+<p>长稳期间系统可能在&quot;资源还健康&quot;之前就已经<strong>功能悄悄坏了</strong>（如 WS 消息延迟从 200ms 漂到 3s，资源曲线看不出）。每小时跑一组 5 分钟的功能哨兵用例（登录/发消息/下单核心路径），<strong>哨兵失败 = 立即终止长稳并保留现场</strong>，比 72 小时后才发现&quot;中间 40 小时都是坏的&quot;便宜得多。</p>
+<h2 id="三-现场保留长稳的价值-80-在崩溃后"><a class="markdownIt-Anchor" href="#三-现场保留长稳的价值-80-在崩溃后"></a> 三、现场保留：长稳的价值 80% 在崩溃后</h2>
+<p>长稳崩了（或判定泄漏）的那一刻，现场数据比什么都重要，必须<strong>预埋自动保留</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_soak_alert</span>(<span class="params">alert</span>):</span></span><br><span class="line">    <span class="comment"># 1) 抓进程现场：heap dump（Java）/ py-spy dump（Python）/ fd 全表</span></span><br><span class="line">    <span class="comment"># 2) 抓依赖现场：DB slow log 最近 1h / 连接池快照 / MQ 深度</span></span><br><span class="line">    <span class="comment"># 3) 抓流量现场：最近 10min 的流量回放包（复现用）</span></span><br><span class="line">    <span class="comment"># 4) 全量打包 var/soak/&lt;run_id&gt;/crash/ 并推送告警群（附一句话判定）</span></span><br><span class="line">    capture_all(alert.run_id)</span><br><span class="line">    notify(<span class="string">f&quot;长稳 <span class="subst">&#123;alert.metric&#125;</span> 异常，现场已保留：<span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>流量回放包</strong>是被低估的宝贝：泄漏/崩溃的复现往往需要&quot;特定流量序列&quot;，保留最近 10 分钟的完整流量，本地重放就能在 30 分钟内复现，不用等下次长稳（72 小时后）。</p>
+<h2 id="四-常态化运行成本与节奏"><a class="markdownIt-Anchor" href="#四-常态化运行成本与节奏"></a> 四、常态化运行：成本与节奏</h2>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频率</td>
+<td>每周一次 72h（覆盖一个完整的工作周期 + 周末流量形态）</td>
+</tr>
+<tr>
+<td>环境</td>
+<td>staging 独立实例（不占生产、不和功能测试互扰）</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>一台 8C16G + 一台流量发生器，月成本约 = 半个人日</td>
+</tr>
+<tr>
+<td>终止条件</td>
+<td>观察项告警 / 功能哨兵失败 / 72h 自然结束</td>
+</tr>
+<tr>
+<td>产出</td>
+<td>每周一份长稳周报（斜率曲线 + 哨兵结果 + 告警明细），进发版评审</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键纪律</strong>：长稳告警必须有人认领。第一次长稳揪出泄漏后，修复验证要<strong>再跑一次定向短长稳（12h，放大该流量维度）</strong>，确认斜率归零才算闭环——&quot;修了&quot;和&quot;修好了&quot;在泄漏问题上是两回事。</p>
+<h2 id="五-实测战绩"><a class="markdownIt-Anchor" href="#五-实测战绩"></a> 五、实测战绩</h2>
+<p>落地三个月抓到三个功能测试完全无感的问题：</p>
+<ol>
+<li><strong>WS 连接句柄泄漏</strong>：长连接重连后旧 fd 不释放，72h 后 fd 增长 8000+，线上表现为&quot;服务跑两周后偶发断连&quot;——正是用户工单里那个&quot;时好时坏&quot;；</li>
+<li><strong>日志异步队列膨胀</strong>：日志级别配置漂移导致异步队列只进不出，内存 6h 涨 2GB，锯齿回归判定精准锁定；</li>
+<li><strong>搜索缓存雪崩</strong>：缓存过期策略在&quot;凌晨低流量 + 批量预热&quot;组合下触发，只有 72h 覆盖凌晨+早高峰的完整长稳能撞上。</li>
+</ol>
+<h2 id="六-小结"><a class="markdownIt-Anchor" href="#六-小结"></a> 六、小结</h2>
+<p>长稳测试的三个支柱：<strong>流量是背景，指标斜率是主体</strong>（看回归不看绝对值）、<strong>功能哨兵保功能真相</strong>（资源健康 ≠ 功能健康）、<strong>现场自动保留</strong>（崩溃那一刻的数据决定问题能否复现）。长稳不是&quot;跑更久的回归&quot;，是<strong>用时间换 bug 维度</strong>——功能、性能、泄漏，各测各的，谁也不能代替谁。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://scofieldsu.github.io/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/" title="7×24 长稳测试：让系统在时间里暴露问题" target="_blank" rel="external">https://scofieldsu.github.io/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Scofieldsu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Scofieldsu" target="_blank"><span class="text-dark">ScofieldYu</span><small class="ml-1x">高筑墙｜广积粮｜缓称王</small></a></h3>
+        <div>Coder</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+       
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/07/10/%E5%A4%9A%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%EF%BC%9Adev/staging/prod%E7%9A%84%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E6%B2%BB%E7%90%86/" title="多环境管理：dev/staging/prod 的测试环境治理"><i class="icon icon-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;上一篇</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2026/01/18/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BB%8E%E4%B8%80%E5%BC%A0HTML%E5%88%B0%E5%86%B3%E7%AD%96%E7%9C%8B%E6%9D%BF/" title="测试报告体系：从&#34;一张 HTML&#34;到&#34;决策看板&#34;">下一篇&nbsp;&nbsp;<i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning hidden-xs" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="donate-payimg">
+            <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+          </div>
+          <p class="text-muted mv">扫码打赏,多少随意。</p>
+          <div class="donate-payselect">
+            <div class="pay_item checked" data-id="alipay" data-src="/images/donate/alipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-alipay" value="alipay" checked>
+                <label class="pay_logo clickable" for="input-alipay"><img src="/images/donate/alipay.jpg" alt="支付宝" /></label>
+              </div>
+            </div>
+            <div class="pay_item" data-id="weipay" data-src="/images/donate/weipayimg.png">
+              <div class="radio">
+                <input type="radio" name="payment" id="input-weipay" value="weipay">
+                <label class="pay_logo clickable" for="input-weipay"><img src="/images/donate/weipay.jpg" alt="微信支付" /></label>
+              </div>
+            </div>
+          </div>
+          <div class="text-grey">
+            <p>扫一扫，即可进行扫码打赏哦🌟</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="100" src="https://music.163.com/outchain/player?type=2&id=1439741086&auto=1&height=66"></iframe>
+
+
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Scofieldsu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+
+    <div class="copyright">
+    	
+        &copy; 2026 俞 元
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+        </div>
+    </div>
+</footer>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+    
+    
+        
+
+
+    
+    
+        
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://scofieldsu.github.io/2026/04/22/7x24%E9%95%BF%E7%A8%B3%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%AE%A9%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%97%B6%E9%97%B4%E9%87%8C%E6%9A%B4%E9%9C%B2%E9%97%AE%E9%A2%98/';
+        
+        this.page.identifier = '7x24长稳测试：让系统在时间里暴露问题';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hush-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+    
+    
+
+
+
+</body>
+</html>

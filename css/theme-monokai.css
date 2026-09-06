@@ -1,0 +1,734 @@
+/* ============================================================
+ * theme-monokai — 博客 MONOKAI 深色皮肤
+ * ------------------------------------------------------------
+ * 底色调性：Monokai 经典深色（代码区 #272822 / 语法色经典 Monokai）
+ * 框架配色：at-web-theme-kit 深色规范
+ *   - 页面底 #0d0f13 / 卡片 #1e2028 / 侧栏 #16181e / 顶栏 #1a1c23
+ *   - 边框 #2a2d38 / 文字 #e5e7eb · #9ca3af · #6b7280
+ *   - 主色 Indigo 深色档 #6d70f6（hover #7c7ffa / active #5b5ef0）
+ *   - 语义色深色档：#3bb97e / #ff8c3a / #f26a6f / #1fa3ff
+ * 保留元素（不改配置）：
+ *   - profile：ScofieldYu / 高筑墙｜广积粮｜缓称王
+ *   - 头像 hover 旋转动画（img-rotate，style.css 自带，此处不覆盖）
+ *   - 网易云音乐播放器（social.ejs iframe）
+ *   - GitHub 社交链接
+ *   - Mac 窗口风格代码容器（红黄绿圆点 + 语法高亮，此文件内重绘为深色）
+ * 所有规则收敛在 body.theme-monokai 作用域内，不影响其他皮肤。
+ * ============================================================ */
+
+body.theme-monokai {
+  /* 主题变量（仅本皮肤内使用） */
+  --mk-page: #0d0f13;
+  --mk-card: #1e2028;
+  --mk-card-alt: #262a34;
+  --mk-header: #1a1c23;
+  --mk-sidebar: #16181e;
+  --mk-border: #2a2d38;
+  --mk-border-light: #202329;
+  --mk-text: #e5e7eb;
+  --mk-text-2: #9ca3af;
+  --mk-text-3: #6b7280;
+  --mk-accent: #6d70f6;
+  --mk-accent-hover: #7c7ffa;
+  --mk-accent-active: #5b5ef0;
+  --mk-accent-bg: rgba(109, 112, 246, 0.15);
+  --mk-success: #3bb97e;
+  --mk-warning: #ff8c3a;
+  --mk-error: #f26a6f;
+  --mk-info: #1fa3ff;
+
+  background-color: var(--mk-page);
+  color: var(--mk-text);
+  font-size: 14px;
+}
+
+/* ── 全局：选中色 / 滚动条 ─────────────────────────── */
+body.theme-monokai ::selection {
+  background: rgba(109, 112, 246, 0.35);
+  color: #ffffff;
+}
+body.theme-monokai {
+  scrollbar-color: #333745 #14161c;
+}
+body.theme-monokai ::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+  background-color: #14161c;
+}
+body.theme-monokai ::-webkit-scrollbar-thumb {
+  background: #333745;
+  border-radius: 3px;
+}
+body.theme-monokai ::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+body.theme-monokai ::-webkit-scrollbar-track {
+  background-color: #14161c;
+  box-shadow: none;
+}
+body.theme-monokai ::-webkit-scrollbar-track-piece {
+  background-color: #14161c;
+}
+
+/* ── 顶栏：kit 深色顶部栏 #1a1c23 ──────────────────── */
+body.theme-monokai .header {
+  background-color: var(--mk-header);
+  color: var(--mk-text);
+  border-bottom: 1px solid var(--mk-border);
+  box-shadow: none;
+}
+body.theme-monokai .header a {
+  color: #d4d4d8;
+}
+body.theme-monokai .navbar-toggle .icon-bar {
+  background-color: #9ca3af;
+}
+
+/* 站点信息（保留 ScofieldYu / 座右铭） */
+body.theme-monokai #name {
+  color: var(--mk-text);
+  font-weight: 600;
+}
+body.theme-monokai #title {
+  color: var(--mk-text-2);
+}
+body.theme-monokai #location {
+  color: var(--mk-text-3) !important;
+}
+/* 头像：保留 img-rotate 旋转动画，仅加深色描边 */
+body.theme-monokai #avatar img {
+  border: 2px solid var(--mk-border);
+  box-shadow: 0 0 0 4px rgba(109, 112, 246, 0.12);
+}
+
+/* ── 导航菜单：深色 + Indigo 激活态 ─────────────────── */
+body.theme-monokai .main-nav > li > a {
+  color: #c7c9d1;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 16px;
+  background: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+body.theme-monokai .main-nav > li > a .icon {
+  color: var(--mk-text-3);
+  transition: color 0.15s ease;
+}
+body.theme-monokai .main-nav > li > a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+body.theme-monokai .main-nav > .active > a,
+body.theme-monokai .main-nav > li > a.active,
+body.theme-monokai .main-nav > li > a:focus {
+  color: var(--mk-accent-hover) !important;
+  background: var(--mk-accent-bg) !important;
+}
+body.theme-monokai .main-nav > .active > a .icon,
+body.theme-monokai .main-nav > li > a.active .icon {
+  color: var(--mk-accent-hover);
+}
+
+/* ── 顶栏搜索框 ─────────────────────────────────────── */
+body.theme-monokai .search .sidebar-form {
+  background: #262a34;
+  border: 1px solid #333745;
+  border-radius: 4px;
+}
+body.theme-monokai .search .sidebar-form input {
+  color: var(--mk-text);
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+}
+body.theme-monokai .search .sidebar-form input::-webkit-input-placeholder,
+body.theme-monokai .search .sidebar-form input::-moz-placeholder,
+body.theme-monokai .search .sidebar-form input:-ms-input-placeholder {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .search .sidebar-form:focus-within {
+  border-color: var(--mk-accent);
+  box-shadow: 0 0 0 3px rgba(109, 112, 246, 0.18);
+}
+body.theme-monokai .search input[type="text"] + .input-group-btn .btn {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .search input[type="text"]:focus,
+body.theme-monokai .search input[type="text"]:focus + .input-group-btn .btn {
+  background-color: #262a34;
+  color: var(--mk-accent-hover);
+}
+
+/* ── 内容区：kit 深色卡片 #1e2028，无阴影 ───────────── */
+body.theme-monokai .content {
+  background-color: var(--mk-card);
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+/* ── 文章列表 ───────────────────────────────────────── */
+body.theme-monokai .article-list article {
+  border-bottom: 1px solid var(--mk-border-light);
+}
+body.theme-monokai .article-title {
+  color: var(--mk-text);
+  transition: color 0.15s ease;
+}
+body.theme-monokai .article-title:hover {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .collection-item {
+  color: #d4d4d8;
+  font-size: 14px;
+  padding: 8px 4px;
+  border-radius: 4px;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+body.theme-monokai .collection-item:hover {
+  color: var(--mk-accent-hover);
+  background: rgba(255, 255, 255, 0.05);
+}
+body.theme-monokai .collection-item time {
+  color: var(--mk-text-3);
+  font-size: 13px;
+}
+
+/* ── 元信息 / 标签（12% 淡底，kit 深色档）──────────── */
+body.theme-monokai .article-meta {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .article-meta a {
+  color: var(--mk-text-2);
+  transition: color 0.15s ease;
+}
+body.theme-monokai .article-meta a:hover {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .label {
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+body.theme-monokai .label-default,
+body.theme-monokai .label-default[href]:hover,
+body.theme-monokai .label-default[href]:focus {
+  background-color: rgba(109, 112, 246, 0.15);
+  color: #8b8ff8;
+  border: 1px solid rgba(109, 112, 246, 0.35);
+}
+body.theme-monokai .article-more-link a {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .article-more-link a:hover {
+  color: #9a9dff;
+}
+
+/* ── 正文排版 ───────────────────────────────────────── */
+body.theme-monokai .article-entry {
+  color: var(--mk-text);
+  line-height: 1.75;
+}
+body.theme-monokai .article-entry a {
+  color: var(--mk-accent-hover);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(109, 112, 246, 0.35);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+body.theme-monokai .article-entry a:hover {
+  color: #9a9dff;
+  border-bottom-color: #9a9dff;
+}
+body.theme-monokai .article-entry strong {
+  color: #ffffff;
+}
+body.theme-monokai .article-entry h1,
+body.theme-monokai .article-entry h2,
+body.theme-monokai .article-entry h3,
+body.theme-monokai .article-entry h4 {
+  color: #ffffff;
+  font-weight: 600;
+}
+body.theme-monokai .article-entry h2 {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--mk-border);
+}
+body.theme-monokai .article-entry blockquote {
+  border-left: 2px solid rgba(109, 112, 246, 0.55);
+  background: rgba(109, 112, 246, 0.08);
+  color: var(--mk-text-2);
+  border-radius: 0 4px 4px 0;
+}
+body.theme-monokai .article-entry blockquote p {
+  margin: 0;
+}
+body.theme-monokai .article-entry img {
+  border-radius: 4px;
+}
+body.theme-monokai .article-entry hr {
+  border-top: 1px solid var(--mk-border);
+}
+body.theme-monokai .article-entry table {
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+  font-size: 13px;
+}
+body.theme-monokai .article-entry table th {
+  background: var(--mk-card-alt);
+  color: var(--mk-text);
+  font-weight: 500;
+}
+body.theme-monokai .article-entry table th,
+body.theme-monokai .article-entry table td {
+  border: 1px solid var(--mk-border);
+  padding: 8px 12px;
+}
+/* 行内代码 */
+body.theme-monokai .article-entry code {
+  background: rgba(109, 112, 246, 0.12);
+  color: #a5b4fc;
+  border: 1px solid rgba(109, 112, 246, 0.2);
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 1px 5px;
+}
+
+/* ── Mac 窗口代码容器（保留）+ Monokai 语法色 ───────── */
+body.theme-monokai .highlight,
+body.theme-monokai pre {
+  background: #272822;
+  color: #f8f8f2;
+  margin: 10px 0;
+  padding: 15px 10px;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.55;
+}
+body.theme-monokai .highlight {
+  position: relative;
+  padding: 32px 10px 0;
+  border-radius: 4px;
+  border: 1px solid var(--mk-border);
+}
+/* 顶部 Mac 标题栏（深色）+ 保留红黄绿圆点 */
+body.theme-monokai .highlight:before {
+  display: block;
+  content: " ";
+  height: 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #1e1f1a;
+  padding: 0 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.theme-monokai .highlight:after {
+  content: " ";
+  position: absolute;
+  border-radius: 50%;
+  background: #fc625d;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  left: 15px;
+  margin-top: 11px;
+  -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+}
+body.theme-monokai .highlight .gutter pre {
+  color: #90918b;
+  background: transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.theme-monokai .highlight .code pre {
+  background: transparent;
+}
+
+/* ── Monokai 经典语法色（highlight.js token 类）─────── */
+body.theme-monokai .highlight .hll {
+  background-color: #49483e;
+}
+body.theme-monokai .highlight .c,
+body.theme-monokai .highlight .c1,
+body.theme-monokai .highlight .cm,
+body.theme-monokai .highlight .cs,
+body.theme-monokai .highlight .cp,
+body.theme-monokai .highlight .c2,
+body.theme-monokai .highlight .ch,
+body.theme-monokai .highlight .cpf,
+body.theme-monokai .highlight .sd {
+  color: #75715e;
+  font-style: italic;
+}
+body.theme-monokai .highlight .err {
+  color: #f8f8f2;
+  background-color: #f92672;
+}
+body.theme-monokai .highlight .k,
+body.theme-monokai .highlight .kc,
+body.theme-monokai .highlight .kd,
+body.theme-monokai .highlight .kn,
+body.theme-monokai .highlight .kp,
+body.theme-monokai .highlight .kr,
+body.theme-monokai .highlight .kt,
+body.theme-monokai .highlight .ow {
+  color: #f92672;
+}
+body.theme-monokai .highlight .na,
+body.theme-monokai .highlight .nf,
+body.theme-monokai .highlight .fm,
+body.theme-monokai .highlight .nc,
+body.theme-monokai .highlight .nn,
+body.theme-monokai .highlight .no,
+body.theme-monokai .highlight .ne,
+body.theme-monokai .highlight .ni,
+body.theme-monokai .highlight .nt {
+  color: #a6e22e;
+}
+body.theme-monokai .highlight .nb,
+body.theme-monokai .highlight .bp {
+  color: #66d9ef;
+}
+body.theme-monokai .highlight .nv,
+body.theme-monokai .highlight .vc,
+body.theme-monokai .highlight .vg,
+body.theme-monokai .highlight .vi,
+body.theme-monokai .highlight .vm,
+body.theme-monokai .highlight .nl {
+  color: #f8f8f2;
+}
+body.theme-monokai .highlight .s,
+body.theme-monokai .highlight .sa,
+body.theme-monokai .highlight .sb,
+body.theme-monokai .highlight .sc,
+body.theme-monokai .highlight .dl,
+body.theme-monokai .highlight .s2,
+body.theme-monokai .highlight .se,
+body.theme-monokai .highlight .sh,
+body.theme-monokai .highlight .si,
+body.theme-monokai .highlight .sx,
+body.theme-monokai .highlight .sr,
+body.theme-monokai .highlight .s1,
+body.theme-monokai .highlight .ss {
+  color: #e6db74;
+}
+body.theme-monokai .highlight .m,
+body.theme-monokai .highlight .mb,
+body.theme-monokai .highlight .mf,
+body.theme-monokai .highlight .mh,
+body.theme-monokai .highlight .mi,
+body.theme-monokai .highlight .mo,
+body.theme-monokai .highlight .il {
+  color: #ae81ff;
+}
+body.theme-monokai .highlight .o {
+  color: #f92672;
+}
+body.theme-monokai .highlight .p {
+  color: #f8f8f2;
+}
+body.theme-monokai .highlight .gd {
+  color: #f92672;
+}
+body.theme-monokai .highlight .gi {
+  color: #a6e22e;
+}
+body.theme-monokai .highlight .gh {
+  color: #66d9ef;
+  font-weight: bold;
+}
+body.theme-monokai .highlight .gp,
+body.theme-monokai .highlight .gu,
+body.theme-monokai .highlight .ld {
+  color: #75715e;
+}
+body.theme-monokai .highlight .l,
+body.theme-monokai .highlight .x,
+body.theme-monokai .highlight .w,
+body.theme-monokai .highlight .z,
+body.theme-monokai .highlight .ge,
+body.theme-monokai .highlight .gr {
+  color: #f8f8f2;
+}
+body.theme-monokai .highlight .ge {
+  font-style: italic;
+}
+body.theme-monokai .highlight .gr {
+  font-weight: bold;
+}
+
+/* ── 目录（TOC）────────────────────────────────────── */
+body.theme-monokai .toc-title {
+  color: var(--mk-text);
+  font-weight: 600;
+}
+body.theme-monokai .toc a {
+  color: var(--mk-text-2);
+  transition: color 0.15s ease;
+}
+body.theme-monokai .toc a:hover,
+body.theme-monokai .toc .active a {
+  color: var(--mk-accent-hover);
+}
+
+/* ── 侧栏：kit 深色侧栏 #16181e ────────────────────── */
+body.theme-monokai .sidebar {
+  background-color: var(--mk-sidebar);
+  border-left: 1px solid var(--mk-border-light);
+}
+body.theme-monokai .sidebar h3,
+body.theme-monokai .sidebar .widget-title {
+  color: var(--mk-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+body.theme-monokai .sidebar a {
+  color: var(--mk-text-2);
+  font-size: 13px;
+  transition: color 0.15s ease, background-color 0.12s ease;
+}
+body.theme-monokai .sidebar a:hover {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .sidebar .tagcloud a {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 2px 8px;
+  background: rgba(109, 112, 246, 0.12);
+  border: 1px solid rgba(109, 112, 246, 0.3);
+  border-radius: 4px;
+  color: #8b8ff8;
+  font-size: 12px;
+}
+body.theme-monokai .sidebar .tagcloud a:hover {
+  background: rgba(109, 112, 246, 0.22);
+  color: #a5b4fc;
+}
+body.theme-monokai .sidebar .archive-list {
+  font-size: 13px;
+}
+body.theme-monokai .sidebar .archive-list a {
+  color: var(--mk-text-2);
+}
+body.theme-monokai .sidebar .archive-list time {
+  color: var(--mk-text-3);
+  font-size: 12px;
+}
+/* 侧栏 about 页技能/项目/个人链接区 */
+body.theme-monokai .sidebar .about,
+body.theme-monokai .sidebar .profile .skill,
+body.theme-monokai .sidebar .profile .project,
+body.theme-monokai .sidebar .profile .links {
+  color: var(--mk-text-2);
+  font-size: 13px;
+}
+body.theme-monokai .sidebar .profile .skill li,
+body.theme-monokai .sidebar .profile .project li,
+body.theme-monokai .sidebar .profile .links li {
+  color: var(--mk-text-2);
+  border-bottom: 1px solid var(--mk-border-light);
+}
+body.theme-monokai .sidebar .profile .skill .rating {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .sidebar .profile .label,
+body.theme-monokai .sidebar .profile .label-default {
+  background: rgba(109, 112, 246, 0.15);
+  color: #8b8ff8;
+  border: 1px solid rgba(109, 112, 246, 0.35);
+}
+
+/* ── 分页：Indigo 当前页（kit 深色档）──────────────── */
+body.theme-monokai .pagination {
+  font-size: 13px;
+}
+body.theme-monokai .pagination .page-number {
+  color: #d4d4d8;
+}
+body.theme-monokai .pagination .page-number:hover {
+  color: var(--mk-accent-hover);
+  background: rgba(109, 112, 246, 0.12);
+}
+body.theme-monokai .pagination .page-number.current {
+  background: var(--mk-accent);
+  border-color: var(--mk-accent);
+  color: #ffffff;
+}
+body.theme-monokai .pagination .extend {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .pagination .extend:hover {
+  color: var(--mk-accent-hover);
+  background: rgba(109, 112, 246, 0.12);
+}
+
+/* ── 按钮 ──────────────────────────────────────────── */
+body.theme-monokai .btn {
+  border: 1px solid #333745;
+  color: #d4d4d8;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.theme-monokai .btn:hover {
+  border-color: var(--mk-accent);
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .btn-primary {
+  background-color: var(--mk-accent);
+  border-color: var(--mk-accent);
+}
+body.theme-monokai .btn-primary:hover,
+body.theme-monokai .btn-primary:focus {
+  background-color: var(--mk-accent-hover);
+  border-color: var(--mk-accent-hover);
+}
+
+/* ── 卡片（card 列表/panel）────────────────────────── */
+body.theme-monokai .panel {
+  background: var(--mk-card);
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.theme-monokai .panel-heading {
+  background: var(--mk-card-alt);
+  border-bottom: 1px solid var(--mk-border);
+  color: var(--mk-text);
+}
+body.theme-monokai .panel-footer {
+  background: var(--mk-card-alt);
+  border-top: 1px solid var(--mk-border);
+}
+body.theme-monokai .hover-shadow:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  border-color: rgba(109, 112, 246, 0.35);
+}
+
+/* ── 页脚：深色 + GitHub 链接保留 ──────────────────── */
+body.theme-monokai .footer {
+  background: var(--mk-header);
+  border-top: 1px solid var(--mk-border);
+}
+body.theme-monokai .footer a {
+  color: var(--mk-text-3);
+  transition: color 0.15s ease;
+}
+body.theme-monokai .footer a:hover {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .footer .social-links {
+  padding: 0;
+}
+body.theme-monokai .footer .social-links a .icon {
+  color: var(--mk-text-3);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+body.theme-monokai .footer .social-links a:hover .icon {
+  color: var(--mk-accent-hover);
+  transform: translateY(-2px);
+}
+body.theme-monokai .footer .copyright {
+  color: var(--mk-text-3);
+  font-size: 13px;
+}
+
+/* ── 网易云音乐播放器（保留，深色融合）──────────────── */
+body.theme-monokai .footer iframe {
+  background: transparent;
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+}
+
+/* ── 文章导航（上一篇/下一篇）──────────────────────── */
+body.theme-monokai .post-nav {
+  background: var(--mk-card);
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+}
+body.theme-monokai .post-nav .label {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .post-nav a {
+  color: var(--mk-text);
+}
+body.theme-monokai .post-nav a:hover {
+  color: var(--mk-accent-hover);
+}
+
+/* ── 打赏按钮区 ────────────────────────────────────── */
+body.theme-monokai .donate {
+  border-top: 1px solid var(--mk-border-light);
+}
+
+/* ── Insight 本地搜索（深色浮层）───────────────────── */
+body.theme-monokai .ins-search {
+  background: #14161c;
+  border: 1px solid var(--mk-border);
+}
+body.theme-monokai .ins-search .ins-search-mask {
+  background: rgba(0, 0, 0, 0.65);
+}
+body.theme-monokai .ins-search .ins-search-container {
+  background: var(--mk-card);
+  border: 1px solid var(--mk-border);
+  color: var(--mk-text);
+}
+body.theme-monokai .ins-search .ins-search-input {
+  color: var(--mk-text);
+  border-bottom: 1px solid var(--mk-border);
+}
+body.theme-monokai .ins-search .ins-search-input::-webkit-input-placeholder,
+body.theme-monokai .ins-search .ins-search-input::-moz-placeholder,
+body.theme-monokai .ins-search .ins-search-input:-ms-input-placeholder {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .ins-search .ins-search-result-item {
+  color: var(--mk-text-2);
+  border-bottom: 1px solid var(--mk-border-light);
+}
+body.theme-monokai .ins-search .ins-search-result-item:hover,
+body.theme-monokai .ins-search .ins-search-result-item.active {
+  background: rgba(109, 112, 246, 0.1);
+}
+body.theme-monokai .ins-search .ins-search-result-title {
+  color: var(--mk-accent-hover);
+}
+body.theme-monokai .ins-search .ins-search-result-content {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .ins-search .ins-search-stats {
+  color: var(--mk-text-3);
+}
+body.theme-monokai .ins-search .ins-search-toggle {
+  color: var(--mk-text-2);
+}
+
+/* ── 输入框聚焦光圈（kit 深色档 Indigo）────────────── */
+body.theme-monokai input:focus,
+body.theme-monokai textarea:focus,
+body.theme-monokai select:focus {
+  border-color: var(--mk-accent);
+  box-shadow: 0 0 0 3px rgba(109, 112, 246, 0.18);
+  outline: none;
+}
+
+/* ── 杂项：markdown 分割线 / 列表 / 链接下划线清理 ──── */
+body.theme-monokai .article-entry ul,
+body.theme-monokai .article-entry ol {
+  padding-left: 1.5em;
+}
+body.theme-monokai .article-entry li {
+  margin-bottom: 4px;
+}
+body.theme-monokai .article-entry li::marker {
+  color: var(--mk-accent-hover);
+}
+
