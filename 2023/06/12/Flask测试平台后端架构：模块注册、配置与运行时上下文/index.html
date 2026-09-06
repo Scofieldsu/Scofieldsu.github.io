@@ -25,7 +25,7 @@
 <meta property="og:description" content="用 Flask 搭了一个自动化测试平台（Web 控制台 + 执行引擎 + 实时日志），踩过的架构坑值得复盘。核心矛盾：Flask 的 request 上下文 vs 平台的后台线程——任务执行、定时调度、SSE 推流都活在 request 之外，怎么让所有代码取到同一份配置和状态？  一、应用工厂 + 模块自动注册 平台有十几个功能模块（任务、机器、代理、报告……），不想让 app.py 长成几百行">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-06-12T21:30:00.000Z">
-<meta property="article:modified_time" content="2026-09-06T06:17:12.102Z">
+<meta property="article:modified_time" content="2026-09-06T09:42:23.561Z">
 <meta property="article:author" content="俞 元">
 <meta property="article:tag" content="Flask">
 <meta property="article:tag" content="架构">
