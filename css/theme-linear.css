@@ -1,0 +1,366 @@
+/* ============================================================
+ * theme-linear — 博客 Linear 风格皮肤（at-web-theme-kit 规范落地）
+ * ------------------------------------------------------------
+ * 规则：
+ *  - Indigo #6366f1 唯一强调色；语义色只以 12% 淡底出现
+ *  - 白色扁平顶栏（#fff + 1px #e5e5e5 下边框），无阴影
+ *  - 页面底 #f8f9fa / 内容卡片 #fff / 侧栏 Slate-100 #f1f5f9
+ *  - UI 元素（菜单/标签/按钮/表格）13px；正文保持 14px+
+ *  - 圆角 4px；边框 1px 浅灰
+ * 所有规则收敛在 body.theme-linear 作用域内，不影响其他皮肤。
+ * ============================================================ */
+
+body.theme-linear {
+  background-color: #f8f9fa;
+  color: #1c2024;
+  font-size: 14px; /* 正文 14px（博客可读性），UI 元素单独收紧到 13px */
+}
+
+/* ── 顶栏：白色扁平 ─────────────────────────────── */
+body.theme-linear .header {
+  background-color: #ffffff;
+  color: #1c2024;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: none;
+}
+body.theme-linear .header a {
+  color: #3f3f46;
+}
+body.theme-linear .navbar-toggle .icon-bar {
+  background-color: #71717a;
+}
+
+/* 站点信息（头像/名字/位置） */
+body.theme-linear #name {
+  color: #1c2024;
+}
+body.theme-linear #title {
+  color: #60646c;
+}
+body.theme-linear #location {
+  color: #9ca3af !important;
+}
+
+/* ── 导航菜单：13px，激活 = Indigo 12% 淡底 + 紫字 ── */
+body.theme-linear .main-nav > li > a {
+  color: #3f3f46;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 16px;
+  background: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+body.theme-linear .main-nav > li > a .icon {
+  color: #9ca3af;
+  transition: color 0.15s ease;
+}
+body.theme-linear .main-nav > li > a:hover {
+  color: #1c2024;
+  background: rgba(0, 0, 0, 0.04);
+}
+body.theme-linear .main-nav > .active > a,
+body.theme-linear .main-nav > li > a.active,
+body.theme-linear .main-nav > li > a:focus {
+  color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.12) !important;
+}
+body.theme-linear .main-nav > .active > a .icon,
+body.theme-linear .main-nav > li > a.active .icon {
+  color: #6366f1;
+}
+
+/* ── 顶栏搜索框 ─────────────────────────────────── */
+body.theme-linear .search .sidebar-form {
+  background: #ffffff;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px;
+}
+body.theme-linear .search .sidebar-form input {
+  color: #1c2024;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+}
+body.theme-linear .search .sidebar-form input::-webkit-input-placeholder,
+body.theme-linear .search .sidebar-form input::-moz-placeholder,
+body.theme-linear .search .sidebar-form input:-ms-input-placeholder {
+  color: #9ca3af;
+}
+body.theme-linear .search .sidebar-form:focus-within {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+body.theme-linear .search input[type="text"] + .input-group-btn .btn {
+  color: #9ca3af;
+}
+body.theme-linear .search input[type="text"]:focus + .input-group-btn .btn {
+  background-color: #ffffff;
+  color: #6366f1;
+}
+
+/* ── 内容区：白色卡片，无阴影 ───────────────────── */
+body.theme-linear .content {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+/* ── 文章列表 ───────────────────────────────────── */
+body.theme-linear .article-list article {
+  border-bottom: 1px solid #f0f0f0;
+}
+body.theme-linear .article-title {
+  color: #1c2024;
+  transition: color 0.15s ease;
+}
+body.theme-linear .article-title:hover {
+  color: #6366f1;
+}
+body.theme-linear .collection-item {
+  color: #3f3f46;
+  font-size: 14px;
+  padding: 8px 4px;
+  border-radius: 4px;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+body.theme-linear .collection-item:hover {
+  color: #6366f1;
+  background: rgba(0, 0, 0, 0.02);
+}
+body.theme-linear .collection-item time {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+/* ── 标签：12% 淡底 + 主色文字 + 细边框 ─────────── */
+body.theme-linear .label {
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+body.theme-linear .label-default,
+body.theme-linear .label-default[href]:hover,
+body.theme-linear .label-default[href]:focus {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: #4f46e5;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+body.theme-linear .article-meta {
+  color: #9ca3af;
+}
+body.theme-linear .article-meta a {
+  color: #60646c;
+  transition: color 0.15s ease;
+}
+body.theme-linear .article-meta a:hover {
+  color: #6366f1;
+}
+body.theme-linear .article-more-link a {
+  color: #6366f1;
+}
+body.theme-linear .article-more-link a:hover {
+  color: #4f46e5;
+}
+
+/* ── 正文排版（markdown-body）──────────────────── */
+body.theme-linear .article-entry {
+  color: #1c2024;
+  line-height: 1.75;
+}
+body.theme-linear .article-entry a {
+  color: #6366f1;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.25);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+body.theme-linear .article-entry a:hover {
+  color: #4f46e5;
+  border-bottom-color: #4f46e5;
+}
+body.theme-linear .article-entry h1,
+body.theme-linear .article-entry h2,
+body.theme-linear .article-entry h3,
+body.theme-linear .article-entry h4 {
+  color: #1c2024;
+  font-weight: 600;
+}
+body.theme-linear .article-entry h2 {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+}
+body.theme-linear .article-entry blockquote {
+  border-left: 2px solid rgba(99, 102, 241, 0.4);
+  background: rgba(99, 102, 241, 0.04);
+  color: #60646c;
+  border-radius: 0 4px 4px 0;
+}
+body.theme-linear .article-entry blockquote p {
+  margin: 0;
+}
+body.theme-linear .article-entry img {
+  border-radius: 4px;
+}
+body.theme-linear .article-entry hr {
+  border-top: 1px solid #f0f0f0;
+}
+body.theme-linear .article-entry table {
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 13px;
+}
+body.theme-linear .article-entry table th {
+  background: #fafafa;
+  color: #1c2024;
+  font-weight: 500;
+}
+body.theme-linear .article-entry table th,
+body.theme-linear .article-entry table td {
+  border: 1px solid #e5e5e5;
+  padding: 8px 12px;
+}
+
+/* ── 目录（TOC）─────────────────────────────────── */
+body.theme-linear .toc-title {
+  color: #1c2024;
+  font-weight: 600;
+}
+body.theme-linear .toc a {
+  color: #60646c;
+  transition: color 0.15s ease;
+}
+body.theme-linear .toc a:hover,
+body.theme-linear .toc .active a {
+  color: #6366f1;
+}
+
+/* ── 侧栏：Slate-100 浅灰蓝 ────────────────────── */
+body.theme-linear .sidebar {
+  background-color: #f1f5f9;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+}
+body.theme-linear .sidebar h3,
+body.theme-linear .sidebar .widget-title {
+  color: #1c2024;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+body.theme-linear .sidebar a {
+  color: #60646c;
+  font-size: 13px;
+  transition: color 0.15s ease, background-color 0.12s ease;
+}
+body.theme-linear .sidebar a:hover {
+  color: #6366f1;
+}
+body.theme-linear .sidebar .tagcloud a {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 2px 8px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 4px;
+  color: #4f46e5;
+  font-size: 12px;
+}
+body.theme-linear .sidebar .tagcloud a:hover {
+  background: rgba(99, 102, 241, 0.16);
+}
+body.theme-linear .sidebar .archive-list {
+  font-size: 13px;
+}
+body.theme-linear .sidebar .archive-list a {
+  color: #60646c;
+}
+body.theme-linear .sidebar .archive-list time {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* ── 分页：主色激活页 ───────────────────────────── */
+body.theme-linear .pagination {
+  font-size: 13px;
+}
+body.theme-linear .pagination .page-number {
+  color: #3f3f46;
+}
+body.theme-linear .pagination .page-number:hover {
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+}
+body.theme-linear .pagination .page-number.current {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+}
+body.theme-linear .pagination .extend {
+  color: #9ca3af;
+}
+
+/* ── 按钮 ───────────────────────────────────────── */
+body.theme-linear .btn {
+  border: 1px solid #d4d4d8;
+  color: #3f3f46;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.theme-linear .btn-primary {
+  background-color: #6366f1;
+  border-color: #6366f1;
+}
+body.theme-linear .btn-primary:hover,
+body.theme-linear .btn-primary:focus {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+}
+
+/* ── 卡片（card 列表/panel）─────────────────────── */
+body.theme-linear .panel {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.theme-linear .panel-footer {
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+}
+body.theme-linear .hover-shadow:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ── 页脚 ───────────────────────────────────────── */
+body.theme-linear .footer {
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+}
+body.theme-linear .footer a {
+  color: #9ca3af;
+}
+body.theme-linear .footer a:hover {
+  color: #6366f1;
+}
+body.theme-linear .footer .social a .icon {
+  color: #9ca3af;
+  transition: color 0.15s ease;
+}
+body.theme-linear .footer .social a:hover .icon {
+  color: #6366f1;
+}
+body.theme-linear .footer .copyright {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+/* ── 输入框聚焦光圈（全局统一 Indigo 10%）──────── */
+body.theme-linear input:focus,
+body.theme-linear textarea:focus,
+body.theme-linear select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  outline: none;
+}
